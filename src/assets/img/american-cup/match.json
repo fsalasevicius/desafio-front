@@ -1,0 +1,292 @@
+[
+    {
+        "nmatch": 1,
+        "teamA": "665e4aeed63e1e27cf30c1a6",
+        "teamB": "665e4aeed63e1e27cf30c1a9",
+        "date": "2024-06-20 21:00",
+        "stadium": "665e55bcd63e1e27cf383a28",
+        "ticket": "https://www.ticketmaster.com/event/0E006039EBC5889C",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 2,
+        "teamA": "665e4aeed63e1e27cf30c1a7",
+        "teamB": "665e4aeed63e1e27cf30c1a8",
+        "date": "2024-06-21 21:00",
+        "stadium": "665e55bcd63e1e27cf383a29",
+        "ticket":"https://seatgeek.com/copa-america-1-tickets/international-soccer/2024-06-21-7-pm/6280902?preview_token=8qJ69ogYqo&amplify_preview=true",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 3,
+        "teamA": "665e4aeed63e1e27cf30c1ac",
+        "teamB": "665e4aeed63e1e27cf30c1ab",
+        "date": "2024-06-22 22:00",
+        "stadium": "665e55bcd63e1e27cf383a2a",
+        "ticket":"https://www.ticketmaster.com/event/3A005F6E8F8414F8",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 4,
+        "teamA": "665e4aeed63e1e27cf30c1aa",
+        "teamB": "665e4aeed63e1e27cf30c1ad",
+        "date": "2024-06-22 19:00",
+        "stadium": "665e55bcd63e1e27cf383a2b",
+        "ticket":"https://www.ticketmaster.com/event/1C00603FA8273B59",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 5,
+        "teamA": "665e4aeed63e1e27cf30c1af",
+        "teamB": "665e4aeed63e1e27cf30c1ae",
+        "date": "2024-06-23 19:00",
+        "stadium": "665e55bcd63e1e27cf383a29",
+        "ticket":"https://seatgeek.com/copa-america-1-tickets/international-soccer/2024-06-23-5-pm/6382116?preview_token=6qXJ8avlZA&amplify_preview=true",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 6,
+        "teamA": "665e4aeed63e1e27cf30c1b1",
+        "teamB": "665e4aeed63e1e27cf30c1b0",
+        "date": "2024-06-23 22:00",
+        "stadium": "665e55bcd63e1e27cf383a2c",
+        "ticket":"https://www.ticketmaster.com/event/0D005F7BA2A11394",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 7,
+        "teamA": "665e4aeed63e1e27cf30c1b2",
+        "teamB": "665e4aeed63e1e27cf30c1b4",
+        "date": "2024-06-24 22:00",
+        "stadium": "665e55bcd63e1e27cf383a2d",
+        "ticket":"https://www.ticketmaster.com/event/0A005F935AE30B00",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 8,
+        "teamA": "665e4aeed63e1e27cf30c1b3",
+        "teamB": "665e4aeed63e1e27cf30c1b5",
+        "date": "2024-06-24 19:00",
+        "stadium": "665e55bcd63e1e27cf383a2a",
+        "ticket":"https://www.ticketmaster.com/event/3A005F7695C815E2",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 9,
+        "teamA": "665e4aeed63e1e27cf30c1a8",
+        "teamB": "665e4aeed63e1e27cf30c1a6",
+        "date": "2024-06-25 22:00",
+        "stadium": "665e55bcd63e1e27cf383a2e",
+        "ticket":"https://www.ticketmaster.com/event/00006039BD1D6224",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 10,
+        "teamA": "665e4aeed63e1e27cf30c1a7",
+        "teamB": "665e4aeed63e1e27cf30c1a9",
+        "date": "2024-06-25 19:00",
+        "stadium": "665e55bcd63e1e27cf383a2f",
+        "ticket":"https://seatgeek.com/copa-america-1-tickets/international-soccer/2024-06-25-7-pm/6307325?preview_token=QK8VjVa1Rl&amplify_preview=true",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 11,
+        "teamA": "665e4aeed63e1e27cf30c1ad",
+        "teamB": "665e4aeed63e1e27cf30c1ac",
+        "date": "2024-06-26 19:00",
+        "stadium": "665e55bcd63e1e27cf383a2d",
+        "ticket":"https://www.ticketmaster.com/event/0A005F939FCD0D83",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 12,
+        "teamA": "665e4aeed63e1e27cf30c1aa",
+        "teamB": "665e4aeed63e1e27cf30c1ab",
+        "date": "2024-06-26 19:00",
+        "stadium": "665e55bcd63e1e27cf383a30",
+        "ticket":"https://www.ticketmaster.com/event/17006046D6FB95B7",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 13,
+        "teamA": "665e4aeed63e1e27cf30c1b0",
+        "teamB": "665e4aeed63e1e27cf30c1af",
+        "date": "2024-06-27 19:00",
+        "stadium": "665e55bcd63e1e27cf383a28",
+        "ticket":"https://www.ticketmaster.com/event/0E006039EBCC889E",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 14,
+        "teamA": "665e4aeed63e1e27cf30c1b1",
+        "teamB": "665e4aeed63e1e27cf30c1ae",
+        "date": "2024-06-27 22:00",
+        "stadium": "665e55bcd63e1e27cf383a2e",
+        "ticket":"https://www.ticketmaster.com/event/00006039BD21622C",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 15,
+        "teamA": "665e4aeed63e1e27cf30c1b5",
+        "teamB": "665e4aeed63e1e27cf30c1b2",
+        "date": "2024-06-28 22:00",
+        "stadium": "665e55bcd63e1e27cf383a30",
+        "ticket":"https://www.ticketmaster.com/event/17006046E9909D4E",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 16,
+        "teamA": "665e4aeed63e1e27cf30c1b3",
+        "teamB": "665e4aeed63e1e27cf30c1b4",
+        "date": "2024-06-28 19:00",
+        "stadium": "665e55bcd63e1e27cf383a31",
+        "ticket":"https://seatgeek.com/copa-america-1-tickets/soccer/2024-06-28-4-45-pm/6340527?preview_token=Lqm7YNdgZd&amplify_preview=true",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 17,
+        "teamA": "665e4aeed63e1e27cf30c1a6",
+        "teamB": "665e4aeed63e1e27cf30c1a7",
+        "date": "2024-06-29 21:00",
+        "stadium": "665e55bcd63e1e27cf383a2c",
+        "ticket":"https://www.ticketmaster.com/event/0D005F7BA3331490",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 18,
+        "teamA": "665e4aeed63e1e27cf30c1a9",
+        "teamB": "665e4aeed63e1e27cf30c1a8",
+        "date": "2024-06-29 21:00",
+        "stadium": "665e55bcd63e1e27cf383a32",
+        "ticket":"https://www.ticketmaster.com/event/22006023A8D91256",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 19,
+        "teamA": "665e4aeed63e1e27cf30c1ac",
+        "teamB": "665e4aeed63e1e27cf30c1aa",
+        "date": "2024-06-30 21:00",
+        "stadium": "665e55bcd63e1e27cf383a31",
+        "ticket":"https://seatgeek.com/copa-america-1-tickets/soccer/2024-06-30-4-45-pm/6340544?preview_token=pKALJMV1qY&amplify_preview=true",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 20,
+        "teamA": "665e4aeed63e1e27cf30c1ab",
+        "teamB": "665e4aeed63e1e27cf30c1ad",
+        "date": "2024-06-30 21:00",
+        "stadium": "665e55bcd63e1e27cf383a33",
+        "ticket":"https://seatgeek.com/copa-america-1-tickets/international-soccer/2024-06-30-7-pm/6380578?preview_token=OKovYwpDqN&amplify_preview=true",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 21,
+        "teamA": "665e4aeed63e1e27cf30c1af",
+        "teamB": "665e4aeed63e1e27cf30c1b1",
+        "date": "2024-07-01 22:00",
+        "stadium": "665e55bcd63e1e27cf383a34",
+        "ticket":"https://www.ticketmaster.com/event/0600604291C97B21",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 22,
+        "teamA": "665e4aeed63e1e27cf30c1ae",
+        "teamB": "665e4aeed63e1e27cf30c1b0",
+        "date": "2024-07-01 22:00",
+        "stadium": "665e55bcd63e1e27cf383a32",
+        "ticket":"https://www.ticketmaster.com/event/22006023A8DD125A",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 23,
+        "teamA": "665e4aeed63e1e27cf30c1b2",
+        "teamB": "665e4aeed63e1e27cf30c1b3",
+        "date": "2024-07-02 22:00",
+        "stadium": "665e55bcd63e1e27cf383a2b",
+        "ticket":"https://www.ticketmaster.com/event/1C00603FA86D3B72",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    },
+    {
+        "nmatch": 24,
+        "teamA": "665e4aeed63e1e27cf30c1b4",
+        "teamB": "665e4aeed63e1e27cf30c1b5",
+        "date": "2024-07-02 22:00",
+        "stadium": "665e55bcd63e1e27cf383a33",
+        "ticket":"https://seatgeek.com/copa-america-1-tickets/international-soccer/2024-07-02-8-pm/6380969?preview_token=QK8VjBwVRl&amplify_preview=true",
+        "result": {
+          "teamA": "",
+          "teamB": ""
+        }
+    }
+      
+      
+]

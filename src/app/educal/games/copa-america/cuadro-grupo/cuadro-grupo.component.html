@@ -1,0 +1,33 @@
+<div class="card-container">
+    <div class="card" *ngFor="let grupo of grupos">
+      <h2>{{ grupo.nombre }}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>EQUIPOS</th>
+            <th>PTS</th>
+            <th>PJ</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>GP</th>
+            <th>GC</th>
+            <th>SG</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipo of grupo.equipos">
+            <td>{{ equipo.nombre }} <img [src]="equipo.logo" alt="{{ equipo.nombre }}" style="width: 20px; height: 20px;"></td>
+            <td>{{ equipo.pts }}</td>
+            <td>{{ equipo.pj }}</td>
+            <td>{{ equipo.v }}</td>
+            <td>{{ equipo.e }}</td>
+            <td>{{ equipo.d }}</td>
+            <td>{{ equipo.gp }}</td>
+            <td>{{ equipo.gc }}</td>
+            <td>{{ equipo.sg }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

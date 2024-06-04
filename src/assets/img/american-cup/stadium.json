@@ -1,0 +1,93 @@
+[
+  {
+    "nstadium": 1,
+    "name": "Mercedes Benz Stadium",
+    "img": "mercedesbenzstadium.webp",
+    "localidad": "Atlanta",
+    "estado": "GA"
+  },
+  {
+    "nstadium": 2,
+    "name": "AT&T Stadium",
+    "img": "attstadium.webp",
+    "localidad": "Arlington",
+    "estado": "TX"
+  },
+  {
+    "nstadium": 3,
+    "name": "NRG Stadium",
+    "img": "nrgstadium.webp",
+    "localidad": "Houston",
+    "estado": "TX"
+  },
+  {
+    "nstadium": 4,
+    "name": "Levi's Stadium",
+    "img": "levisstadium.webp",
+    "localidad": "Santa Clara",
+    "estado": "CA"
+  },
+  {
+    "nstadium": 5,
+    "name": "Hard Rock Stadium",
+    "img": "hardrockstadium.webp",
+    "localidad": "Miami",
+    "estado": "FL"
+  },
+  {
+    "nstadium": 6,
+    "name": "SoFi Stadium",
+    "img": "sofistadium.webp",
+    "localidad": "Inglewood",
+    "estado": "CA"
+  },
+  {
+    "nstadium": 7,
+    "name": "Metlife Stadium",
+    "img": "metlifestadium.webp",
+    "localidad": "East Rutherford",
+    "estado": "NJ"
+  },
+  {
+    "nstadium": 8,
+    "name": "Childre's Mercy Park",
+    "img": "childrenstadium.webp",
+    "localidad": "Kansas City",
+    "estado": "KS"
+  },
+  {
+    "nstadium": 9,
+    "name": "Allegiant Stadium",
+    "img": "allegiantstadium.webp",
+    "localidad": "Las Vegas",
+    "estado": "NV"
+  },
+  {
+    "nstadium": 10,
+    "name": "State Farm Stadium",
+    "img": "statefarmstadium.webp",
+    "localidad": "Glendale",
+    "estado": "AZ"
+  },
+  {
+    "nstadium": 11,
+    "name": "Inter&Co Stadium",
+    "img": "interstadium.webp",
+    "localidad": "Orlando",
+    "estado": "FL"
+  },
+  {
+    "nstadium": 12,
+    "name": "Q2 Stadium",
+    "img": "q2stadium.webp",
+    "localidad": "Austin",
+    "estado": "TX"
+  },
+  {
+    "nstadium": 13,
+    "name": "GEHA Field At Arrowhead",
+    "img": "gehastadium.webp",
+    "localidad": "Kansas City",
+    "estado": "MO"
+  }
+]

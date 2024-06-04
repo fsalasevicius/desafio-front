@@ -1,0 +1,98 @@
+[
+  {
+    "nmatch": 1,
+    "name": "Argentina",
+    "flag": "argentina.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 2,
+    "name": "Peru",
+    "flag": "peru.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 3,
+    "name": "Chile",
+    "flag": "chile.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 4,
+    "name": "Canada",
+    "flag": "canada.webp",
+    "conf": "Concacaf"
+  },
+  {
+    "nmatch": 5,
+    "name": "Ecuador",
+    "flag": "ecuador.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 6,
+    "name": "Jamaica",
+    "flag": "jamaica.webp",
+    "conf": "Concacaf"
+  },
+  {
+    "nmatch": 7,
+    "name": "Mexico",
+    "flag": "mexico.webp",
+    "conf": "Concacaf"
+  },
+  {
+    "nmatch": 8,
+    "name": "Venezuela",
+    "flag": "venezuela.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 9,
+    "name": "Bolivia",
+    "flag": "bolivia.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 10,
+    "name": "Estados Unidos",
+    "flag": "eeuu.webp",
+    "conf": "Concacaf"
+  },
+  {
+    "nmatch": 11,
+    "name": "Panama",
+    "flag": "panama.webp",
+    "conf": "Concacaf"
+  },
+  {
+    "nmatch": 12,
+    "name": "Uruguay",
+    "flag": "uruguay.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 13,
+    "name": "Brasil",
+    "flag": "brasil.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 14,
+    "name": "Colombia",
+    "flag": "colombia.webp",
+    "conf": "Conmebol"
+  },
+  {
+    "nmatch": 15,
+    "name": "Costa Rica",
+    "flag": "costa-rica.webp",
+    "conf": "Concacaf"
+  },
+  {
+    "nmatch": 16,
+    "name": "Paraguay",
+    "flag": "paraguay.webp",
+    "conf": "Conmebol"
+  }
+]
