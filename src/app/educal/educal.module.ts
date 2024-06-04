@@ -155,7 +155,6 @@ import { FormsModule } from '@angular/forms';
     ContactAreaComponent,
     ContactInfoComponent,
     BlogTwoComponent,
-    CopaAmericaComponent,
     CuadroGrupoComponent,
   ],
   imports: [

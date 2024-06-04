@@ -1,36 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Match, Team } from 'src/app/interface/copa-america.interface';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
-
-interface Team {
-  conf: string;
-  createdAt: string;
-  flag: string;
-  name: string;
-  nid: number;
-  goles: number;
-}
-
-interface Match {
-  createdAt: string;
-  date: string;
-  fase: string;
-  group: string;
-  ticket: string;
-  nmatch: number;
-  stadium: Stadium[];
-  teamA: Team[];
-  teamB: Team[];
-}
-
-interface Stadium {
-  createdAt: string;
-  estado: string;
-  img: string;
-  localidad: string;
-  name: string;
-  nstadium: number;
-}
-
 
 @Component({
   selector: 'app-copa-america',
@@ -40,6 +10,7 @@ interface Stadium {
 export class CopaAmericaComponent implements OnInit {
   public dataMatches: Match[] = [];
   public grupos: any[] = [];
+  public loading: boolean = true;
   constructor(private _copaamerica: CopaAmericaService) {}
 
   ngOnInit(): void {
@@ -53,16 +24,17 @@ export class CopaAmericaComponent implements OnInit {
       this.dataMatches = response.data;
       console.log(this.dataMatches)
       this.organizeMatchesByGroup();
+      this.loading = false;
     });
   }
 
-  getGoles(team: Team[]): number {
-    return team && team.length > 0 ? team[0].goles : 0;
+  getGoles(equipo: Team[], partidoIndex: number): number {
+    return equipo && equipo[partidoIndex] ? equipo[partidoIndex].goles : 0;
   }
   
-  setGoles(team: Team[], goles: number) {
-    if (team && team.length > 0) {
-      team[0].goles = goles;
+  setGoles(equipo: Team[], partidoIndex: number, goles: number) {
+    if (equipo && equipo[partidoIndex]) {
+      equipo[partidoIndex].goles = goles;
     }
   }
 
@@ -86,12 +58,16 @@ export class CopaAmericaComponent implements OnInit {
 
   grabarPrediccion() {
     this.grupos.forEach((grupo) => {
-      grupo.partidos.forEach((partido: { teamA: { goles: number; }; teamB: { goles: number; }; }) => {
-        const golesEquipoA = partido.teamA?.goles ?? 0;
-        const golesEquipoB = partido.teamB?.goles ?? 0;
-  
-        console.log(`Goles Equipo A: ${golesEquipoA}, Goles Equipo B: ${golesEquipoB}`);
-      });
+      if (grupo && grupo.partidos) {
+        grupo.partidos.forEach((partido: { teamA: { goles: number; }[]; teamB: { goles: number; }[]; }) => {
+          if (partido && partido.teamA && partido.teamB) {
+            const golesEquipoA = partido.teamA[0]?.goles ?? 0;
+            const golesEquipoB = partido.teamB[0]?.goles ?? 0;
+    
+            console.log(`Goles Equipo A: ${golesEquipoA}, Goles Equipo B: ${golesEquipoB}`);
+          }
+        });
+      }
     });
   }
 }
