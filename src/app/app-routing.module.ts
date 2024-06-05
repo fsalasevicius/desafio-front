@@ -13,9 +13,6 @@ import { AboutMainComponent } from './educal/about/about-main/about-main.compone
 import { InstructorMainComponent } from './educal/instructor/instructor-main/instructor-main.component';
 import { InstructorDetailsComponent } from './educal/instructor-details/instructor-details-main/instructor-details.component';
 import { EventDetailsMainComponent } from './educal/event-details/event-details-main/event-details-main.component';
-import { CartComponent } from './educal/cart/cart-main/cart.component';
-import { WishlistMainComponent } from './educal/wishlist/wishlist-main/wishlist-main.component';
-import { CheckoutMainComponent } from './educal/checkout/checkout-main/checkout-main.component';
 import { SignInMainComponent } from './educal/sign-in/sign-in-main/sign-in-main.component';
 import { SignUpMainComponent } from './educal/sign-up/sign-up-main/sign-up-main.component';
 import { ErrorPageComponent } from './educal/error-page/error-page.component';
@@ -78,18 +75,6 @@ const routes: Routes = [
   {
     path: 'event-details',
     component: EventDetailsMainComponent
-  },
-  {
-    path: 'cart',
-    component: CartComponent
-  },
-  {
-    path: 'wishlist',
-    component: WishlistMainComponent
-  },
-  {
-    path: 'checkout',
-    component: CheckoutMainComponent
   },
   {
     path: 'sign-in',

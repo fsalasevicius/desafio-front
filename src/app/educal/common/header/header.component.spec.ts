@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckoutAreaComponent } from './checkout-area.component';
+import { HeaderTwoComponent } from './header.component';
 
-describe('CheckoutAreaComponent', () => {
-  let component: CheckoutAreaComponent;
-  let fixture: ComponentFixture<CheckoutAreaComponent>;
+describe('HeaderTwoComponent', () => {
+  let component: HeaderTwoComponent;
+  let fixture: ComponentFixture<HeaderTwoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckoutAreaComponent ]
+      declarations: [ HeaderTwoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CheckoutAreaComponent);
+    fixture = TestBed.createComponent(HeaderTwoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
