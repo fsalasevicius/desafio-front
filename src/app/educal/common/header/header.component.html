@@ -63,9 +63,6 @@
                                  <li><a [routerLink]="['/instructor']">Instructor</a></li>
                                  <li><a [routerLink]="['/instructor-details']">Instructor Details</a></li>
                                  <li><a [routerLink]="['/event-details']">Event Details</a></li>
-                                 <li><a [routerLink]="['/cart']">My Cart</a></li>
-                                 <li><a [routerLink]="['/wishlist']">My Wishlist</a></li>
-                                 <li><a [routerLink]="['/checkout']">checkout</a></li>
                                  <li><a [routerLink]="['/sign-in']">Sign In</a></li>
                                  <li><a [routerLink]="['/sign-up']">Sign Up</a></li>
                                  <li><a [routerLink]="['/error']">Error</a></li>
@@ -84,7 +81,21 @@
                       </nav>
                    </div>
                    <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
-                      <a [routerLink]="['/sign-in']" class="e-btn">Ingresar</a>
+                     <ng-container *ngIf="buttonText === 'Registrarse' || buttonText === 'Ingresar'; else showUserName">
+                       <button [routerLink]="['/sign-in']" *ngIf="buttonText === 'Ingresar'" class="e-btn">{{ buttonText }}</button>
+                       <button [routerLink]="['/sign-up']" *ngIf="buttonText === 'Registrarse'" class="e-btn">{{ buttonText }}</button>
+                     </ng-container>
+                     <ng-template #showUserName>
+                        <div class="dropdown" (click)="toggleDropdown($event)">
+                          <button class="e-btn dropdown-toggle" type="button">
+                            {{ buttonText }}
+                          </button>
+                          <div class="dropdown-menu" [class.show]="isDropdownOpen">
+                            <a class="dropdown-item" href="#">Ver perfil</a>
+                            <a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a>
+                          </div>
+                        </div>
+                      </ng-template>
                    </div>
                    <div class="sidebar__menu d-xl-none">
                       <div (click)="handleSidebar()" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
@@ -175,9 +186,6 @@
                   <li><a [routerLink]="['/instructor']">Instructor</a></li>
                   <li><a [routerLink]="['/instructor-details']">Instructor Details</a></li>
                   <li><a [routerLink]="['/event-details']">Event Details</a></li>
-                  <li><a [routerLink]="['/cart']">My Cart</a></li>
-                  <li><a [routerLink]="['/wishlist']">My Wishlist</a></li>
-                  <li><a [routerLink]="['/checkout']">checkout</a></li>
                   <li><a [routerLink]="['/sign-in']">Sign In</a></li>
                   <li><a [routerLink]="['/sign-up']">Sign Up</a></li>
                   <li><a [routerLink]="['/error']">Error</a></li>

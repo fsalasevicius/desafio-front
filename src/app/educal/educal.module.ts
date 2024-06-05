@@ -12,25 +12,9 @@ import { EventsComponent } from './Home/events/events.component';
 import { PricingComponent } from './Home/pricing/pricing.component';
 import { CtaComponent } from './Home/cta/cta.component';
 import { FooterComponent } from './common/footer/footer.component';
-import { HomeTwoComponent } from './home-two/home-two-main/home-two.component';
 import { HeaderTwoComponent } from './common/header/header.component';
-import { HeroAreaComponent } from './home-two/hero-area/hero-area.component';
-import { ServiceAreaComponent } from './home-two/service-area/service-area.component';
 import { AboutAreaComponent } from './common/about-area/about-area.component';
-import { WhyAreaComponent } from './home-two/why-area/why-area.component';
-import { WhatAreaComponent } from './home-two/what-area/what-area.component';
-import { CounterAreaComponent } from './home-two/counter-area/counter-area.component';
-import { TestimonialAreaComponent } from './home-two/testimonial-area/testimonial-area.component';
-import { CtaAreaComponent } from './home-two/cta-area/cta-area.component';
-import { FooterTwoComponent } from './home-two/footer-two/footer-two.component';
-import { HomeThreeComponent } from './home-three/home-three-main/home-three.component';
-import { HeaderThreeComponent } from './home-three/header-three/header-three.component';
-import { HeroSliderComponent } from './home-three/hero-slider/hero-slider.component';
 import { BrandAreaComponent } from './common/brand-area/brand-area.component';
-import { HomeThreeCoursesComponent } from './home-three/home-three-courses/home-three-courses.component';
-import { PopularTeachersComponent } from './home-three/popular-teachers/popular-teachers.component';
-import { HomeThreeCtaComponent } from './home-three/home-three-cta/home-three-cta.component';
-import { HomeThreeTestimonialComponent } from './home-three/home-three-testimonial/home-three-testimonial.component';
 import { CoursesPageComponent } from './courses/courses-page/courses-page.component';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 import { CourseGridComponent } from './common/course-grid/course-grid.component';
@@ -66,10 +50,10 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { ContactMainComponent } from './contact/contact-main/contact-main.component';
 import { ContactAreaComponent } from './contact/contact-area/contact-area.component';
 import { ContactInfoComponent } from './contact/contact-info/contact-info.component';
-import { BlogTwoComponent } from './home-two/blog-two/blog-two.component';
 import { CopaAmericaComponent } from './games/copa-america/copa-america.component';
 import { CuadroGrupoComponent } from './games/copa-america/cuadro-grupo/cuadro-grupo.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -83,25 +67,9 @@ import { FormsModule } from '@angular/forms';
     PricingComponent,
     CtaComponent,
     FooterComponent,
-    HomeTwoComponent,
     HeaderTwoComponent,
-    HeroAreaComponent,
-    ServiceAreaComponent,
     AboutAreaComponent,
-    WhyAreaComponent,
-    WhatAreaComponent,
-    CounterAreaComponent,
-    TestimonialAreaComponent,
-    CtaAreaComponent,
-    FooterTwoComponent,
-    HomeThreeComponent,
-    HeaderThreeComponent,
-    HeroSliderComponent,
     BrandAreaComponent,
-    HomeThreeCoursesComponent,
-    PopularTeachersComponent,
-    HomeThreeCtaComponent,
-    HomeThreeTestimonialComponent,
     CoursesPageComponent,
     BreadcrumbComponent,
     CourseGridComponent,
@@ -138,13 +106,14 @@ import { FormsModule } from '@angular/forms';
     ContactMainComponent,
     ContactAreaComponent,
     ContactInfoComponent,
-    BlogTwoComponent,
     CuadroGrupoComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     MatTabsModule,
     SwiperModule,
   ],

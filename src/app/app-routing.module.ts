@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './educal/Home/Home/home.component';
-import { HomeTwoComponent } from './educal/home-two/home-two-main/home-two.component';
-import { HomeThreeComponent } from './educal/home-three/home-three-main/home-three.component';
 import { CoursesPageComponent } from './educal/courses/courses-page/courses-page.component';
 import { CoursesListPageComponent } from './educal/courses-list-page/courses-list-main/courses-list-page.component';
 import { CourseSidebarMainComponent } from './educal/course-sidebar/course-sidebar-main/course-sidebar-main.component';
@@ -18,20 +16,14 @@ import { SignUpMainComponent } from './educal/sign-up/sign-up-main/sign-up-main.
 import { ErrorPageComponent } from './educal/error-page/error-page.component';
 import { ContactMainComponent } from './educal/contact/contact-main/contact-main.component';
 import { CopaAmericaComponent } from './educal/games/copa-america/copa-america.component';
+import { AuthGuard } from './guard/auth.guard';
+import { RegisterComponent } from './educal/register/register.component';
 
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  {
-    path: 'home-two',
-    component: HomeTwoComponent
-  },
-  {
-    path: 'home-three',
-    component: HomeThreeComponent
-  },
   {
     path: 'courses',
     component: CoursesPageComponent
@@ -50,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'games-copa-america',
-    component: CopaAmericaComponent
+    component: CopaAmericaComponent, canActivate: [AuthGuard]
   },
   {
     path: 'blog',

@@ -1,4 +1,7 @@
-import { Component, HostListener, OnInit,Input } from '@angular/core';
+import { Component, HostListener, OnInit, Input } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -6,54 +9,95 @@ import { Component, HostListener, OnInit,Input } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderTwoComponent implements OnInit {
+  constructor(private _router: Router, private _authService: AuthService) { }
 
-  @Input () headerShadow : string | undefined;
+  @Input() headerShadow: string | undefined;
+  public buttonText: string = 'Ingresar';
+  public userName: string | null = null;
+  public isDropdownOpen: boolean = false;
+  headerSticky: boolean = false;
+  showSidebar: boolean = false;
+  showHomeDropdown: boolean = false;
+  showCoursesDropdown: boolean = false;
+  showBlogDropdown: boolean = false;
+  showPagesDropdown: boolean = false;
 
-  headerSticky : boolean = false;
-  showSidebar : boolean = false;
-  showHomeDropdown : boolean = false;
-  showCoursesDropdown : boolean = false;
-  showBlogDropdown : boolean = false;
-  showPagesDropdown : boolean = false;
-
-  @HostListener('window:scroll',['$event']) onscroll () {
-    if(window.scrollY > 80){
+  @HostListener('window:scroll', ['$event']) onscroll() {
+    if (window.scrollY > 80) {
       this.headerSticky = true
     }
-    else{
+    else {
       this.headerSticky = false
     }
   }
+  getUserName(): string | null {
+    return localStorage.getItem('userName');
+  }
+
+  toggleDropdown(event: MouseEvent): void {
+    event.stopPropagation(); // Para evitar que el evento llegue al documento y cierre el dropdown
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+
+  updateButtonText(): void {
+    const token = this._authService.getToken();
+    const currentRoute = this._router.url;
+  
+    if (token) {
+      const userName = this._authService.getUserName();
+      this.userName = userName !== null ? userName.toString() : 'Usuario';
+      this.buttonText = this.userName !== null ? this.userName.toString() : 'Usuario';
+    } else {
+      if (currentRoute.includes('sign-in')) {
+        this.buttonText = 'Registrarse';
+      } else if (currentRoute.includes('sign-up')) {
+        this.buttonText = 'Ingresar';
+      } else {
+        this.buttonText = 'Ingresar';
+      }
+    }
+    console.log(this.buttonText, this.userName)
+  }
 
   // handleSidebar
-  handleSidebar () {
+  handleSidebar() {
     this.showSidebar = true;
   }
-  handleSidebarClose () {
+  handleSidebarClose() {
     this.showSidebar = false;
   }
 
   // home dropdown
-  homeDropdown () {
+  homeDropdown() {
     this.showHomeDropdown = !this.showHomeDropdown
   }
   // coursesDropdown
-  coursesDropdown () {
+  coursesDropdown() {
     this.showCoursesDropdown = !this.showCoursesDropdown
   }
 
   // blogDropdown
-  blogDropdown () {
+  blogDropdown() {
     this.showBlogDropdown = !this.showBlogDropdown
   }
   // pagesDropDown
-  pagesDropDown () {
+  pagesDropDown() {
     this.showPagesDropdown = !this.showPagesDropdown
   }
 
-  constructor() { }
-
   ngOnInit(): void {
+    this.updateButtonText();
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.updateButtonText();
+    });
+  }
+
+  logout(): void {
+    this._authService.logout();
+    this._router.navigate(['/sign-in']); // Redirigir a la página de inicio de sesión después de cerrar sesión
   }
 
 }
