@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth-service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,7 +14,7 @@ export class SignInAreaComponent implements OnInit {
   public userName: string | null = null;
   public errorMessage: string | null = null;
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private _userService:UserService, private _authService:AuthService, private _router: Router,private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder, private _userService:UserService, private _authService:AuthService, private _router: Router) { }
 
 
   ngOnInit(): void {
@@ -36,10 +35,6 @@ export class SignInAreaComponent implements OnInit {
           this._router.navigate(['/']);
         }else{
           this.errorMessage = 'Las Credenciales no coinciden';
-          this.toastr.success('Mensaje de éxito', 'Título');
-this.toastr.error('Mensaje de error', 'Título');
-this.toastr.warning('Mensaje de advertencia', 'Título');
-this.toastr.info('Mensaje informativo', 'Título');
         }
       });
     }
