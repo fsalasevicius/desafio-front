@@ -1,22 +1,23 @@
 export interface Team {
+  _id:object;
   conf: string;
   createdAt: string;
   flag: string;
   name: string;
   nid: number;
-  goles: number;
 }
 
 export interface Match {
+  _id:object;
   createdAt: string;
   date: string;
   fase: string;
   group: string;
   ticket: string;
   nmatch: number;
-  stadium: Stadium[];
-  teamA: Team[];
-  teamB: Team[];
+  stadium: Stadium;
+  teamA: Team;
+  teamB: Team;
 }
 
 export interface Prediction {
@@ -35,6 +36,7 @@ export interface User {
   createdAt: Date;
 }
 export interface Stadium {
+  _id:object;
   createdAt: string;
   estado: string;
   img: string;

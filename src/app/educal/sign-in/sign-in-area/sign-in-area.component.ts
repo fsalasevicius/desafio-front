@@ -34,9 +34,11 @@ export class SignInAreaComponent implements OnInit {
       this._userService.login_user(email, password).subscribe(response => {
         if (response.data != undefined) {
           this._authService.login(response.token, response.data.email);
-          this.updateButtonText(); // Llama a updateButtonText directamente aquí
+          this.updateButtonText(); 
           this._messageService.add({ severity: 'success', summary: 'Credenciales Correctas', detail: 'Ingresando...' });
-          this._router.navigate(['/']);
+          setTimeout(() => {
+            this._router.navigate(['/']);
+          }, 1000);
         } else {
           this._messageService.add({ severity: 'error', summary: 'Credenciales Incorrectas', detail: 'Revise los datos ingresados.' });
         }

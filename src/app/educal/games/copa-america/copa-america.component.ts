@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Match, Team } from 'src/app/interface/copa-america.interface';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
 
@@ -8,66 +9,95 @@ import { CopaAmericaService } from 'src/app/services/copa-america.service';
   styleUrls: ['./copa-america.component.scss']
 })
 export class CopaAmericaComponent implements OnInit {
-  public dataMatches: Match[] = [];
-  public grupos: any[] = [];
-  public loading: boolean = true;
-  constructor(private _copaamerica: CopaAmericaService) {}
+  predictionForm!: FormGroup;
+  matches: Match[] = [];
+  loading = true;
+  grupos: { nombre: string, partidos: Match[] }[] = [];
+
+  constructor(private fb: FormBuilder, private _copaAmericaService: CopaAmericaService) {}
 
   ngOnInit(): void {
-    this._copaamerica.stadium_list().subscribe(response => {
-      console.log(response);
+    this.predictionForm = this.fb.group({
+      predictions: this.fb.array([]) // Debe ser un FormArray vacío al principio
     });
-    this._copaamerica.country_list().subscribe(response => {
-      console.log(response);
-    });
-    this._copaamerica.match_list().subscribe(response => {
-      this.dataMatches = response.data;
-      console.log(this.dataMatches)
-      this.organizeMatchesByGroup();
-      this.loading = false;
+
+    this._copaAmericaService.match_list().subscribe({
+      next: (response: any) => {
+        // Verificar si response.data es un array
+        if (Array.isArray(response.data)) {
+          this.matches = response.data.map((matchData: any) => {
+            return {
+              _id: matchData._id,
+              nmatch: matchData.nmatch,
+              teamA: matchData.teamA ? matchData.teamA : null,
+              teamB: matchData.teamB ? matchData.teamB : null,
+              date: matchData.date,
+              stadium: matchData.stadium ? matchData.stadium : null,
+              ticket: matchData.ticket,
+              fase: matchData.fase,
+              group: matchData.group,
+              createdAt: matchData.createdAt
+            };
+          });
+          this.groupMatches();
+          this.addMatchControls();
+          this.loading = false;
+        } else {
+          console.error('La respuesta de la API no es un array:', response.data);
+          this.loading = false;
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener los partidos:', error);
+        this.loading = false;
+      }
     });
   }
 
-  getGoles(equipo: Team[], partidoIndex: number): number {
-    return equipo && equipo[partidoIndex] ? equipo[partidoIndex].goles : 0;
-  }
-  
-  setGoles(equipo: Team[], partidoIndex: number, goles: number) {
-    if (equipo && equipo[partidoIndex]) {
-      equipo[partidoIndex].goles = goles;
-    }
+  private addMatchControls(): void {
+    const predictionsFormArray = this.predictionForm.get('predictions') as FormArray;
+    this.matches.forEach(match => {
+      predictionsFormArray.push(this.createMatchGroup(match));
+    });
   }
 
-  organizeMatchesByGroup() {
-    const groupedMatches: { [key: string]: Match[] } = {};
-  
-    this.dataMatches.forEach(match => {
+  private createMatchGroup(match: any): FormGroup {
+    return this.fb.group({
+      matchId: [match._id, Validators.required],
+      predictedWinner: ['', Validators.required],
+      predictedScore: this.fb.group({
+        teamA: ['', Validators.required],
+        teamB: ['', Validators.required]
+      }),
+      predictedGoalDifference: ['', Validators.required]
+    });
+  }
+
+  groupMatches(): void {
+    const groupedMatches: { [key: string]: any[] } = {};
+    this.matches.forEach(match => {
       if (!groupedMatches[match.group]) {
         groupedMatches[match.group] = [];
       }
       groupedMatches[match.group].push(match);
     });
-  
-    console.log(groupedMatches); // Verifica que los partidos se agrupen correctamente
-  
-    this.grupos = Object.keys(groupedMatches).map(group => ({
-      nombre: group,
-      partidos: groupedMatches[group]
+
+    this.grupos = Object.keys(groupedMatches).map(grupo => ({
+      nombre: `Grupo ${grupo}`,
+      partidos: groupedMatches[grupo]
     }));
   }
 
-  grabarPrediccion() {
-    this.grupos.forEach((grupo) => {
-      if (grupo && grupo.partidos) {
-        grupo.partidos.forEach((partido: { teamA: { goles: number; }[]; teamB: { goles: number; }[]; }) => {
-          if (partido && partido.teamA && partido.teamB) {
-            const golesEquipoA = partido.teamA[0]?.goles ?? 0;
-            const golesEquipoB = partido.teamB[0]?.goles ?? 0;
-    
-            console.log(`Goles Equipo A: ${golesEquipoA}, Goles Equipo B: ${golesEquipoB}`);
-          }
-        });
-      }
-    });
+  onSubmit(): void {
+    // Aquí puedes enviar los datos del formulario al servidor
+    console.log(this.predictionForm.value);
+  }
+
+  get predictions(): FormArray {
+    return this.predictionForm.get('predictions') as FormArray;
+  }
+
+  getFormGroupIndex(gIndex: number, pIndex: number): number {
+    return gIndex * this.grupos[gIndex].partidos.length + pIndex;
   }
 }
