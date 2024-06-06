@@ -1,6 +1,5 @@
 <main>
-  <app-header headerShadow="header__area header__padding-2 header__shadow">
-  </app-header>
+  <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
 
   <section class="teacher__area pt-50 pb-110">
     <div class="page__title-shape">
@@ -22,54 +21,71 @@
           Predicciones Fase de Grupos
         </div>
         <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
-          <div class="row">
-            <div class="col-md-6 mb-3" *ngFor="let grupo of grupos; let gIndex = index">
-              <div class="card h-100" style="border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                <div class="card-body">
-                  <h2 style="color: #2c3e50;">{{ grupo.nombre }}</h2>
-                  <div class="table-responsive">
-                    <table class="table table-bordered">
-                      <thead class="thead-light">
-                        <tr>
-                          <th>Selección</th>
-                          <th>Gol</th>
-                          <th>Selección</th>
-                          <th>Gol</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let partido of grupo.partidos; let pIndex = index" [formGroupName]="getFormGroupIndex(gIndex, pIndex)">
-                          <td data-label="Selección" style="display: flex; align-items: center;">
-                            <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag" alt="{{ partido.teamA.name }}" class="img-fluid" style="margin-right: 10px;">
-                            <div>
-                              <div style="font-weight: bold;">{{ partido.teamA.name }}</div>
-                            </div>
-                          </td>
-                          <td data-label="Gol">
-                            <input class="form-control form-control-goles" type="number" formControlName="teamA">
-                          </td>
-                          <td data-label="Selección" style="display: flex; align-items: center;">
-                            <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag" alt="{{ partido.teamB.name }}" class="img-fluid" style="margin-right: 10px;">
-                            <div>
-                              <div style="font-weight: bold;">{{ partido.teamB.name }}</div>
-                            </div>
-                          </td>
-                          <td data-label="Gol">
-                            <input class="form-control form-control-goles" type="number" formControlName="teamB">
-                          </td>
-                          <td>
-                            <i class="fas fa-check-circle" style="color: green; margin-right: 5px;"></i>
-                            <i class="fas fa-times-circle" style="color: red;"></i>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+          <div formArrayName="predictions">
+            <div class="row">
+              <div class="col-lg-6 mb-3" *ngFor="let grupo of grupos; let gIndex = index">
+                <div class="card h-100" style="border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                  <div class="card-body">
+                    <h2 style="color: #2c3e50;">{{ grupo.nombre }}</h2>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead class="thead-light">
+                          <tr>
+                            <th>Selección</th>
+                            <th>Gol</th>
+                            <th>Selección</th>
+                            <th>Gol</th>
+                            <th colspan="2">Resultado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let partido of grupo.partidos; let pIndex = index" [formGroupName]="getFormGroupIndex(gIndex, pIndex)">
+                            <td data-label="Selección" style="display: flex; align-items: center;">
+                              <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag" alt="{{ partido.teamA.name }}" class="img-fluid" style="margin-right: 10px;">
+                              <div>
+                                <div style="font-weight: bold;">{{ partido.teamA.name }}</div>
+                                
+                              </div>
+                            </td>
+                            <td data-label="Gol">
+                              <div formGroupName="predictedScore">
+                                <input class="form-control form-control-goles" type="number" formControlName="teamA" min="0">
+                                <div *ngIf="predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamA'])?.invalid && predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamA'])?.touched" class="text-danger">
+                                 
+                                  Gol requerido
+                                </div>
+                              </div>
+                            </td>
+                            <td data-label="Selección" style="display: flex; align-items: center;">
+                              <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag" alt="{{ partido.teamB.name }}" class="img-fluid" style="margin-right: 10px;">
+                              <div>
+                                <div style="font-weight: bold;">{{ partido.teamB.name }}</div>
+                              </div>
+                            </td>
+                            <td data-label="Gol">
+                              <div formGroupName="predictedScore">
+                                <input class="form-control form-control-goles" type="number" formControlName="teamB" min="0">
+                                <div *ngIf="predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamB'])?.invalid && predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamB'])?.touched" class="text-danger">
+                                  Gol requerido
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <i [class]="getIconClass(predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamA'])?.value, predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamB'])?.value)" style="margin-right: 5px;"></i>
+                            </td>
+                            <td>
+                              <i [class]="getIconClass(predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamB'])?.value, predictionForm.get(['predictions', getFormGroupIndex(gIndex, pIndex), 'predictedScore', 'teamA'])?.value)" style="margin-right: 5px;"></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <p-toast position="bottom-center"></p-toast>
           <div class="text-right mt-2 mb-3">
             <button class="btn btn-primary" type="submit" style="background-color: #2ecc71; border: none; padding: 10px 20px;">Guardar Predicción</button>
           </div>
