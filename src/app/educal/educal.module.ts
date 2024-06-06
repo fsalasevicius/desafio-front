@@ -54,6 +54,7 @@ import { CopaAmericaComponent } from './games/copa-america/copa-america.componen
 import { CuadroGrupoComponent } from './games/copa-america/cuadro-grupo/cuadro-grupo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
+import { PrimeNgModule } from './common/primeng/primeng.module';
 
 
 @NgModule({
@@ -115,6 +116,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    PrimeNgModule,
     SwiperModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

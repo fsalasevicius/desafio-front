@@ -21,67 +21,62 @@
         <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
            <div class="sign__wrapper white-bg">
               <div class="sign__header mb-35">
+               <!--
                  <div class="sign__in text-center">
-                    <a href="#" class="sign__social g-plus text-start mb-15"><i class="fab fa-google-plus-g"></i>Ingresa con Google</a>
-                    <a href="#" class="sign__social text-start mb-15"><i class="fab fa-facebook-f"></i>Ingresa con Facebook</a>
+                     <a href="#" class="sign__social g-plus text-start mb-15"><i class="fab fa-google-plus-g"></i>Ingresa con Google</a>
+                    <a href="#" class="sign__social text-start mb-15"><i class="fab fa-facebook-f"></i>Ingresa con Facebook</a> 
                     <p> <span>-------</span> O <a [routerLink]="['/sign-up']">Regístrate</a>  Con tu correo electrónico<span> -------</span> </p>
                  </div>
+                 -->
               </div>
               <div class="sign__form">
-                 <form action="#">
-                    <div class="sign__input-wrapper mb-25">
-                       <h5>Nombre de Usuario</h5>
-                       <div class="sign__input">
-                          <input type="text" placeholder="Nombre de Usuario">
-                          <i class="fal fa-user"></i>
-                       </div>
-                    </div>
+               <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <div class="sign__input-wrapper mb-25">
                        <h5>Nombre</h5>
                        <div class="sign__input">
-                          <input type="text" placeholder="Nombre">
+                          <input type="text" placeholder="Nombre"  name="name" formControlName="name" required>
                           <i class="fal fa-user"></i>
                        </div>
                     </div>
                     <div class="sign__input-wrapper mb-25">
                      <h5>Apellido</h5>
                      <div class="sign__input">
-                        <input type="text" placeholder="Apellido">
+                        <input type="text" placeholder="Apellido"  name="surname" formControlName="surname" required>
                         <i class="fal fa-user"></i>
                      </div>
                   </div>
                   <div class="sign__input-wrapper mb-25">
                      <h5>Fecha de Nacimiento</h5>
                      <div class="sign__input">
-                        <input type="date" placeholder="">
+                        <input type="date"   name="birthday" formControlName="birthday" required>
                         <i class="fal fa-calendar"></i>
                      </div>
                   </div>
                   <div class="sign__input-wrapper mb-25">
                      <h5>Email</h5>
                      <div class="sign__input">
-                        <input type="text" placeholder="Email">
+                        <input type="text" placeholder="Email" name="email" formControlName="email" required>
                         <i class="fal fa-envelope"></i>
                      </div>
                   </div>
-                    <div class="sign__input-wrapper mb-25">
-                       <h5>Contraseña</h5>
-                       <div class="sign__input">
-                          <input type="password" placeholder="Contraseña">
-                          <i class="fal fa-lock"></i>
-                       </div>
-                    </div>
-                    <div class="sign__input-wrapper mb-10">
-                       <h5>Confirma tu contraseña</h5>
-                       <div class="sign__input">
-                          <input type="password" placeholder="Confirma tu contraseña">
-                          <i class="fal fa-lock"></i>
-                       </div>
-                    </div>
-
-                    <button class="e-btn w-100 mt-3"> <span></span> Registrarse</button>
+                  <div class="sign__input-wrapper mb-25">
+                     <h5>Contraseña</h5>
+                     <div class="sign__input">
+                       <input type="password" placeholder="Contraseña" name="password" formControlName="password" required>
+                       <i class="fal fa-lock"></i>
+                     </div>
+                   </div>
+                   <div class="sign__input-wrapper mb-10">
+                     <h5>Confirma tu contraseña</h5>
+                     <div class="sign__input">
+                       <input type="password" placeholder="Confirma tu contraseña" name="confirmPassword" formControlName="confirmPassword" required>
+                       <i class="fal fa-lock"></i>
+                     </div>
+                   </div>
+                   <p-toast position="bottom-center"></p-toast>
+                    <button class="e-btn w-100 mt-3" type="submit"> Registrarse</button>
                     <div class="sign__new text-center mt-20">
-                       <p>¿ Ya tienes una cuenta ? <a [routerLink]="['/sign-in']"> Ingresa!</a></p>
+                       <p>¿ Ya tienes una cuenta ? <a class="btn-reg" [routerLink]="['/sign-in']"> Ingresa!</a></p>
                     </div>
                  </form>
               </div>

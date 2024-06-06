@@ -12,7 +12,7 @@
          <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
             <div class="section__title-wrapper text-center mb-55">
                <h2 class="section__title">Ingreso de Usuarios</h2>
-               <p>Si no tienes una cuenta <a [routerLink]="['/sign-up']">Registrate Aquí!</a></p>
+               <p>Si no tienes una cuenta <a class="btn-reg" [routerLink]="['/sign-up']">Registrate Aquí!</a></p>
             </div>
          </div>
       </div>
@@ -36,6 +36,7 @@
                         </div>
                      </div>
                      <button type="submit" class="e-btn w-100">Ingresar</button>
+                     <p-toast position="bottom-center"></p-toast>
                   </form>
                </div>
             </div>

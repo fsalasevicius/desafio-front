@@ -103,7 +103,7 @@
                            </button>
                            <div class="dropdown-menu" [class.show]="isDropdownOpen">
                               <a class="dropdown-item" href="#"><i class="fal fa-user-circle"></i> Ver perfil</a>
-                              <a class="dropdown-item" href="#" (click)="logout()"><i class="fal fa-sign-out-alt"></i>
+                              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()"><i class="fal fa-sign-out-alt"></i>
                                  Cerrar sesión</a>
                            </div>
                         </div>
@@ -168,6 +168,26 @@
                <li>
                   <a [routerLink]="['/contact']" class="border-0">Contacto</a>
                </li>
+               <ng-container *ngIf="buttonText === 'Registrarse' || buttonText === 'Ingresar'">
+                  <li>
+                    <a [routerLink]="buttonText === 'Ingresar' ? '/sign-in' : '/sign-up'" class="e-link">{{ buttonText }}</a>
+                  </li>
+                </ng-container>
+                
+                <!-- Menú para usuarios autenticados -->
+                <ng-container *ngIf="buttonText !== 'Registrarse' && buttonText !== 'Ingresar'">
+                  <li class="menu-item-has-children has-droupdown" [class.active]="showUsrDropdown">
+                    <div class="dropdown" (click)="toggleDropdown($event)">
+                      <a class="e-link dropdown-toggle">
+                        {{ buttonText }}
+                      </a>
+                      <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+                        <li><a [routerLink]="['/blog']"><i class="fal fa-user-circle"></i> Ver perfil</a></li>
+                        <li><a (click)="logout()"><i class="fal fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ng-container>
             </ul>
          </div>
          <div class="sidebar__search p-relative mt-40 ">

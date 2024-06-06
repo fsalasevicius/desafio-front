@@ -1,0 +1,9 @@
+.ui-toast.ui-widget.ui-toast-bottom-center {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 50px; /* Ajusta este valor para mover el toast hacia arriba */
+}
+
+.btn-reg:hover {
+    color: #fa5b41 !important;
+}

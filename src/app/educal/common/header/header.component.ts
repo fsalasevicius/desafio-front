@@ -20,6 +20,7 @@ export class HeaderTwoComponent implements OnInit {
   showHomeDropdown: boolean = false;
   showCoursesDropdown: boolean = false;
   showBlogDropdown: boolean = false;
+  showUsrDropdown: boolean = false;
   showPagesDropdown: boolean = false;
 
   @HostListener('window:scroll', ['$event']) onscroll() {
@@ -30,7 +31,7 @@ export class HeaderTwoComponent implements OnInit {
       this.headerSticky = false
     }
   }
-  getUserName(): string | null {
+  getEmail(): string | null {
     return localStorage.getItem('userName');
   }
 
@@ -45,21 +46,19 @@ export class HeaderTwoComponent implements OnInit {
     const currentRoute = this._router.url;
   
     if (token) {
-      const userName = this._authService.getUserName();
+      const userName = this._authService.getEmail();
       this.userName = userName !== null ? userName.toString() : 'Usuario';
-      this.buttonText = this.userName !== null ? this.userName.toString() : 'Usuario';
-    } else {
-      if (currentRoute.includes('sign-in')) {
-        this.buttonText = 'Registrarse';
-      } else if (currentRoute.includes('sign-up')) {
-        this.buttonText = 'Ingresar';
-      } else {
-        this.buttonText = 'Ingresar';
-      }
     }
-    console.log(this.buttonText, this.userName)
+  
+    if (currentRoute.includes('sign-in')) {
+      this.buttonText = 'Registrarse';
+    } else if (currentRoute.includes('sign-up')) {
+      this.buttonText = 'Ingresar';
+    } else {
+      this.buttonText = token ? (this.userName ? this.userName.toString() : 'Usuario') : 'Ingresar';
+    }
   }
-
+  
   // handleSidebar
   handleSidebar() {
     this.showSidebar = true;
@@ -81,6 +80,9 @@ export class HeaderTwoComponent implements OnInit {
   blogDropdown() {
     this.showBlogDropdown = !this.showBlogDropdown
   }
+  UsrDropdown() {
+    this.showUsrDropdown = !this.showUsrDropdown
+  }
   // pagesDropDown
   pagesDropDown() {
     this.showPagesDropdown = !this.showPagesDropdown
@@ -97,7 +99,7 @@ export class HeaderTwoComponent implements OnInit {
 
   logout(): void {
     this._authService.logout();
-    this._router.navigate(['/sign-in']); // Redirigir a la página de inicio de sesión después de cerrar sesión
+    this._router.navigate(['/sign-in']); 
   }
 
 }
