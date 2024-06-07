@@ -31,6 +31,7 @@
                       <table class="table table-bordered">
                         <thead class="thead-light">
                           <tr>
+                            <th>N°</th>
                             <th>Fecha <br> Hora</th>
                             <th>Selección <br> Local</th>
                             <th>Gol <br> Selección Local</th>
@@ -41,6 +42,7 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let partido of grupo.partidos; let pIndex = index" [formGroupName]="getFormGroupIndex(gIndex, pIndex)">
+                            <td>{{partido.nmatch}} </td>
                             <td>{{partido.date | date:"dd/MM/yyyy"}} <br> {{partido.date | date:"HH:mm"}} </td>
                             <td data-label="Selección" style="display: flex; align-items: center;">
                               <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag" alt="{{ partido.teamA.name }}" class="img-fluid" style="margin-right: 10px;">
