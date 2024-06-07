@@ -33,7 +33,7 @@ export class SignInAreaComponent implements OnInit {
       const { email, password } = this.loginForm.value;
       this._userService.login_user(email, password).subscribe(response => {
         if (response.data != undefined) {
-          this._authService.login(response.token, response.data.email);
+          this._authService.login(response.token, response.data.email, response.data);
           this.updateButtonText(); 
           this._messageService.add({ severity: 'success', summary: 'Credenciales Correctas', detail: 'Ingresando...' });
           setTimeout(() => {

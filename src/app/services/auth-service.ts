@@ -11,17 +11,17 @@ export class AuthService {
     return !!localStorage.getItem('authToken');
   }
 
-  login(token: string | undefined, email: string | undefined): boolean {
-    if (token && email) {
+  login(token: string | undefined, email: string | undefined, userData: any): boolean {
+    if (token && email && userData && userData.surname && userData.name) {
       localStorage.setItem('authToken', token);
-      localStorage.setItem('userName', email.split('@')[0]);
+      localStorage.setItem('userName', capitalize(userData.surname) + ', ' + capitalize(userData.name));
+      localStorage.setItem('userData', JSON.stringify(userData));
       return true;
     } else {
-      console.error('Token o nombre de usuario indefinidos');
+      console.error('Token, email, or user data is undefined');
       return false;
     }
   }
-
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userName');
@@ -34,5 +34,10 @@ export class AuthService {
   getEmail(): string | null {
     return localStorage.getItem('userName');
   }
+  
 
+}
+
+function capitalize(str: string): string {
+  return str.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 }

@@ -31,6 +31,11 @@ export class CopaAmericaService {
     return this._http.get(this.url + 'match_list/',{headers:headers});
   }
 
+  register_prediction(data:any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "register_prediction",data,{headers})
+  }
+
   
 
 }
