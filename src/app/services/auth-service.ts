@@ -16,6 +16,7 @@ export class AuthService {
       localStorage.setItem('authToken', token);
       localStorage.setItem('userName', capitalize(userData.surname) + ', ' + capitalize(userData.name));
       localStorage.setItem('userData', JSON.stringify(userData));
+      
       return true;
     } else {
       console.error('Token, email, or user data is undefined');
@@ -25,6 +26,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userName');
+    localStorage.removeItem('userData');
   }
 
   getToken(): string | null {
