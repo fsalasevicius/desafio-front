@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Match } from 'src/app/interface/copa-america.interface';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
 import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-copa-america',
@@ -16,6 +17,7 @@ export class CopaAmericaComponent implements OnInit {
   predictionForm!: FormGroup;
   matches: Match[] = [];
   loading = true;
+  prediccion = false
   grupos: { nombre: string; partidos: Match[] }[] = [];
   userPredictions: any[] = [];
 
@@ -35,19 +37,37 @@ export class CopaAmericaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._copaAmericaService
-      .view_prediction(this.user, this.token)
-      .subscribe((response) => {
-        console.log(response);
-      });
+    if (this.user && this.token) {
+      this._copaAmericaService.view_prediction(this.user, this.token).subscribe(
+        (response) => {
+          this.userPredictions = response.data[0].predictions;
+          if(this.userPredictions.length == 0){
+            this.prediccion = false
+          }else{
+            this.prediccion = true
+          }
+          console.log('Predicciones del usuario:', this.userPredictions);
+          this.loadMatches();
+        },
+        (error) => {
+          console.error('Error al obtener predicciones del usuario:', error);
+          this.loadMatches(); // Intentar cargar los partidos aunque haya error con predicciones
+        }
+      );
+    } else {
+      this.loadMatches();
+    }
+  }
+
+  loadMatches(): void {
     this._copaAmericaService.match_list().subscribe(
       (response: any) => {
         this.matches = response.data;
         if (Array.isArray(this.matches)) {
-          this.matches.sort((a, b) => a.nmatch - b.nmatch); // Ordenar por nmatch o _id
+          this.matches.sort((a, b) => a.nmatch - b.nmatch);
           this.groupMatches();
-          this.initializeForm();
           this.loading = false;
+          this.initializeForm();
         } else {
           console.error('La respuesta de la API no es un array:', this.matches);
           this.loading = false;
@@ -61,23 +81,27 @@ export class CopaAmericaComponent implements OnInit {
   }
 
   initializeForm() {
-    const predictionsArray = this.predictionForm.get(
-      'predictions'
-    ) as FormArray;
+    const predictionsArray = this.predictionForm.get('predictions') as FormArray;
+  
     this.matches.forEach((partido) => {
+      const existingPrediction = this.userPredictions.find(
+        (pred: any) => pred.matchId === partido._id
+      );
+  
       const partidoFormGroup = this.fb.group({
         matchId: [partido._id, Validators.required],
-        user: this.user._id,
+        user: this.user ? this.user._id : null,
         predictedScore: this.fb.group({
-          teamA: ['', Validators.required],
-          teamB: ['', Validators.required],
+          teamA: [existingPrediction ? existingPrediction.predictedScore.teamA : '', Validators.required],
+          teamB: [existingPrediction ? existingPrediction.predictedScore.teamB : '', Validators.required],
         }),
       });
+  
       predictionsArray.push(partidoFormGroup);
     });
-
-    // Marcar el formulario como 'touched' después de inicializarlo
+  
     this.predictionForm.markAllAsTouched();
+    console.log('Formulario inicializado:', this.predictionForm.value);
   }
 
   groupMatches(): void {
@@ -98,6 +122,10 @@ export class CopaAmericaComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const currentDate = new Date();
+    const limitDate = new Date('2024-06-19');
+    
+  if (currentDate <= limitDate) {
     if (this.predictionForm.invalid) {
       this.predictionForm.markAllAsTouched();
       this._messageService.add({
@@ -144,7 +172,23 @@ export class CopaAmericaComponent implements OnInit {
           }
         );
     }
+  } else {
+    this._messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'El plazo para modificar las predicciones ha expirado.',
+    });
   }
+}
+
+clearPredictions(): void {
+  this.predictionForm.reset();
+  this._messageService.add({
+    severity: 'info',
+    summary: 'Predicciones borradas',
+    detail: 'Tus predicciones actuales han sido borradas. Si te arrepentiste recarga la pagina.',
+  });
+}
 
   get predictions(): FormArray {
     return this.predictionForm.get('predictions') as FormArray;
@@ -174,15 +218,15 @@ export class CopaAmericaComponent implements OnInit {
       teamA < 0 ||
       teamB < 0
     ) {
-      return ''; // No mostrar nada si alguno de los goles está en blanco, es null o negativo
+      return ''; 
     }
 
     if (teamA > teamB) {
-      return teamAName; // Nombre del equipo A si tiene más goles
+      return teamAName; 
     } else if (teamA < teamB) {
-      return teamBName; // Nombre del equipo B si tiene más goles
+      return teamBName; 
     } else {
-      return 'Empate'; // Empate si los goles son iguales
+      return 'Empate'; 
     }
   }
 

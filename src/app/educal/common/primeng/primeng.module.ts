@@ -5,7 +5,7 @@ import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';  
 import { MessageService } from 'primeng/api';
-
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   imports: [
@@ -21,6 +21,7 @@ import { MessageService } from 'primeng/api';
     DropdownModule,
     ToastModule  
   ],
-  providers: [MessageService]  
+  providers: [MessageService,
+    ConfirmationService]  
 })
 export class PrimeNgModule { }
