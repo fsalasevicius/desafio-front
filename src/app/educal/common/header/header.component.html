@@ -7,8 +7,7 @@
                <div class="header__left d-flex">
                   <div class="logo">
                      <a [routerLink]="['/']">
-                        <!-- <img src="assets/img/logo/logo.png" alt="logo"> -->
-                        ACA VA EL LOGO
+                        <img src="assets/img/logo/logo.png" alt="logo" width="100%"> 
                      </a>
                   </div>
                   <div class="header__category d-none d-lg-block">
@@ -99,7 +98,7 @@
                      </ng-container>
                      <ng-template #showUserName>
                         <div class="dropdown" (click)="toggleDropdown($event)">
-                           <button class="e-btn dropdown-toggle" type="button">
+                           <button class="e-btn dropdown-toggle  capitalize-text" type="button">
                               {{ buttonText }}
                            </button>
                            <div class="dropdown-menu" [class.show]="isDropdownOpen">
@@ -171,7 +170,7 @@
                </li>
                <ng-container *ngIf="buttonText === 'Registrarse' || buttonText === 'Ingresar'">
                   <li>
-                    <a [routerLink]="buttonText === 'Ingresar' ? '/sign-in' : '/sign-up'" class="e-link">{{ buttonText }}</a>
+                    <a [routerLink]="buttonText === 'Ingresar' ? '/sign-in' : '/sign-up'" class="e-link">{{ buttonText.toUpperCase() }}</a>
                   </li>
                 </ng-container>
                 
@@ -180,7 +179,7 @@
                   <li class="menu-item-has-children has-droupdown" [class.active]="showUsrDropdown">
                     <div class="dropdown" (click)="toggleDropdown($event)">
                       <a class="e-link dropdown-toggle">
-                        {{ buttonText }}
+                        {{ buttonText.toUpperCase() }}
                       </a>
                       <ul class="dropdown-menu" [class.show]="isDropdownOpen">
                         <li><a [routerLink]="['/blog']"><i class="fal fa-user-circle"></i> Ver perfil</a></li>

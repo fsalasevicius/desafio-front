@@ -58,6 +58,8 @@ export class HeaderTwoComponent implements OnInit {
       this.buttonText = token ? (this.userName ? this.userName.toString() : 'Usuario') : 'Ingresar';
     }
   }
+
+  
   
   // handleSidebar
   handleSidebar() {
