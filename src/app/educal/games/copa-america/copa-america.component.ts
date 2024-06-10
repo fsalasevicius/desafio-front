@@ -41,6 +41,7 @@ export class CopaAmericaComponent implements OnInit {
         (response) => {
           this.userPredictions = response.data[0]?.predictions || [];
           this.prediccion = this.userPredictions.length > 0;
+          console.log(this.userPredictions)
           console.log('Predicciones del usuario:', this.userPredictions);
           this.loadMatches();
         },
@@ -49,6 +50,12 @@ export class CopaAmericaComponent implements OnInit {
           this.loadMatches(); // Intentar cargar los partidos aunque haya error con predicciones
         }
       );
+      this._copaAmericaService.table_prediction(this.user, this.token).subscribe(
+        (response) => {
+        console.log(response)
+        }
+      );
+
     } else {
       this.loadMatches();
     }

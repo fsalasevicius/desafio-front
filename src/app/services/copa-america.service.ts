@@ -41,6 +41,11 @@ export class CopaAmericaService {
     return this._http.post(this.url + "view_prediction",user,{headers})
   }
 
+  table_prediction(user:any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "table_prediction",user,{headers})
+  }
+
   
 
 }
