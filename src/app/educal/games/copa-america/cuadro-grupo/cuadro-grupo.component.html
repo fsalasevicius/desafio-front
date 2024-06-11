@@ -1,33 +1,39 @@
-<div class="card-container">
-    <div class="card" *ngFor="let grupo of grupos">
-      <h2>{{ grupo.nombre }}</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>EQUIPOS</th>
-            <th>PTS</th>
-            <th>PJ</th>
-            <th>V</th>
-            <th>E</th>
-            <th>D</th>
-            <th>GP</th>
-            <th>GC</th>
-            <th>SG</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let equipo of grupo.equipos">
-            <td>{{ equipo.nombre }} <img [src]="equipo.logo" alt="{{ equipo.nombre }}" style="width: 20px; height: 20px;"></td>
-            <td>{{ equipo.pts }}</td>
-            <td>{{ equipo.pj }}</td>
-            <td>{{ equipo.v }}</td>
-            <td>{{ equipo.e }}</td>
-            <td>{{ equipo.d }}</td>
-            <td>{{ equipo.gp }}</td>
-            <td>{{ equipo.gc }}</td>
-            <td>{{ equipo.sg }}</td>
-          </tr>
-        </tbody>
-      </table>
+<main>
+  <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
+
+  <section class="teacher__area pt-50 pb-110">
+    <div class="row">
+      <div class="col-12" *ngFor="let partido of partidos">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title">Grupo {{ partido.group }}</h5>
+                <h5 class="card-stadium">Grupo {{ partido.stadium.name }} - {{partido.stadium.localidad}}, {{partido.stadium.estado}}</h5>
+              </div>
+              <div class="d-flex align-items-center">
+                <div>
+                  <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag" alt="{{ partido.teamA.name }}" class="img-fluid rounded-circle" style="width: 30px; height: 30px; margin-right: 10px;">
+                </div>
+                <div>
+                  {{ partido.teamA.name }}
+                </div>
+              </div>
+              <div>
+                {{ formatFecha(partido.date) }}
+              </div>
+              <div class="d-flex align-items-center">
+                <div>
+                  <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag" alt="{{ partido.teamB.name }}" class="img-fluid rounded-circle" style="width: 30px; height: 30px; margin-right: 10px;">
+                </div>
+                <div>
+                  {{ partido.teamB.name }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+</section>
+</main>

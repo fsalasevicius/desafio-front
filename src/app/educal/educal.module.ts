@@ -1,4 +1,6 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA,LOCALE_ID } from '@angular/core';
+import localeEsAr from '@angular/common/locales/es-AR';
+import { registerLocaleData } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -56,6 +58,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { PrimeNgModule } from './common/primeng/primeng.module';
 
+registerLocaleData(localeEsAr);
 
 @NgModule({
   declarations: [
@@ -118,6 +121,9 @@ import { PrimeNgModule } from './common/primeng/primeng.module';
     MatTabsModule,
     PrimeNgModule,
     SwiperModule,
+  ],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es-AR' }
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

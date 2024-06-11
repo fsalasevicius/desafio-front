@@ -46,6 +46,10 @@ const routes: Routes = [
     component: CopaAmericaComponent, canActivate: [AuthGuard]
   },
   {
+    path: 'games-tabla-real',
+    component: CuadroGrupoComponent, canActivate: [AuthGuard]
+  },
+  {
     path: 'games-simulacion-tabla',
     component: CuadroGrupoComponent, canActivate: [AuthGuard]
   },

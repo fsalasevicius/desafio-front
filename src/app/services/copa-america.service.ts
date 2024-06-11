@@ -46,6 +46,11 @@ export class CopaAmericaService {
     return this._http.post(this.url + "table_prediction",user,{headers})
   }
 
+  table_resultados():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url + "table_resultados",{headers})
+  }
+
   
 
 }

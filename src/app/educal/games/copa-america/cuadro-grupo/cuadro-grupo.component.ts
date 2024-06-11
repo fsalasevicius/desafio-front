@@ -1,49 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-interface Equipo {
-  nombre: string;
-  logo: string;
-  pts: number;
-  pj: number;
-  v: number;
-  e: number;
-  d: number;
-  gp: number;
+import { CopaAmericaService } from 'src/app/services/copa-america.service';
+import { formatDate } from '@angular/common';
+export interface Partido {
+  grupo: string;
+  fechaHora: string;
+  nombreEquipo: string;
+  escudoEquipo: string;
+  puntos: number;
+  partidosJugados: number;
+  partidosGanados: number;
+  partidosEmpatados: number;
+  partidosPerdidos: number;
+  gd: number;
+  gf: number;
   gc: number;
-  sg: number;
 }
 
-interface Grupo {
-  nombre: string;
-  equipos: Equipo[];
-}
 @Component({
   selector: 'app-cuadro-grupo',
   templateUrl: './cuadro-grupo.component.html',
   styleUrls: ['./cuadro-grupo.component.scss']
 })
 export class CuadroGrupoComponent implements OnInit {
-  grupos: Grupo[] = [
-    {
-      nombre: 'Grupo A',
-      equipos: [
-        { nombre: 'Equipo 1', logo: 'ruta/al/logo1.png', pts: 3, pj: 1, v: 1, e: 0, d: 0, gp: 3, gc: 0, sg: 3 },
-        { nombre: 'Equipo 2', logo: 'ruta/al/logo2.png', pts: 1, pj: 1, v: 0, e: 1, d: 0, gp: 1, gc: 1, sg: 0 },
-        // Agregar más equipos según sea necesario
-      ]
-    },
-    {
-      nombre: 'Grupo B',
-      equipos: [
-        { nombre: 'Equipo 3', logo: 'ruta/al/logo3.png', pts: 3, pj: 1, v: 1, e: 0, d: 0, gp: 2, gc: 1, sg: 1 },
-        { nombre: 'Equipo 4', logo: 'ruta/al/logo4.png', pts: 0, pj: 1, v: 0, e: 0, d: 1, gp: 1, gc: 2, sg: -1 },
-        // Agregar más equipos según sea necesario
-      ]
-    },
-    // Agregar más grupos según sea necesario
-  ];
-  constructor() { }
-
-  ngOnInit(): void {
+  loading = true;
+  partidos: any = [];
+  formatFecha(fecha: Date): string {
+    const formattedDate = formatDate(fecha, 'EEE, dd/MM/yyyy', 'es-AR');
+    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
   }
+  constructor(
+    private _copaAmericaService: CopaAmericaService,) { }
+
+    ngOnInit(): void {
+      this._copaAmericaService.match_list().subscribe(
+        (response: any) => {
+          this.partidos = response.data;
+          this.partidos.sort((a: { date: string; group: string; }, b: { date: string; group: any; }) => {
+            // Convertir las fechas a formato comparable (ej. dd/MM/yyyy hh:mm -> yyyyMMddhhmm)
+            const dateA = this.formatDate(a.date);
+            const dateB = this.formatDate(b.date);
+    
+            // Comparar las fechas y luego los grupos si las fechas son iguales
+            if (dateA < dateB) return -1;
+            if (dateA > dateB) return 1;
+            return a.group.localeCompare(b.group);
+          });
+          console.log(this.partidos)
+        },
+        (error) => {
+          console.error('Error al obtener los partidos:', error);
+          this.loading = false;
+        }
+      );
+    }
+    
+    // Función para convertir la fecha y hora a un formato comparable
+    formatDate(dateString: string): string {
+      const [dayMonthYear, time] = dateString.split(' ');
+      const [day, month, year] = dayMonthYear.split('/');
+      const [hours, minutes] = time.split(':');
+      return `${year}${month}${day}${hours}${minutes}`;
+    }
 
 }

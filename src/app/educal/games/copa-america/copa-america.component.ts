@@ -17,7 +17,6 @@ export class CopaAmericaComponent implements OnInit {
   matches: Match[] = [];
   loading = true;
   prediccion = false;
-  grupos: { nombre: string; partidos: Match[] }[] = [];
   userPredictions: any[] = [];
 
   constructor(
@@ -50,11 +49,17 @@ export class CopaAmericaComponent implements OnInit {
           this.loadMatches(); // Intentar cargar los partidos aunque haya error con predicciones
         }
       );
-      this._copaAmericaService.table_prediction(this.user, this.token).subscribe(
+      // this._copaAmericaService.table_prediction(this.user, this.token).subscribe(
+      //   (response) => {
+      //   console.log(response)
+      //   }
+      // );
+      this._copaAmericaService.table_resultados().subscribe(
         (response) => {
         console.log(response)
         }
       );
+
 
     } else {
       this.loadMatches();
@@ -67,9 +72,8 @@ export class CopaAmericaComponent implements OnInit {
         this.matches = response.data;
         if (Array.isArray(this.matches)) {
           this.matches.sort((a, b) => a.nmatch - b.nmatch);
-          this.groupMatches();
-          this.loading = false;
           this.initializeForm();
+          this.loading = false;
         } else {
           console.error('La respuesta de la API no es un array:', this.matches);
           this.loading = false;
@@ -106,23 +110,6 @@ export class CopaAmericaComponent implements OnInit {
     console.log('Formulario inicializado:', this.predictionForm.value);
   }
 
-  groupMatches(): void {
-    const groupedMatches: { [key: string]: Match[] } = {};
-    this.matches.forEach((match) => {
-      if (!groupedMatches[match.group]) {
-        groupedMatches[match.group] = [];
-      }
-      groupedMatches[match.group].push(match);
-    });
-
-    this.grupos = Object.keys(groupedMatches)
-      .sort()
-      .map((grupo) => ({
-        nombre: `Grupo ${grupo}`,
-        partidos: groupedMatches[grupo],
-      }));
-  }
-
   onSubmit(): void {
     if (this.predictionForm.invalid) {
       this.predictionForm.markAllAsTouched();
@@ -135,14 +122,27 @@ export class CopaAmericaComponent implements OnInit {
     } else {
       const predictionsData = this.predictionForm.value.predictions.map(
         (prediction: any, index: number) => {
-          const matchId = this.matches[index]._id;
+          const matchId = this.matches[index]._id; // Obtener el ID correcto del partido
+  
+          // Verificar que el ID del partido en predictedScore coincida con el ID correcto
+          if (prediction.matchId !== matchId) {
+            console.error('ID del partido incorrecto:', prediction.matchId);
+            return null; // Devolver null para indicar un error
+          }
+  
           return {
             ...prediction,
             matchId,
           };
         }
       );
-
+  
+      // Verificar si hay errores antes de enviar la solicitud al backend
+      if (predictionsData.includes(null)) {
+        console.error('Error en las predicciones.');
+        return;
+      }
+  
       this._copaAmericaService
         .register_prediction({ predictions: predictionsData }, this.token)
         .subscribe(
@@ -176,18 +176,18 @@ export class CopaAmericaComponent implements OnInit {
     return this.predictionForm.get('predictions') as FormArray;
   }
 
-  getWinnerName(gIndex: number, pIndex: number): string {
-    const teamAName = this.grupos[gIndex].partidos[pIndex].teamA.name;
-    const teamBName = this.grupos[gIndex].partidos[pIndex].teamB.name;
+  getWinnerName(pIndex: number): string {
+    const teamAName = this.matches[pIndex].teamA.name;
+    const teamBName = this.matches[pIndex].teamB.name;
     const teamA = this.predictionForm.get([
       'predictions',
-      this.getFormGroupIndex(gIndex, pIndex),
+      pIndex,
       'predictedScore',
       'teamA',
     ])?.value;
     const teamB = this.predictionForm.get([
       'predictions',
-      this.getFormGroupIndex(gIndex, pIndex),
+      pIndex,
       'predictedScore',
       'teamB',
     ])?.value;
@@ -212,18 +212,12 @@ export class CopaAmericaComponent implements OnInit {
     }
   }
 
-  getFormGroupIndex(gIndex: number, pIndex: number): number {
-    return gIndex * this.grupos[gIndex].partidos.length + pIndex;
+  clearPredictions(): void {
+    this.predictionForm.reset();
+    this._messageService.add({
+      severity: 'info',
+      summary: 'Predicciones borradas',
+      detail: 'Tus predicciones actuales han sido borradas. Si te arrepentiste recarga la pagina.',
+    });
   }
-
-  
-clearPredictions(): void {
-  this.predictionForm.reset();
-  this._messageService.add({
-    severity: 'info',
-    summary: 'Predicciones borradas',
-    detail: 'Tus predicciones actuales han sido borradas. Si te arrepentiste recarga la pagina.',
-  });
 }
-}
-
