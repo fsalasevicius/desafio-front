@@ -4,16 +4,22 @@
   <section class="teacher__area pt-50 pb-110">
     <div class="row">
       <div class="join-tournament-container">
-        <h2>Unirse a Torneo</h2>
-        <form [formGroup]="joinForm" (ngSubmit)="onSubmit()">
-          <label for="tournamentName">Nombre del Torneo:</label>
-          <input id="tournamentName" formControlName="tournamentName" type="text" required>
-
-          <label for="password">Contraseña del Torneo:</label>
-          <input id="password" formControlName="password" type="password" required>
-
-          <button type="submit" [disabled]="joinForm.invalid">Unirse al Torneo</button>
-        </form>
+        <h2>Detalles de Invitaciones a Torneos</h2>
+        <div *ngFor="let tournament of invitations" class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ tournament.tournamentName }}</h5>
+            <p class="card-text">Organizado por: {{ tournament.owner.surname }}, {{ tournament.owner.name }}</p>
+            <p class="card-text">Participantes: {{ tournament.participants.length }}</p>
+            <button *ngIf="isPendingInvitation(tournament)"
+                    (click)="joinTournament(tournament)"
+                    class="btn btn-primary">
+              Unirse al Torneo
+            </button>
+            <p *ngIf="!isPendingInvitation(tournament)">
+              Ya te has unido a este torneo o la invitación no está pendiente.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

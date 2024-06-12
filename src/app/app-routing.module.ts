@@ -56,7 +56,7 @@ const routes: Routes = [
     component: FriendsTournamentComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'games-copa-america-join-tournament/:tournamentId',
+    path: 'games-copa-america-join-tournament',
     component: JoinTournamentComponent, canActivate: [AuthGuard]
   },
   {
