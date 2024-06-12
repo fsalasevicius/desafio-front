@@ -2,22 +2,29 @@
   <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
 
   <section class="teacher__area pt-50 pb-110">
-    <div class="row">
-      <div class="join-tournament-container">
-        <h2>Detalles de Invitaciones a Torneos</h2>
-        <div *ngFor="let tournament of invitations" class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{ tournament.tournamentName }}</h5>
-            <p class="card-text">Organizado por: {{ tournament.owner.surname }}, {{ tournament.owner.name }}</p>
-            <p class="card-text">Participantes: {{ tournament.participants.length }}</p>
-            <button *ngIf="isPendingInvitation(tournament)"
-                    (click)="joinTournament(tournament)"
-                    class="btn btn-primary">
-              Unirse al Torneo
-            </button>
-            <p *ngIf="!isPendingInvitation(tournament)">
-              Ya te has unido a este torneo o la invitación no está pendiente.
-            </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6" *ngFor="let tournament of invitations">
+          <div class="banner__item p-relative mb-40"
+            [ngStyle]="{background:'url(assets/img/banner/banner-bg-1.jpg)',backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundPosition:'center'}">
+            <div class="banner__content">
+              <span>Participantes: {{ tournament.participants.length }}</span>
+              <p class="card-text">Organizado por: <br> {{ tournament.owner.surname }}, {{ tournament.owner.name }}</p>
+              <h3 class="banner__title">
+                <a [routerLink]="['/course-details']">{{ tournament.tournamentName }}</a>
+              </h3>
+              <button *ngIf="isPendingInvitation(tournament)" (click)="joinTournament(tournament)"
+                class="e-btn e-btn-2">
+                Unirse al Torneo
+              </button>
+              <button *ngIf="!isPendingInvitation(tournament)" disabled class="e-btn e-btn-2"
+                style="background-color:rgb(29, 183, 47)">
+                Ya Estas Participando
+              </button>
+            </div>
+            <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
+              <img src="assets/img/banner/banner-img-1.png" alt="">
+            </div>
           </div>
         </div>
       </div>
