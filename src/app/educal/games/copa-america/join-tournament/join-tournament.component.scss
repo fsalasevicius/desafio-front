@@ -1,0 +1,42 @@
+/* join-tournament.component.scss */
+.join-tournament-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .join-tournament-container h2 {
+    text-align: center;
+  }
+  
+  .join-tournament-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .join-tournament-container form label {
+    margin: 10px 0 5px;
+  }
+  
+  .join-tournament-container form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .join-tournament-container form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .join-tournament-container form button:disabled {
+    background-color: #ccc;
+  }

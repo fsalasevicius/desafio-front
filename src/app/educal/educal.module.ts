@@ -57,6 +57,8 @@ import { CuadroGrupoComponent } from './games/copa-america/cuadro-grupo/cuadro-g
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { PrimeNgModule } from './common/primeng/primeng.module';
+import { FriendsTournamentComponent } from './games/copa-america/friends-tournament/friends-tournament.component';
+import { JoinTournamentComponent } from './games/copa-america/join-tournament/join-tournament.component';
 
 registerLocaleData(localeEsAr);
 
@@ -112,6 +114,8 @@ registerLocaleData(localeEsAr);
     ContactInfoComponent,
     CuadroGrupoComponent,
     RegisterComponent,
+    FriendsTournamentComponent,
+    JoinTournamentComponent,
   ],
   imports: [
     CommonModule,

@@ -88,12 +88,13 @@ export class CopaAmericaComponent implements OnInit {
 
   initializeForm() {
     const predictionsArray = this.predictionForm.get('predictions') as FormArray;
-  
+    predictionsArray.clear(); // Clear the form array to avoid duplicates
+
     this.matches.forEach((partido) => {
       const existingPrediction = this.userPredictions.find(
         (pred: any) => pred.matchId === partido._id
       );
-  
+
       const partidoFormGroup = this.fb.group({
         matchId: [partido._id, Validators.required],
         user: this.user ? this.user._id : null,
@@ -102,10 +103,10 @@ export class CopaAmericaComponent implements OnInit {
           teamB: [existingPrediction ? existingPrediction.predictedScore.teamB : '', Validators.required],
         }),
       });
-  
+
       predictionsArray.push(partidoFormGroup);
     });
-  
+
     this.predictionForm.markAllAsTouched();
     console.log('Formulario inicializado:', this.predictionForm.value);
   }
@@ -123,26 +124,26 @@ export class CopaAmericaComponent implements OnInit {
       const predictionsData = this.predictionForm.value.predictions.map(
         (prediction: any, index: number) => {
           const matchId = this.matches[index]._id; // Obtener el ID correcto del partido
-  
+
           // Verificar que el ID del partido en predictedScore coincida con el ID correcto
           if (prediction.matchId !== matchId) {
             console.error('ID del partido incorrecto:', prediction.matchId);
             return null; // Devolver null para indicar un error
           }
-  
+
           return {
             ...prediction,
             matchId,
           };
         }
       );
-  
+
       // Verificar si hay errores antes de enviar la solicitud al backend
       if (predictionsData.includes(null)) {
         console.error('Error en las predicciones.');
         return;
       }
-  
+
       this._copaAmericaService
         .register_prediction({ predictions: predictionsData }, this.token)
         .subscribe(
@@ -214,6 +215,7 @@ export class CopaAmericaComponent implements OnInit {
 
   clearPredictions(): void {
     this.predictionForm.reset();
+    this.initializeForm(); // Reinitialize the form to reset it completely
     this._messageService.add({
       severity: 'info',
       summary: 'Predicciones borradas',

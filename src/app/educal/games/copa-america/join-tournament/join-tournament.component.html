@@ -1,0 +1,20 @@
+<main>
+  <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
+
+  <section class="teacher__area pt-50 pb-110">
+    <div class="row">
+      <div class="join-tournament-container">
+        <h2>Unirse a Torneo</h2>
+        <form [formGroup]="joinForm" (ngSubmit)="onSubmit()">
+          <label for="tournamentName">Nombre del Torneo:</label>
+          <input id="tournamentName" formControlName="tournamentName" type="text" required>
+
+          <label for="password">Contraseña del Torneo:</label>
+          <input id="password" formControlName="password" type="password" required>
+
+          <button type="submit" [disabled]="joinForm.invalid">Unirse al Torneo</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
