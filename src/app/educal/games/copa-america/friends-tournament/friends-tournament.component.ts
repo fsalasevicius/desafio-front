@@ -79,8 +79,9 @@ export class FriendsTournamentComponent implements OnInit {
       this._copaAmericaService.createTournament(formData, this.token).subscribe(
         (response) => {
           console.log(formData)
-          this.tournamentLink = `${window.location.origin}/games-copa-america-join-tournament/${tournamentId}`;
-          this.sendInvitationEmails(emails, tournamentId, password);
+          let nameTournament = formData.tournamentName
+          this.tournamentLink = `${window.location.origin}/games-copa-america-join-tournament`;
+          this.sendInvitationEmails(emails, nameTournament);
         },
         (error) => {
           console.error('Error al crear el torneo:', error);
@@ -92,9 +93,9 @@ export class FriendsTournamentComponent implements OnInit {
     
   }
 
-  sendInvitationEmails(emails: string[], tournamentId: string, password: string): void {
+  sendInvitationEmails(emails: string[], nameTournament: string): void {
     emails.forEach(email => {
-      this._copaAmericaService.sendInvitationEmail({ email, tournamentId, password }, this.token).subscribe(
+      this._copaAmericaService.sendInvitationEmail({ email, nameTournament }, this.token).subscribe(
         (response) => {
           console.log('Correo enviado a:', email);
         },

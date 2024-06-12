@@ -43,11 +43,8 @@ export class JoinTournamentComponent implements OnInit {
   }
 
   joinTournament(tournament: any): void {
-    const password = prompt(`Introduce la contraseña para el torneo "${tournament.tournamentName}":`);
-
-    if (password) {
       this._copaAmericaService.joinTournament(
-        { tournamentName: tournament.tournamentName, userEmail: this.user.email, password },
+        { tournamentName: tournament.tournamentName, userEmail: this.user.email },
         this.token
       ).subscribe(
         (response) => {
@@ -58,7 +55,6 @@ export class JoinTournamentComponent implements OnInit {
           console.error('Error al unirse al torneo:', error);
         }
       );
-    }
   }
 
   isPendingInvitation(tournament: any): boolean {
