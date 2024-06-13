@@ -12,6 +12,7 @@ export class JoinTournamentComponent implements OnInit {
   user: any = undefined;
   public token = localStorage.getItem('authToken');
   invitations: any[] = [];
+  public tournamentName = "";
   constructor(
     private fb: FormBuilder,
     private _copaAmericaService: CopaAmericaService

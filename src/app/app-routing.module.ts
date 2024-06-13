@@ -21,6 +21,7 @@ import { RegisterComponent } from './educal/register/register.component';
 import { CuadroGrupoComponent } from './educal/games/copa-america/cuadro-grupo/cuadro-grupo.component';
 import { FriendsTournamentComponent } from './educal/games/copa-america/friends-tournament/friends-tournament.component';
 import { JoinTournamentComponent } from './educal/games/copa-america/join-tournament/join-tournament.component';
+import { TournamentDetailComponent } from './educal/games/copa-america/tournament-detail/tournament-detail.component';
 
 
 
@@ -59,6 +60,11 @@ const routes: Routes = [
     path: 'games-copa-america-join-tournament',
     component: JoinTournamentComponent, canActivate: [AuthGuard]
   },
+  {
+    path: 'tournament-detail/:id',
+    component: TournamentDetailComponent, canActivate: [AuthGuard]
+  },
+  
   {
     path: 'games-simulacion-tabla',
     component: CuadroGrupoComponent, canActivate: [AuthGuard]

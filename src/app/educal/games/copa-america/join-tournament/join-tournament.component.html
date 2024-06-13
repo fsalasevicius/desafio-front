@@ -11,16 +11,16 @@
               <span>Participantes: {{ tournament.participants.length }}</span>
               <p class="card-text">Organizado por: <br> {{ tournament.owner.surname }}, {{ tournament.owner.name }}</p>
               <h3 class="banner__title">
-                <a [routerLink]="['/course-details']">{{ tournament.tournamentName }}</a>
+                <a [routerLink]="['/tournament-detail', tournament._id]">{{ tournament.tournamentName }}</a>
               </h3>
               <button *ngIf="isPendingInvitation(tournament)" (click)="joinTournament(tournament)"
                 class="e-btn e-btn-2">
                 Unirse al Torneo
               </button>
-              <button *ngIf="!isPendingInvitation(tournament)" disabled class="e-btn e-btn-2"
-                style="background-color:rgb(29, 183, 47)">
-                Ya Estas Participando
-              </button>
+              <a [routerLink]="['/tournament-detail', tournament._id]" *ngIf="!isPendingInvitation(tournament)" disabled class="e-btn e-btn-2"
+                style="background-color:rgb(29, 183, 47);cursor: pointer;">
+                Ir al torneo
+              </a>
             </div>
             <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
               <img src="assets/img/banner/banner-img-1.png" alt="">

@@ -1,0 +1,31 @@
+<main>
+    <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
+
+    <section class="teacher__area pt-50 pb-110">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-4 offset-xxl-4">
+                   <div class="section__title-wrapper mb-60 text-center">
+                      <h2 class="section__title"> <span class="yellow-bg yellow-bg-big"><img src="assets/img/shape/yellow-bg.png" alt="">{{tournamentName}}</span></h2>
+                      <p>Organizado por: {{owner}} </p>
+                   </div>
+                </div>
+             </div>
+            <div class="row"  *ngFor="let tournament of invitations; let i = index">
+                <div class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
+                    <div class="events__item mb-10 hover__active">
+                        <div class="events__item-inner d-sm-flex align-items-center justify-content-between white-bg">
+                            <div style="font-weight: 600;color: black;">{{i+1}}</div>
+                            <div class="events__content">
+                                <h3 class="events__title"><a >{{tournament.surname}}, {{tournament.name}}</a></h3>
+                            </div>
+                            <div class="events__more" style="font-weight: 600;color: black;">
+                                90
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

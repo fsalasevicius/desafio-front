@@ -59,6 +59,7 @@ import { RegisterComponent } from './register/register.component';
 import { PrimeNgModule } from './common/primeng/primeng.module';
 import { FriendsTournamentComponent } from './games/copa-america/friends-tournament/friends-tournament.component';
 import { JoinTournamentComponent } from './games/copa-america/join-tournament/join-tournament.component';
+import { TournamentDetailComponent } from './games/copa-america/tournament-detail/tournament-detail.component';
 
 registerLocaleData(localeEsAr);
 
@@ -116,6 +117,7 @@ registerLocaleData(localeEsAr);
     RegisterComponent,
     FriendsTournamentComponent,
     JoinTournamentComponent,
+    TournamentDetailComponent,
   ],
   imports: [
     CommonModule,
