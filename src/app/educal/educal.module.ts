@@ -60,6 +60,7 @@ import { PrimeNgModule } from './common/primeng/primeng.module';
 import { FriendsTournamentComponent } from './games/copa-america/friends-tournament/friends-tournament.component';
 import { JoinTournamentComponent } from './games/copa-america/join-tournament/join-tournament.component';
 import { TournamentDetailComponent } from './games/copa-america/tournament-detail/tournament-detail.component';
+import { CuadroSimulacionComponent } from './games/copa-america/cuadro-simulacion/cuadro-simulacion.component';
 
 registerLocaleData(localeEsAr);
 
@@ -118,6 +119,7 @@ registerLocaleData(localeEsAr);
     FriendsTournamentComponent,
     JoinTournamentComponent,
     TournamentDetailComponent,
+    CuadroSimulacionComponent,
   ],
   imports: [
     CommonModule,

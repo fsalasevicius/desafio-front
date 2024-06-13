@@ -22,6 +22,7 @@ import { CuadroGrupoComponent } from './educal/games/copa-america/cuadro-grupo/c
 import { FriendsTournamentComponent } from './educal/games/copa-america/friends-tournament/friends-tournament.component';
 import { JoinTournamentComponent } from './educal/games/copa-america/join-tournament/join-tournament.component';
 import { TournamentDetailComponent } from './educal/games/copa-america/tournament-detail/tournament-detail.component';
+import { CuadroSimulacionComponent } from './educal/games/copa-america/cuadro-simulacion/cuadro-simulacion.component';
 
 
 
@@ -67,7 +68,7 @@ const routes: Routes = [
   
   {
     path: 'games-simulacion-tabla',
-    component: CuadroGrupoComponent, canActivate: [AuthGuard]
+    component: CuadroSimulacionComponent, canActivate: [AuthGuard]
   },
   {
     path: 'blog',
