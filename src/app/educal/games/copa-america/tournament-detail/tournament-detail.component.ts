@@ -11,14 +11,15 @@ import { DialogService } from 'primeng/dynamicdialog';
 export class TournamentDetailComponent implements OnInit {
   user: any = undefined;
   public id = '';
+  checkIcon: any;
   public tournamentName = '';
   selectedUser: any;
   public owner = '';
   public load_data = false;
   public token = localStorage.getItem('authToken');
   invitations: any[] = [];
+  userPredictions: any[] = [];
   public userPoints: any = {};
-  public displayPointsDetailModal: boolean = false;
   public display: boolean | undefined;
   constructor(
     private _route: ActivatedRoute,
@@ -36,7 +37,6 @@ export class TournamentDetailComponent implements OnInit {
       this.id = params['id'];
       this.load_data = true;
 
-      // Llamar a calculatePoints cuando se carguen los detalles del torneo
       this.calculatePoints();
 
       this._copaAmericaService
@@ -44,7 +44,7 @@ export class TournamentDetailComponent implements OnInit {
         .subscribe(
           (response) => {
             this.invitations = response.participants;
-
+            this.userPredictions = response.userPredictionDetails;
           
           console.log('Invitaciones ordenadas:', this.invitations);
             this.tournamentName = response.tournamentName;
@@ -59,14 +59,13 @@ export class TournamentDetailComponent implements OnInit {
     });
   }
 
+
   calculatePoints(): void {
     let id = this.id;
     this._copaAmericaService.calculatePoints({ id }, this.token).subscribe(
       (response) => {
         this.userPoints = response.userPoints;
-        this.invitations.sort((a, b) => {
-          return this.userPoints[b._id] - this.userPoints[a._id];
-      });
+        this.userPredictions = response.userPredictionDetails; // Guardamos las predicciones
       },
       (error) => {
         console.error('Error al recalcular puntos:', error);
@@ -75,9 +74,13 @@ export class TournamentDetailComponent implements OnInit {
   }
 
   showPointsDetail(user: any) {
-    this.selectedUser = user;
+    this.selectedUser = {
+      ...user,
+      matches: this.userPredictions[user._id] || []
+    };
     this.display = true;
-}
+    console.log(this.selectedUser)
+  }
 }
 
 

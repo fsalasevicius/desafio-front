@@ -8,12 +8,14 @@ import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   imports: [
     CommonModule,
     ButtonModule,
     TableModule,
+    TooltipModule,
     DialogModule,
     DropdownModule,
     ToastModule  
@@ -21,6 +23,7 @@ import { DialogModule } from 'primeng/dialog';
   exports: [
     ButtonModule,
     TableModule,
+    TooltipModule,
     DropdownModule,
     DialogModule,
     ToastModule  
