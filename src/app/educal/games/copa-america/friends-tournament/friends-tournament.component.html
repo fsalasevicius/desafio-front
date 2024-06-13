@@ -8,7 +8,10 @@
         <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
           <label for="tournamentName">Nombre del Torneo:</label>
           <input id="tournamentName" formControlName="tournamentName" type="text" required>
-
+          <label for="tournament-select">Seleccionar Torneo:</label>
+          <select id="tournamentDetail" class="form-control" formControlName="tournamentDetail">
+            <option *ngFor="let torneo of torneoDetail" [value]="torneo._id">{{ torneo.name }} {{ torneo.edition }} {{ torneo.year }}</option>
+          </select>
           <label for="friendsEmails">Correos Electrónicos de Amigos:</label>
           <div formArrayName="friendsEmails">
             <div *ngFor="let emailGroup of friendsEmails.controls; let i = index" [formGroupName]="i">

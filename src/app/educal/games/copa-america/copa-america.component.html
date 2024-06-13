@@ -30,6 +30,7 @@
                       <table class="table table-bordered">
                         <thead class="thead-light">
                           <tr>
+                            <th>#</th>
                             <th>Grupo</th>
                             <th>Fecha <br> Hora</th>
                             <th>Selección <br> Local</th>
@@ -41,6 +42,7 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let partido of matches; let pIndex = index" [formGroupName]="pIndex">
+                            <td>{{partido.nmatch}} </td>
                             <td>{{partido.group}} </td>
                             <td>{{partido.date | date:"dd/MM/yyyy"}} <br> {{partido.date | date:"HH:mm"}} </td>
                             <td data-label="Selección" style="display: flex; align-items: center;">

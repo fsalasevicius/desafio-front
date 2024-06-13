@@ -31,6 +31,11 @@ export class CopaAmericaService {
     return this._http.get(this.url + 'match_list/',{headers:headers});
   }
 
+  tournament_detail():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url + 'tournament_detail/',{headers:headers});
+  }
+
   register_prediction(data:any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.post(this.url + "register_prediction",data,{headers})
@@ -74,6 +79,11 @@ export class CopaAmericaService {
   getParticipantsTournament(id:any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.get(this.url + "getParticipantsTournament/" + id,{headers})
+  }
+
+  calculatePoints(id: any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "calculatePoints",id,{headers})
   }
 
 }

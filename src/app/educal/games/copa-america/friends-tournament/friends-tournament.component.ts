@@ -12,6 +12,8 @@ import { CopaAmericaService } from 'src/app/services/copa-america.service';
 export class FriendsTournamentComponent implements OnInit {
   tournamentForm!: FormGroup;
   tournamentLink: string | null = null;
+  public torneoDetail: any;
+  public selectedTournament: string | null = null;
   user: any = undefined;
   public token = localStorage.getItem('authToken');
   i: number = 0;
@@ -22,6 +24,7 @@ export class FriendsTournamentComponent implements OnInit {
   ) {
     this.tournamentForm = this.fb.group({
       tournamentName: ['', Validators.required],
+      tournamentDetail: ['', Validators.required],
       friendsEmails: this.fb.array([this.createFriendEmail()]), // Initialize with one email field
     });
     if (this.token) {
@@ -31,8 +34,14 @@ export class FriendsTournamentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._copaAmericaService.tournament_detail().subscribe(
+      response=>{
+        this.torneoDetail = response.data;
+      }
+    )
     this.tournamentForm = this.fb.group({
       tournamentName: ['', Validators.required],
+      tournamentDetail: ['', Validators.required],
       friendsEmails: this.fb.array([]),
     });
   }
@@ -61,8 +70,7 @@ export class FriendsTournamentComponent implements OnInit {
       return;
     }
   
-    const { tournamentName, friendsEmails } = this.tournamentForm.value;
-    console.log(this.tournamentForm.value)
+    const { tournamentName,tournamentDetail, friendsEmails } = this.tournamentForm.value;
     const emails = this.friendsEmails.controls.map((control: AbstractControl) => control.value.email);
     const tournamentId = this.generateTournamentId();
     const password = this.generatePassword();
@@ -72,6 +80,7 @@ export class FriendsTournamentComponent implements OnInit {
     if (friendsEmailsControl) {
       const formData = {
         tournamentName: this.tournamentForm.value.tournamentName,
+        tournamentDetail: this.tournamentForm.value.tournamentDetail,
         friendsEmails: friendsEmailsControl.value.map((emailControl: any) => emailControl.email),
         password,
         owner: ownerId,
@@ -89,8 +98,6 @@ export class FriendsTournamentComponent implements OnInit {
       );
     }
   
-
-    
   }
 
   sendInvitationEmails(emails: string[], nameTournament: string): void {
