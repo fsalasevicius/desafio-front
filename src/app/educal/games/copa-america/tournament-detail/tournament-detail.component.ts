@@ -66,6 +66,10 @@ export class TournamentDetailComponent implements OnInit {
       (response) => {
         this.userPoints = response.userPoints;
         this.userPredictions = response.userPredictionDetails; // Guardamos las predicciones
+        this.invitations.sort((a, b) => {
+          return this.userPoints[b._id] - this.userPoints[a._id];
+      });
+      
       },
       (error) => {
         console.error('Error al recalcular puntos:', error);
