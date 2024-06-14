@@ -10,11 +10,7 @@
     </div>
     <div class="container">
       <ng-container *ngIf="loading">
-        <div class="d-flex justify-content-center align-items-center vh-100">
-          <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-            <span class="sr-only">Loading...</span>
-          </div>
-        </div>
+          <app-spinner></app-spinner>
       </ng-container>
       <ng-container *ngIf="!loading">
         <div class="card text-center my-3" style="font-weight: 500; font-size: 20px; color: black;">

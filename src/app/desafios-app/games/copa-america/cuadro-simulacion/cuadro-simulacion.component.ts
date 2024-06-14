@@ -32,6 +32,7 @@ export class CuadroSimulacionComponent implements OnInit {
     private _copaAmericaService: CopaAmericaService,) { }
 
     ngOnInit(): void {
+      this.loading = true;
       this._copaAmericaService.table_resultados().subscribe(
         (response: any) => {
           this.partidos = response.data;

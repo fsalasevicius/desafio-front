@@ -10,6 +10,7 @@ import { CopaAmericaService } from 'src/app/services/copa-america.service';
 export class JoinTournamentComponent implements OnInit { 
   joinForm!: FormGroup;
   user: any = undefined;
+  loading: boolean = true;
   public token = localStorage.getItem('authToken');
   invitations: any[] = [];
   public tournamentName = "";
@@ -29,15 +30,18 @@ export class JoinTournamentComponent implements OnInit {
   }
 
   loadInvitations(): void {
+    this.loading = true;
     if (this.user && this.user.email) {
       const email = this.user.email;
       this._copaAmericaService.getUserInvitations({ email }, this.token).subscribe(
         (response) => {
           this.invitations = response;
-          console.log('Detalle de torneos', this.invitations);
+          this.loading = false;
         },
         (error) => {
+          this.loading = true;
           console.error('Error al obtener las invitaciones:', error);
+          this.loading = false;
         }
       );
     }
@@ -49,8 +53,7 @@ export class JoinTournamentComponent implements OnInit {
         this.token
       ).subscribe(
         (response) => {
-          console.log('Unido al torneo con éxito:', response);
-          this.loadInvitations(); // Refresh the invitations list
+          this.loadInvitations(); 
         },
         (error) => {
           console.error('Error al unirse al torneo:', error);

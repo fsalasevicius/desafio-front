@@ -22,6 +22,7 @@ import { JoinTournamentComponent } from './desafios-app/games/copa-america/join-
 import { TournamentDetailComponent } from './desafios-app/games/copa-america/tournament-detail/tournament-detail.component';
 import { CuadroSimulacionComponent } from './desafios-app/games/copa-america/cuadro-simulacion/cuadro-simulacion.component';
 import { Copaamerica2024comosejuegaComponent } from './desafios-app/como-se-juega/copaamerica2024comosejuega/copaamerica2024comosejuega.component';
+import { TournamentConfigComponent } from './desafios-app/games/copa-america/tournament-config/tournament-config.component';
 
 
 
@@ -55,6 +56,10 @@ const routes: Routes = [
   {
     path: 'games-tabla-real',
     component: CuadroGrupoComponent
+  },
+  {
+    path: 'games-copa-america-config-tournament/:id',
+    component: TournamentConfigComponent, canActivate: [AuthGuard]
   },
   {
     path: 'games-copa-america-create-tournament',

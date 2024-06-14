@@ -14,7 +14,7 @@
                      <nav>
                         <ul>
                            <li>
-                              <a [routerLink]="['/courses']" class="cat-menu d-flex align-items-center">
+                              <a  class="cat-menu d-flex align-items-center">
                                  <div class="cat-dot-icon d-inline-block">
                                     <svg viewBox="0 0 276.2 276.2">
                                        <g>
@@ -41,7 +41,7 @@
                                        </g>
                                     </svg>
                                  </div>
-                                 <span>Categorias</span>
+                                 <span style="cursor: pointer;">Categorias</span>
                               </a>
                               <ul class="cat-submenu">
                                  <li><a [routerLink]="['/games-copa-america']">Copa America</a></li>
@@ -61,16 +61,16 @@
                               <a [routerLink]="['/']">Inicio</a>
                            </li>
                            <!-- <li>
-                              <a [routerLink]="['/courses']">Sobre Nosotros</a>
+                              <a >Sobre Nosotros</a>
                            </li> -->
                            <li class="has-dropdown">
-                              <a [routerLink]="['/courses']">Juegos</a>
+                              <a [routerLink]="['/']"  style="cursor: pointer;">Juegos</a>
                               <ul class="submenu">
                                  <li><a [routerLink]="['/games-copa-america']">Copa America 2024</a></li>
                               </ul>
                            </li>
                            <li class="has-dropdown">
-                              <a [routerLink]="['/blog']">¿Como se juega?</a>
+                              <a [routerLink]="['/']">¿Como se juega?</a>
                               <ul class="submenu">
                                  <li><a [routerLink]="['/games-copa-america-como-jugar']">Copa America 2024</a></li>
                               </ul>

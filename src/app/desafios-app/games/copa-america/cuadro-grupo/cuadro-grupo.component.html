@@ -1,33 +1,37 @@
 <main>
     <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
-    <section class="events__area pt-115 pb-120 p-relative">
-        <div class="events__shape">
-            <img class="events-1-shape" src="assets/img/events/events-shape.png" alt="">
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xxl-12 offset-xxl-12">
-                    <div class="section__title-wrapper mb-60 text-center">
-                        <h2 class="section__title">Detalle de <span class="yellow-bg yellow-bg-big">Partidos<img
-                                    src="assets/img/shape/yellow-bg.png" alt=""></span></h2>
-                        <p>Copa America del 20/06 al 14/07.</p>
+    <ng-container *ngIf="!loading">
+        <app-spinner></app-spinner>
+    </ng-container>
+    <ng-container *ngIf="loading">
+        <section class="events__area pt-115 pb-120 p-relative">
+            <div class="events__shape">
+                <img class="events-1-shape" src="assets/img/events/events-shape.png" alt="">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-12 offset-xxl-12">
+                        <div class="section__title-wrapper mb-60 text-center">
+                            <h2 class="section__title">Detalle de <span class="yellow-bg yellow-bg-big">Partidos<img
+                                        src="assets/img/shape/yellow-bg.png" alt=""></span></h2>
+                            <p>Copa America del 20/06 al 14/07.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xxl-12 col-xl-12 col-lg-12" *ngFor="let partido of partidos; let i = index">
-                    <div class="events__item mb-10 hover__active">
-                        <div class="events__item-inner white-bg">
-                            <div class="events__content">
-                                <div class="events__meta">
-                                    <span>Grupo {{ partido.group }}</span>
-                                    <span>{{ partido.stadium.name }} - {{ partido.stadium.localidad }},
-                                        {{ partido.stadium.estado }}</span>
-                                </div>
-                                <h3 class="events__title">
+                <div class="row">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12" *ngFor="let partido of partidos; let i = index">
+                        <div class="events__item mb-10 hover__active">
+                            <div class="events__item-inner white-bg">
+                                <div class="events__content">
+                                    <div class="events__meta">
+                                        <span>Grupo {{ partido.group }}</span>
+                                        <span>{{ partido.stadium.name }} - {{ partido.stadium.localidad }},
+                                            {{ partido.stadium.estado }}</span>
+                                    </div>
+                                    <h3 class="events__title">
                                         <div class="d-flex justify-content-between align-items-center events__details">
                                             <div class="col-1 text-center event-number">
-                                                {{ i + 1 }}
+                                                # {{ i + 1 }}
                                             </div>
                                             <div class="col-3 team-info">
                                                 <div class="d-flex align-items-center">
@@ -44,15 +48,17 @@
                                             </div>
                                             <div class="col-1 result">
                                                 <div>
-                                                    <span>{{ partido.result.teamA !== undefined ? partido.result.teamA : '-' }}</span>
+                                                    <span>{{ partido.result.teamA !== undefined ? partido.result.teamA :
+                                                        '-' }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-3 text-center match-date">
-                                                {{ formatFecha(partido.date) }}
+                                                {{ formatFecha(partido.date) }} <br> {{ partido.date | date:'HH:mm' }}
                                             </div>
                                             <div class="col-1 result">
                                                 <div>
-                                                    <span>{{ partido.result.teamB !== undefined ? partido.result.teamB : '-' }}</span>
+                                                    <span>{{ partido.result.teamB !== undefined ? partido.result.teamB :
+                                                        '-' }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-3 d-flex align-items-center justify-content-end team-info">
@@ -66,12 +72,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                </h3>
+                                    </h3>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </ng-container>
+
 </main>
