@@ -32,6 +32,7 @@ export class CuadroGrupoComponent implements OnInit {
     private _copaAmericaService: CopaAmericaService,) { }
 
     ngOnInit(): void {
+      this.loading = true;
       this._copaAmericaService.match_list().subscribe(
         (response: any) => {
           this.partidos = response.data;

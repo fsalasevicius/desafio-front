@@ -15,6 +15,7 @@ export class TournamentDetailComponent implements OnInit {
   public tournamentName = '';
   selectedUser: any;
   public owner = '';
+  loading = true;
   public load_data = false;
   public token = localStorage.getItem('authToken');
   invitations: any[] = [];
@@ -45,8 +46,6 @@ export class TournamentDetailComponent implements OnInit {
           (response) => {
             this.invitations = response.participants;
             this.userPredictions = response.userPredictionDetails;
-          
-          console.log('Invitaciones ordenadas:', this.invitations);
             this.tournamentName = response.tournamentName;
             this.owner = response.owner.surname + ' ' + response.owner.name;
 
@@ -61,6 +60,7 @@ export class TournamentDetailComponent implements OnInit {
 
 
   calculatePoints(): void {
+    this.loading = true;
     let id = this.id;
     this._copaAmericaService.calculatePoints({ id }, this.token).subscribe(
       (response) => {
@@ -69,10 +69,12 @@ export class TournamentDetailComponent implements OnInit {
         this.invitations.sort((a, b) => {
           return this.userPoints[b._id] - this.userPoints[a._id];
       });
-      
+        this.loading = false;
       },
       (error) => {
+        this.loading = true;
         console.error('Error al recalcular puntos:', error);
+        this.loading = false;
       }
     );
   }

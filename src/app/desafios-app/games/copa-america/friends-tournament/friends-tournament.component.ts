@@ -13,6 +13,7 @@ export class FriendsTournamentComponent implements OnInit {
   tournamentForm!: FormGroup;
   tournamentLink: string | null = null;
   public torneoDetail: any;
+  public loading: boolean = false;
   public selectedTournament: string | null = null;
   user: any = undefined;
   public token = localStorage.getItem('authToken');
@@ -66,6 +67,7 @@ export class FriendsTournamentComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.loading = true;
     if (this.tournamentForm.invalid) {
       return;
     }
@@ -91,9 +93,12 @@ export class FriendsTournamentComponent implements OnInit {
           let nameTournament = formData.tournamentName
           this.tournamentLink = `${window.location.origin}/games-copa-america-join-tournament`;
           this.sendInvitationEmails(emails, nameTournament);
+          this.loading = false;
         },
         (error) => {
+          this.loading = true;
           console.error('Error al crear el torneo:', error);
+          this.loading = false;
         }
       );
     }

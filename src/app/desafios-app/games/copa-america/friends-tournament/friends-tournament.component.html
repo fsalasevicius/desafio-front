@@ -1,34 +1,40 @@
 <main>
   <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
-
-  <section class="teacher__area pt-50 pb-110">
-    <div class="row">
-      <div class="tournament-container">
-        <h2>Crear Torneo</h2>
-        <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
-          <label for="tournamentName">Nombre del Torneo:</label>
-          <input id="tournamentName" formControlName="tournamentName" type="text" required>
-          <label for="tournament-select">Seleccionar Torneo:</label>
-          <select id="tournamentDetail" class="form-control" formControlName="tournamentDetail">
-            <option *ngFor="let torneo of torneoDetail" [value]="torneo._id">{{ torneo.name }} {{ torneo.edition }} {{ torneo.year }}</option>
-          </select>
-          <label for="friendsEmails">Correos Electrónicos de Amigos:</label>
-          <div formArrayName="friendsEmails">
-            <div *ngFor="let emailGroup of friendsEmails.controls; let i = index" [formGroupName]="i">
-              <input formControlName="email" type="email" placeholder="Correo electrónico {{i + 1}}" required>
-              <button type="button" (click)="removeEmail(i)" *ngIf="i > 0">Eliminar</button>
+  <ng-container *ngIf="loading">
+    <app-spinner></app-spinner>
+  </ng-container>
+  <ng-container *ngIf="!loading">
+    <section class="teacher__area pt-50 pb-110">
+      <div class="row">
+        <div class="tournament-container">
+          <h2>Crear Torneo</h2>
+          <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
+            <label for="tournamentName">Nombre del Torneo:</label>
+            <input id="tournamentName" formControlName="tournamentName" type="text" required>
+            <label for="tournament-select">Seleccionar Torneo:</label>
+            <select id="tournamentDetail" class="form-control" formControlName="tournamentDetail">
+              <option *ngFor="let torneo of torneoDetail" [value]="torneo._id">{{ torneo.name }} {{ torneo.edition }} {{
+                torneo.year }}</option>
+            </select>
+            <label for="friendsEmails">Correos Electrónicos de Amigos:</label>
+            <div formArrayName="friendsEmails">
+              <div *ngFor="let emailGroup of friendsEmails.controls; let i = index" [formGroupName]="i">
+                <input formControlName="email" type="email" placeholder="Correo electrónico {{i + 1}}" required>
+                <button type="button" (click)="removeEmail(i)" *ngIf="i > 0">Eliminar</button>
+              </div>
             </div>
+            <button type="button" (click)="addFriendEmail()">Agregar correo</button>
+
+            <button type="submit" [disabled]="tournamentForm.invalid">Crear Torneo</button>
+          </form>
+
+          <div *ngIf="tournamentLink">
+            <h3>Invita a tus amigos con este enlace:</h3>
+            <p>{{ tournamentLink }}</p>
           </div>
-          <button type="button" (click)="addFriendEmail()">Agregar correo</button>
-
-          <button type="submit" [disabled]="tournamentForm.invalid">Crear Torneo</button>
-        </form>
-
-        <div *ngIf="tournamentLink">
-          <h3>Invita a tus amigos con este enlace:</h3>
-          <p>{{ tournamentLink }}</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </ng-container>
+
 </main>
