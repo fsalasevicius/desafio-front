@@ -1,28 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './educal/Home/Home/home.component';
-import { CoursesPageComponent } from './educal/courses/courses-page/courses-page.component';
-import { CoursesListPageComponent } from './educal/courses-list-page/courses-list-main/courses-list-page.component';
-import { CourseSidebarMainComponent } from './educal/course-sidebar/course-sidebar-main/course-sidebar-main.component';
-import { CourseDetailsComponent } from './educal/course-details/course-details-main/course-details.component';
-import { BlogComponent } from './educal/blog/blog-main/blog.component';
-import { BlogDetailsMainComponent } from './educal/blog-details/blog-details-main/blog-details-main.component';
-import { AboutMainComponent } from './educal/about/about-main/about-main.component';
-import { InstructorMainComponent } from './educal/instructor/instructor-main/instructor-main.component';
-import { InstructorDetailsComponent } from './educal/instructor-details/instructor-details-main/instructor-details.component';
-import { EventDetailsMainComponent } from './educal/event-details/event-details-main/event-details-main.component';
-import { SignInMainComponent } from './educal/sign-in/sign-in-main/sign-in-main.component';
-import { SignUpMainComponent } from './educal/sign-up/sign-up-main/sign-up-main.component';
-import { ErrorPageComponent } from './educal/error-page/error-page.component';
-import { ContactMainComponent } from './educal/contact/contact-main/contact-main.component';
-import { CopaAmericaComponent } from './educal/games/copa-america/copa-america.component';
+import { HomeComponent } from './desafios-app/Home/Home/home.component';
+import { CoursesPageComponent } from './desafios-app/courses/courses-page/courses-page.component';
+import { CoursesListPageComponent } from './desafios-app/courses-list-page/courses-list-main/courses-list-page.component';
+import { CourseSidebarMainComponent } from './desafios-app/course-sidebar/course-sidebar-main/course-sidebar-main.component';
+import { CourseDetailsComponent } from './desafios-app/course-details/course-details-main/course-details.component';
+import { AboutMainComponent } from './desafios-app/about/about-main/about-main.component';
+import { InstructorMainComponent } from './desafios-app/instructor/instructor-main/instructor-main.component';
+import { InstructorDetailsComponent } from './desafios-app/instructor-details/instructor-details-main/instructor-details.component';
+import { EventDetailsMainComponent } from './desafios-app/event-details/event-details-main/event-details-main.component';
+import { SignInMainComponent } from './desafios-app/sign-in/sign-in-main/sign-in-main.component';
+import { SignUpMainComponent } from './desafios-app/sign-up/sign-up-main/sign-up-main.component';
+import { ErrorPageComponent } from './desafios-app/error-page/error-page.component';
+import { ContactMainComponent } from './desafios-app/contact/contact-main/contact-main.component';
+import { CopaAmericaComponent } from './desafios-app/games/copa-america/copa-america.component';
 import { AuthGuard } from './guard/auth.guard';
-import { RegisterComponent } from './educal/register/register.component';
-import { CuadroGrupoComponent } from './educal/games/copa-america/cuadro-grupo/cuadro-grupo.component';
-import { FriendsTournamentComponent } from './educal/games/copa-america/friends-tournament/friends-tournament.component';
-import { JoinTournamentComponent } from './educal/games/copa-america/join-tournament/join-tournament.component';
-import { TournamentDetailComponent } from './educal/games/copa-america/tournament-detail/tournament-detail.component';
-import { CuadroSimulacionComponent } from './educal/games/copa-america/cuadro-simulacion/cuadro-simulacion.component';
+import { RegisterComponent } from './desafios-app/register/register.component';
+import { CuadroGrupoComponent } from './desafios-app/games/copa-america/cuadro-grupo/cuadro-grupo.component';
+import { FriendsTournamentComponent } from './desafios-app/games/copa-america/friends-tournament/friends-tournament.component';
+import { JoinTournamentComponent } from './desafios-app/games/copa-america/join-tournament/join-tournament.component';
+import { TournamentDetailComponent } from './desafios-app/games/copa-america/tournament-detail/tournament-detail.component';
+import { CuadroSimulacionComponent } from './desafios-app/games/copa-america/cuadro-simulacion/cuadro-simulacion.component';
+import { Copaamerica2024comosejuegaComponent } from './desafios-app/como-se-juega/copaamerica2024comosejuega/copaamerica2024comosejuega.component';
 
 
 
@@ -50,8 +49,12 @@ const routes: Routes = [
     component: CopaAmericaComponent, canActivate: [AuthGuard]
   },
   {
+    path: 'games-copa-america-como-jugar',
+    component: Copaamerica2024comosejuegaComponent
+  },
+  {
     path: 'games-tabla-real',
-    component: CuadroGrupoComponent, canActivate: [AuthGuard]
+    component: CuadroGrupoComponent
   },
   {
     path: 'games-copa-america-create-tournament',
@@ -69,14 +72,6 @@ const routes: Routes = [
   {
     path: 'games-simulacion-tabla',
     component: CuadroSimulacionComponent, canActivate: [AuthGuard]
-  },
-  {
-    path: 'blog',
-    component: BlogComponent
-  },
-  {
-    path: 'blog-details',
-    component: BlogDetailsMainComponent
   },
   {
     path: 'about',

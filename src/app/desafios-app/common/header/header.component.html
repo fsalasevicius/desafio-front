@@ -1,0 +1,190 @@
+<header>
+   <div id="header-sticky"
+      [ngClass]="headerSticky ? 'header__area header__transparent header__padding-2 sticky' : headerShadow ? headerShadow : 'header__area header__transparent header__padding-2' ">
+      <div class="container">
+         <div class="row align-items-center">
+            <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
+               <div class="header__left d-flex">
+                  <div class="logo">
+                     <a [routerLink]="['/']">
+                        <img src="assets/img/logo/logo.png" alt="logo" width="100%"> 
+                     </a>
+                  </div>
+                  <div class="header__category d-none d-lg-block">
+                     <nav>
+                        <ul>
+                           <li>
+                              <a [routerLink]="['/courses']" class="cat-menu d-flex align-items-center">
+                                 <div class="cat-dot-icon d-inline-block">
+                                    <svg viewBox="0 0 276.2 276.2">
+                                       <g>
+                                          <g>
+                                             <path class="cat-dot"
+                                                d="M33.1,2.5C15.3,2.5,0.9,17,0.9,34.8s14.5,32.3,32.3,32.3s32.3-14.5,32.3-32.3S51,2.5,33.1,2.5z" />
+                                             <path class="cat-dot"
+                                                d="M137.7,2.5c-17.8,0-32.3,14.5-32.3,32.3s14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3S155.5,2.5,137.7,2.5    z" />
+                                             <path class="cat-dot"
+                                                d="M243.9,67.1c17.8,0,32.3-14.5,32.3-32.3S261.7,2.5,243.9,2.5S211.6,17,211.6,34.8S226.1,67.1,243.9,67.1z" />
+                                             <path class="cat-dot"
+                                                d="M32.3,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3S0,120.4,0,138.2S14.5,170.5,32.3,170.5z" />
+                                             <path class="cat-dot"
+                                                d="M136.8,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3c-17.8,0-32.3,14.5-32.3,32.3    C104.5,156.1,119,170.5,136.8,170.5z" />
+                                             <path class="cat-dot"
+                                                d="M243,170.5c17.8,0,32.3-14.5,32.3-32.3c0-17.8-14.5-32.3-32.3-32.3s-32.3,14.5-32.3,32.3    C210.7,156.1,225.2,170.5,243,170.5z" />
+                                             <path class="cat-dot"
+                                                d="M33,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3s32.3-14.5,32.3-32.3S50.8,209.1,33,209.1z    " />
+                                             <path class="cat-dot"
+                                                d="M137.6,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3    S155.4,209.1,137.6,209.1z" />
+                                             <path class="cat-dot"
+                                                d="M243.8,209.1c-17.8,0-32.3,14.5-32.3,32.3c0,17.8,14.5,32.3,32.3,32.3c17.8,0,32.3-14.5,32.3-32.3    S261.6,209.1,243.8,209.1z" />
+                                          </g>
+                                       </g>
+                                    </svg>
+                                 </div>
+                                 <span>Categorias</span>
+                              </a>
+                              <ul class="cat-submenu">
+                                 <li><a [routerLink]="['/games-copa-america']">Copa America</a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
+               <div class="header__right d-flex justify-content-end align-items-center">
+                  <div class="main-menu main-menu-2">
+                     <nav id="mobile-menu" class="d-none d-xl-block">
+                        <ul>
+                           <li>
+                              <a [routerLink]="['/']">Inicio</a>
+                           </li>
+                           <!-- <li>
+                              <a [routerLink]="['/courses']">Sobre Nosotros</a>
+                           </li> -->
+                           <li class="has-dropdown">
+                              <a [routerLink]="['/courses']">Juegos</a>
+                              <ul class="submenu">
+                                 <li><a [routerLink]="['/games-copa-america']">Copa America 2024</a></li>
+                              </ul>
+                           </li>
+                           <li class="has-dropdown">
+                              <a [routerLink]="['/blog']">¿Como se juega?</a>
+                              <ul class="submenu">
+                                 <li><a [routerLink]="['/games-copa-america-como-jugar']">Copa America 2024</a></li>
+                              </ul>
+                           </li>
+
+                           <li><a [routerLink]="['/contact']">Contacto</a></li>
+                        </ul>
+                     </nav>
+                  </div>
+                  <div class="header__btn header__btn-2 ml-50 d-none d-sm-block">
+                     <ng-container *ngIf="buttonText === 'Registrarse' || buttonText === 'Ingresar'; else showUserName">
+                        <button [routerLink]="['/sign-in']" *ngIf="buttonText === 'Ingresar'" class="e-btn">{{
+                           buttonText }}</button>
+                        <button [routerLink]="['/sign-up']" *ngIf="buttonText === 'Registrarse'" class="e-btn">{{
+                           buttonText }}</button>
+                     </ng-container>
+                     <ng-template #showUserName>
+                        <div class="dropdown" (click)="toggleDropdown($event)">
+                           <button class="e-btn dropdown-toggle  capitalize-text" type="button">
+                              {{ buttonText }}
+                           </button>
+                           <div class="dropdown-menu" [class.show]="isDropdownOpen">
+                              <a class="dropdown-item" href="#"><i class="fal fa-user-circle"></i> Ver perfil</a>
+                              <a [routerLink]="['/games-copa-america-join-tournament']"><i class="fal fa-hand-point-right"></i> Ver Desafios</a>
+                              <a class="dropdown-item" style="cursor: pointer;" (click)="logout()"><i class="fal fa-sign-out-alt"></i>
+                                 Cerrar sesión</a>
+                           </div>
+                        </div>
+                     </ng-template>
+                  </div>
+                  <div class="sidebar__menu d-xl-none">
+                     <div (click)="handleSidebar()" class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
+                        <span class="line"></span>
+                        <span class="line"></span>
+                        <span class="line"></span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+
+<!-- sidebar area start -->
+<div class="sidebar__area" [class.sidebar-opened]="showSidebar">
+   <div class="sidebar__wrapper">
+      <div (click)="handleSidebarClose()" class="sidebar__close">
+         <button class="sidebar__close-btn" id="sidebar__close-btn">
+            <span><i class="fal fa-times"></i></span>
+            <span>Cerrar</span>
+         </button>
+      </div>
+      <div class="sidebar__content">
+         <div class="logo mb-40">
+            <a [routerLink]="['/']">
+               <img src="../../assets/img/logo/logo.png" alt="logo">
+            </a>
+         </div>
+         <div class="side-info-content sidebar-menu mm-menu">
+            <ul>
+               <li>
+                  <a [routerLink]="['/']" class="border-0">Inicio</a>
+               </li>
+               <!-- <li>
+                  <a [routerLink]="['/']" class="border-0">Sobre Nosotros</a>
+               </li> -->
+               <li class="menu-item-has-children has-droupdown" [class.active]="showPagesDropdown">
+                  <a (click)="pagesDropDown()">Juegos</a>
+                  <ul class="sub-menu" [class.active]="showPagesDropdown">
+                     <li><a [routerLink]="['/games-copa-america']">Copa America 2024</a></li>
+                  </ul>
+               </li>
+               <li class="menu-item-has-children has-droupdown" [class.active]="showBlogDropdown">
+                  <a (click)="blogDropdown()">¿Como se juega?</a>
+                  <ul class="sub-menu" [class.active]="showBlogDropdown">
+                     <li><a [routerLink]="['/games-copa-america-como-jugar']">Copa America 2024</a></li>
+                  </ul>
+               </li>
+               <li>
+                  <a [routerLink]="['/contact']" class="border-0">Contacto</a>
+               </li>
+               <ng-container *ngIf="buttonText === 'Registrarse' || buttonText === 'Ingresar'">
+                  <li>
+                    <a [routerLink]="buttonText === 'Ingresar' ? '/sign-in' : '/sign-up'" class="e-link">{{ buttonText.toUpperCase() }}</a>
+                  </li>
+                </ng-container>
+                
+                <!-- Menú para usuarios autenticados -->
+                <ng-container *ngIf="buttonText !== 'Registrarse' && buttonText !== 'Ingresar'">
+                  <li class="menu-item-has-children has-droupdown" [class.active]="showUsrDropdown">
+                    <div class="dropdown" (click)="toggleDropdown($event)">
+                      <a class="e-link dropdown-toggle">
+                        {{ buttonText.toUpperCase() }}
+                      </a>
+                      <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+                        <li><a [routerLink]="['/blog']"><i class="fal fa-user-circle"></i> Ver perfil</a></li>
+                        <li><a [routerLink]="['/games-copa-america-join-tournament']"><i class="fal fa-user-circle"></i> Ver Desafios</a></li>
+                        <li><a (click)="logout()"><i class="fal fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ng-container>
+            </ul>
+         </div>
+         <div class="sidebar__search p-relative mt-40 ">
+            <form action="#">
+               <input type="text" placeholder="Buscar...">
+               <button type="submit"><i class="fad fa-search"></i></button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div (click)="handleSidebarClose()" class="body-overlay" [class.opened]="showSidebar"></div>
+<!-- sidebar area end -->

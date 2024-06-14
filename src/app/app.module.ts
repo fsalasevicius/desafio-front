@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EducalModule } from './educal/educal.module';
+import { EducalModule } from './desafios-app/educal.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';

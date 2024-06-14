@@ -1,0 +1,113 @@
+<main>
+    <app-header header__white="header__white"></app-header>
+    <section class="page__title-area page__title-height-2 page__title-overlay d-flex align-items-center"
+        [ngStyle]="{background:'url(assets/img/banner/copa-america-banner.jpg)',backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundPosition:'center'}">
+        <div class="page__title-shape">
+            <img class="page-title-shape-1" src="assets/img/page-title/page-title-shape-1.png" alt="">
+            <img class="page-title-shape-2" src="assets/img/page-title/page-title-shape-2.png" alt="">
+            <img class="page-title-shape-3" src="assets/img/page-title/page-title-shape-3.png" alt="">
+            <img class="page-title-shape-4" src="assets/img/page-title/page-title-shape-4.png" alt="">
+        </div>
+
+    </section>
+
+    <section class="blog__area pt-120 pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-8 col-xl-8 col-lg-8">
+                    <div class="blog__wrapper">
+                        <div class="blog__text mb-40">
+                            <p></p>
+                        </div>
+                        <div class="blog__quote grey-bg mb-45 p-relative fix">
+                            <img class="quote" src="assets/img/blog/quote-1.png" alt="">
+                            <blockquote>
+                                <p>¿Como Jugar a Predicciones Copa America 2024?</p>
+                            </blockquote>
+                        </div>
+                        <div class="blog__text mb-30">
+                            <p>
+                                Este juego consta de 2 etapas. La etapa principal es predecir la fase de grupos de la
+                                Copa América y la segunda parte es la predicción de la fase eliminatoria (Cuartos,
+                                Semifinales, Tercer Puesto y Final).
+                            </p>
+                            <p>Primero y fundamental, tienes que <a class="btn-reg"
+                                    [routerLink]="['/sign-up']">Registrarte</a> Es un proceso simple que consiste en
+                                completar un formulario con datos básicos. Posteriormente, confirma tu correo
+                                electrónico y ya estarás listo para empezar a jugar.</p>
+                            <p>El segundo paso es ingresar al siguiente enlace a <a class="btn-reg"
+                                    [routerLink]="['/games-copa-america']" target="_blank">Predicciones Copa America</a>
+                                y completar el formulario con tu pronóstico de todos los partidos de la fase de grupos.
+                            </p>
+                            <p>En el tercer paso, una vez que estén definidas las llaves del cuadro eliminatorio, se
+                                habilitará un nuevo formulario para predecir el resto de la Copa.</p>
+
+                            <p style="font-weight: 600;">¿Cómo sumo puntos?</p>
+
+                            <p>Es muy sencillo. Se suman puntos acertando resultados según el siguiente detalle:</p>
+
+                            <p>
+                                * Ganador del Partido: Suma 6 Puntos <br>
+                                * Resultado Exacto del Partido: Suma 4 Puntos <br>
+                                * Coincidencia en Goles (Si acertas los goles de una selección): Suma 2 Puntos
+                            </p>
+
+                            <p style="font-weight: 600;">Torneo de Amigos</p>
+
+                            <p> * Puedes <a class="btn-reg" [routerLink]="['/games-copa-america-create-tournament']"
+                                    target="_blank">Crear</a> o <a class="btn-reg"
+                                    [routerLink]="['/games-copa-america-join-tournament']" target="_blank">unirte</a> a
+                                torneos de amigos.</p>
+                            <p>Para <a class="btn-reg" [routerLink]="['/games-copa-america-create-tournament']"
+                                    target="_blank">crear</a> un torneo, debes completar un formulario con el nombre del
+                                torneo, seleccionar el torneo al que quieres participar, hacer clic en el botón de
+                                agregar correo e invitar a tus amigos. Una vez finalizada la carga de los correos
+                                electrónicos de tus amigos, finaliza haciendo clic en "crear torneo".</p>
+                            <p>Para <a class="btn-reg" [routerLink]="['/games-copa-america-join-tournament']"
+                                    target="_blank">unirte</a>, te aparecerá el listado de los torneos a los que fuiste
+                                invitado por el organizador del mismo. Solo debes hacer clic en el botón azul que dice
+                                "Unirme al torneo". En caso de haberte unido ya a un torneo, te aparecerá un botón verde
+                                para acceder al detalle de puntos obtenidos por cada participante. Si haces clic sobre
+                                los puntos de un usuario, verás el desarrollo de cómo fue sumando los puntos obtenidos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-xl-4 col-lg-4">
+
+                    <div class="blog__sidebar pl-70">
+
+                        <div class="sidebar__widget mb-55">
+                            <div class="sidebar__widget-head mb-35">
+                                <h3 class="sidebar__widget-title">¿Como se Juega?</h3>
+                            </div>
+                            <div class="sidebar__widget-content">
+                                <div class="sidebar__category">
+                                    <ul>
+                                        <li><a [routerLink]="['/blog']">Predicción Copa America 2024</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar__widget mb-55">
+                            <div class="sidebar__widget-head mb-35">
+                                <h3 class="sidebar__widget-title">Acesso Rápido</h3>
+                            </div>
+                            <div class="sidebar__widget-content">
+                                <div class="sidebar__tag">
+                                    <a class="btn-reg" [routerLink]="['/games-copa-america']"
+                                        target="_blank">Predicciones Copa America</a>
+                                    <a class="btn-reg" [routerLink]="['/games-copa-america-create-tournament']"
+                                        target="_blank">Crear Torneo de Amigos</a>
+                                    <a class="btn-reg" [routerLink]="['/games-copa-america-join-tournament']"
+                                        target="_blank">Unirse a Torneo de Amigos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
