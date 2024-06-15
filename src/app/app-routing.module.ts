@@ -19,6 +19,7 @@ import { TournamentDetailComponent } from './desafios-app/games/copa-america/tou
 import { CuadroSimulacionComponent } from './desafios-app/games/copa-america/cuadro-simulacion/cuadro-simulacion.component';
 import { Copaamerica2024comosejuegaComponent } from './desafios-app/como-se-juega/copaamerica2024comosejuega/copaamerica2024comosejuega.component';
 import { TournamentConfigComponent } from './desafios-app/games/copa-america/tournament-config/tournament-config.component';
+import { ProfileUserComponent } from './desafios-app/user/profile-user/profile-user.component';
 
 
 
@@ -37,10 +38,10 @@ const routes: Routes = [
     path: 'games-tabla-real',
     component: CuadroGrupoComponent
   },
-  // {
-  //   path: 'games-copa-america-config-tournament/:id',
-  //   component: TournamentConfigComponent, canActivate: [AuthGuard]
-  // },
+  {
+    path: 'games-config-tournament/:id',
+    component: TournamentConfigComponent, canActivate: [AuthGuard]
+  },
   {
     path: 'games-copa-america-create-tournament',
     component: FriendsTournamentComponent, canActivate: [AuthGuard]
@@ -49,6 +50,10 @@ const routes: Routes = [
     path: 'games-copa-america-join-tournament',
     component: JoinTournamentComponent, canActivate: [AuthGuard]
   },
+  // {
+  //   path: 'user-profile/:id',
+  //   component: ProfileUserComponent, canActivate: [AuthGuard]
+  // },
   {
     path: 'tournament-detail/:id',
     component: TournamentDetailComponent, canActivate: [AuthGuard]

@@ -9,9 +9,16 @@ import { AuthService } from 'src/app/services/auth-service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderTwoComponent implements OnInit {
-  constructor(private _router: Router, private _authService: AuthService) { }
+  constructor(private _router: Router, private _authService: AuthService) {
+    if (this.token) {
+      let obj_lc: any = localStorage.getItem('userData');
+      this.user = JSON.parse(obj_lc);
+    }
+   }
 
   @Input() headerShadow: string | undefined;
+  public token = localStorage.getItem('authToken');
+  user: any = undefined;
   public buttonText: string = 'Ingresar';
   public userName: string | null = null;
   public isDropdownOpen: boolean = false;

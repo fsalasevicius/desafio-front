@@ -52,6 +52,9 @@ import { Copaamerica2024comosejuegaComponent } from './como-se-juega/copaamerica
 import { SpinnerComponent } from './common/spinner/spinner.component';
 import { TournamentConfigComponent } from './games/copa-america/tournament-config/tournament-config.component';
 import { CountdownComponent } from './Home/category/countdown/countdown.component';
+import { ProfileUserComponent } from './user/profile-user/profile-user.component';
+import { UserDataFormComponent } from './user/profile-user/user-data-form/user-data-form.component';
+import { UserSegurityFormComponent } from './user/profile-user/user-segurity-form/user-segurity-form.component';
 
 registerLocaleData(localeEsAr);
 
@@ -102,6 +105,9 @@ registerLocaleData(localeEsAr);
     SpinnerComponent,
     TournamentConfigComponent,
     CountdownComponent,
+    ProfileUserComponent,
+    UserDataFormComponent,
+    UserSegurityFormComponent,
   ],
   imports: [
     CommonModule,
