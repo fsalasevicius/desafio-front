@@ -65,10 +65,10 @@ const routes: Routes = [
     path: 'error',
     component: ErrorPageComponent
   },
-  {
-    path: 'contact',
-    component: ContactMainComponent
-  },
+  // {
+  //   path: 'contact',
+  //   component: ContactMainComponent
+  // },
   {
     path: '**', pathMatch: 'full',
     component: ErrorPageComponent
