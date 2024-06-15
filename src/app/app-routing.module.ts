@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './desafios-app/Home/Home/home.component';
-import { CoursesPageComponent } from './desafios-app/courses/courses-page/courses-page.component';
-import { CoursesListPageComponent } from './desafios-app/courses-list-page/courses-list-main/courses-list-page.component';
-import { CourseSidebarMainComponent } from './desafios-app/course-sidebar/course-sidebar-main/course-sidebar-main.component';
-import { CourseDetailsComponent } from './desafios-app/course-details/course-details-main/course-details.component';
 import { AboutMainComponent } from './desafios-app/about/about-main/about-main.component';
 import { InstructorMainComponent } from './desafios-app/instructor/instructor-main/instructor-main.component';
 import { InstructorDetailsComponent } from './desafios-app/instructor-details/instructor-details-main/instructor-details.component';
@@ -30,22 +26,6 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   {
-    path: 'courses',
-    component: CoursesPageComponent
-  },
-  {
-    path: 'courses-list',
-    component: CoursesListPageComponent
-  },
-  {
-    path: 'courses-sidebar',
-    component: CourseSidebarMainComponent
-  },
-  {
-    path: 'course-details',
-    component: CourseDetailsComponent
-  },
-  {
     path: 'games-copa-america',
     component: CopaAmericaComponent, canActivate: [AuthGuard]
   },
@@ -57,10 +37,10 @@ const routes: Routes = [
     path: 'games-tabla-real',
     component: CuadroGrupoComponent
   },
-  {
-    path: 'games-copa-america-config-tournament/:id',
-    component: TournamentConfigComponent, canActivate: [AuthGuard]
-  },
+  // {
+  //   path: 'games-copa-america-config-tournament/:id',
+  //   component: TournamentConfigComponent, canActivate: [AuthGuard]
+  // },
   {
     path: 'games-copa-america-create-tournament',
     component: FriendsTournamentComponent, canActivate: [AuthGuard]
@@ -72,27 +52,6 @@ const routes: Routes = [
   {
     path: 'tournament-detail/:id',
     component: TournamentDetailComponent, canActivate: [AuthGuard]
-  },
-  
-  {
-    path: 'games-simulacion-tabla',
-    component: CuadroSimulacionComponent, canActivate: [AuthGuard]
-  },
-  {
-    path: 'about',
-    component: AboutMainComponent
-  },
-  {
-    path: 'instructor',
-    component: InstructorMainComponent
-  },
-  {
-    path: 'instructor-details',
-    component: InstructorDetailsComponent
-  },
-  {
-    path: 'event-details',
-    component: EventDetailsMainComponent
   },
   {
     path: 'sign-in',

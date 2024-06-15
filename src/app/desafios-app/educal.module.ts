@@ -17,19 +17,11 @@ import { FooterComponent } from './common/footer/footer.component';
 import { HeaderTwoComponent } from './common/header/header.component';
 import { AboutAreaComponent } from './common/about-area/about-area.component';
 import { BrandAreaComponent } from './common/brand-area/brand-area.component';
-import { CoursesPageComponent } from './courses/courses-page/courses-page.component';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 import { CourseGridComponent } from './common/course-grid/course-grid.component';
 import { CourseListComponent } from './common/course-list/course-list.component';
-import { CoursesPageCoursesAreaComponent } from './courses/courses-page-courses-area/courses-page-courses-area.component';
 import { PaginationComponent } from './common/pagination/pagination.component';
-import { CoursesListPageComponent } from './courses-list-page/courses-list-main/courses-list-page.component';
-import { CoursesListAreaComponent } from './courses-list-page/courses-list-area/courses-list-area.component';
-import { CourseSidebarMainComponent } from './course-sidebar/course-sidebar-main/course-sidebar-main.component';
-import { CourseSidebarAreaComponent } from './course-sidebar/course-sidebar-area/course-sidebar-area.component';
 import { RelatedCourseComponent } from './common/related-course/related-course.component';
-import { CourseDetailsComponent } from './course-details/course-details-main/course-details.component';
-import { CourseDetailsAreaComponent } from './course-details/course-details-area/course-details-area.component';
 import { BlogSidebarComponent } from './common/blog-sidebar/blog-sidebar.component';
 import { AboutMainComponent } from './about/about-main/about-main.component';
 import { InstructorMainComponent } from './instructor/instructor-main/instructor-main.component';
@@ -77,20 +69,12 @@ registerLocaleData(localeEsAr);
     HeaderTwoComponent,
     AboutAreaComponent,
     BrandAreaComponent,
-    CoursesPageComponent,
     BreadcrumbComponent,
     CourseGridComponent,
     CourseListComponent,
-    CoursesPageCoursesAreaComponent,
     PaginationComponent,
-    CoursesListPageComponent,
-    CoursesListAreaComponent,
-    CourseSidebarMainComponent,
-    CourseSidebarAreaComponent,
     RelatedCourseComponent,
-    CourseDetailsComponent,
     CopaAmericaComponent,
-    CourseDetailsAreaComponent,
     BlogSidebarComponent,
     AboutMainComponent,
     InstructorMainComponent,
