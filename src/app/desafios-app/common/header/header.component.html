@@ -76,7 +76,7 @@
                               </ul>
                            </li>
 
-                           <li><a [routerLink]="['/contact']">Contacto</a></li>
+                           <!-- <li><a [routerLink]="['/contact']">Contacto</a></li> -->
                         </ul>
                      </nav>
                   </div>
@@ -150,9 +150,9 @@
                      <li><a [routerLink]="['/games-copa-america-como-jugar']">Copa America 2024</a></li>
                   </ul>
                </li>
-               <li>
+               <!-- <li>
                   <a [routerLink]="['/contact']" class="border-0">Contacto</a>
-               </li>
+               </li> -->
                <ng-container *ngIf="buttonText === 'Registrarse' || buttonText === 'Ingresar'">
                   <li>
                     <a [routerLink]="buttonText === 'Ingresar' ? '/sign-in' : '/sign-up'" class="e-link">{{ buttonText.toUpperCase() }}</a>
