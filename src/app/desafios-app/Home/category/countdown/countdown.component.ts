@@ -34,7 +34,7 @@ export class CountdownComponent implements OnInit, OnDestroy {
       const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      this.timeLeft = `${days} d ${hours}h ${minutes}m ${seconds}s`;
+      this.timeLeft = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
   }
 }
