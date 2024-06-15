@@ -1,87 +1,109 @@
 <section class="signup__area po-rel-z1 pt-100 pb-145">
-  <div class="sign__shape">
-     <img class="man-1" src="assets/img/icon/sign/man-3.png" alt="">
-     <img class="man-2 man-22" src="assets/img/icon/sign/man-2.png" alt="">
-     <img class="circle" src="assets/img/icon/sign/circle.png" alt="">
-     <img class="zigzag" src="assets/img/icon/sign/zigzag.png" alt="">
-     <img class="dot" src="assets/img/icon/sign/dot.png" alt="">
-     <img class="bg" src="assets/img/icon/sign/sign-up.png" alt="">
-     <img class="flower" src="assets/img/icon/sign/flower.png" alt="">
-  </div>
-  <div class="container">
-     <div class="row">
-        <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
-           <div class="section__title-wrapper text-center mb-55">
-              <h2 class="section__title">Crea tu cuenta</h2>
-              <p>Para empezar a jugar</p>
-           </div>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
-           <div class="sign__wrapper white-bg">
-              <div class="sign__header mb-35">
-               <!--
-                 <div class="sign__in text-center">
-                     <a href="#" class="sign__social g-plus text-start mb-15"><i class="fab fa-google-plus-g"></i>Ingresa con Google</a>
-                    <a href="#" class="sign__social text-start mb-15"><i class="fab fa-facebook-f"></i>Ingresa con Facebook</a> 
-                    <p> <span>-------</span> O <a [routerLink]="['/sign-up']">Regístrate</a>  Con tu correo electrónico<span> -------</span> </p>
-                 </div>
-                 -->
-              </div>
-              <div class="sign__form">
-               <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                    <div class="sign__input-wrapper mb-25">
-                       <h5>Nombre</h5>
-                       <div class="sign__input">
-                          <input type="text" placeholder="Nombre"  name="name" formControlName="name" required>
-                          <i class="fal fa-user"></i>
-                       </div>
-                    </div>
-                    <div class="sign__input-wrapper mb-25">
-                     <h5>Apellido</h5>
-                     <div class="sign__input">
-                        <input type="text" placeholder="Apellido"  name="surname" formControlName="surname" required>
-                        <i class="fal fa-user"></i>
+   <div class="sign__shape">
+      <img class="man-1" src="assets/img/icon/sign/man-3.png" alt="">
+      <img class="man-2 man-22" src="assets/img/icon/sign/man-2.png" alt="">
+      <img class="circle" src="assets/img/icon/sign/circle.png" alt="">
+      <img class="zigzag" src="assets/img/icon/sign/zigzag.png" alt="">
+      <img class="dot" src="assets/img/icon/sign/dot.png" alt="">
+      <img class="bg" src="assets/img/icon/sign/sign-up.png" alt="">
+      <img class="flower" src="assets/img/icon/sign/flower.png" alt="">
+   </div>
+   <div class="container">
+      <div class="row">
+         <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2">
+            <div class="section__title-wrapper text-center mb-55">
+               <h2 class="section__title">Crea tu cuenta</h2>
+               <p>Para empezar a jugar</p>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+            <div class="sign__wrapper white-bg">
+               <div class="sign__header mb-35">
+                  <!-- Contenido opcional del encabezado -->
+               </div>
+               <div class="sign__form">
+                  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                     <div class="sign__input-wrapper mb-25">
+                        <label for="name">Nombre</label>
+                        <div class="sign__input" [ngClass]="{'is-invalid': registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)}">
+                           <input type="text" id="name" placeholder="Nombre" name="name" formControlName="name" required>
+                           <i class="fal fa-user"></i>
+                        </div>
+                        <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="error-message text-danger">
+                           <i class="fal fa-exclamation-circle"> </i>
+                           El nombre es obligatorio
+                        </div>
                      </div>
-                  </div>
-                  <div class="sign__input-wrapper mb-25">
-                     <h5>Fecha de Nacimiento</h5>
-                     <div class="sign__input">
-                        <input type="date"   name="birthday" formControlName="birthday" required>
-                        <i class="fal fa-calendar"></i>
+                     <div class="sign__input-wrapper mb-25">
+                        <label for="surname">Apellido</label>
+                        <div class="sign__input" [ngClass]="{'is-invalid': registerForm.get('surname')?.invalid && (registerForm.get('surname')?.dirty || registerForm.get('surname')?.touched)}">
+                           <input type="text" id="surname" placeholder="Apellido" name="surname" formControlName="surname" required>
+                           <i class="fal fa-user"></i>
+                        </div>
+                        <div *ngIf="registerForm.get('surname')?.invalid && (registerForm.get('surname')?.dirty || registerForm.get('surname')?.touched)" class="error-message text-danger">
+                           <i class="fal fa-exclamation-circle"> </i>
+                           El apellido es obligatorio
+                        </div>
                      </div>
-                  </div>
-                  <div class="sign__input-wrapper mb-25">
-                     <h5>Email</h5>
-                     <div class="sign__input">
-                        <input type="text" placeholder="Email" name="email" formControlName="email" required>
-                        <i class="fal fa-envelope"></i>
+                     <div class="sign__input-wrapper mb-25">
+                        <label for="birthday">Fecha de Nacimiento</label>
+                        <div class="sign__input" [ngClass]="{'is-invalid': registerForm.get('birthday')?.invalid && (registerForm.get('birthday')?.dirty || registerForm.get('birthday')?.touched)}">
+                           <input type="date" id="birthday" name="birthday" formControlName="birthday" required>
+                           <i class="fal fa-calendar"></i>
+                        </div>
+                        <div *ngIf="registerForm.get('birthday')?.invalid && (registerForm.get('birthday')?.dirty || registerForm.get('birthday')?.touched)" class="error-message text-danger">
+                           <i class="fal fa-exclamation-circle"> </i>
+                           La fecha de nacimiento es obligatoria
+                        </div>
+                        <div *ngIf="birthdayControl?.errors?.['invalidAge'] && (birthdayControl?.dirty || birthdayControl?.touched)" class="error-message text-danger">
+                           <i class="fal fa-exclamation-circle"> </i>
+                           Debes tener al menos 10 años para registrarte
+                         </div>
                      </div>
-                  </div>
-                  <div class="sign__input-wrapper mb-25">
-                     <h5>Contraseña</h5>
-                     <div class="sign__input">
-                       <input type="password" placeholder="Contraseña" name="password" formControlName="password" required>
-                       <i class="fal fa-lock"></i>
+                     <div class="sign__input-wrapper mb-25">
+                        <label for="email">Email</label>
+                        <div class="sign__input" [ngClass]="{'is-invalid': registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)}">
+                           <input type="text" id="email" placeholder="Email" name="email" formControlName="email" required>
+                           <i class="fal fa-envelope"></i>
+                        </div>
+                        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="error-message text-danger">
+                           <i class="fal fa-exclamation-circle"> </i>
+                           El email es obligatorio
+                        </div>
                      </div>
-                   </div>
-                   <div class="sign__input-wrapper mb-10">
-                     <h5>Confirma tu contraseña</h5>
-                     <div class="sign__input">
-                       <input type="password" placeholder="Confirma tu contraseña" name="confirmPassword" formControlName="confirmPassword" required>
-                       <i class="fal fa-lock"></i>
+                     <div class="sign__input-wrapper mb-25">
+                        <label for="password">Contraseña</label>
+                        <div class="sign__input" [ngClass]="{'is-invalid': registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)}">
+                           <input type="password" id="password" placeholder="Contraseña" name="password" formControlName="password" required>
+                           <i class="fal fa-lock"></i>
+                        </div>
+                        <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="error-message text-danger">
+                           <i class="fal fa-exclamation-circle"> </i>
+                           La contraseña es obligatoria
+                        </div>
                      </div>
-                   </div>
-                   <p-toast position="bottom-center"></p-toast>
-                    <button class="e-btn w-100 mt-3" type="submit"> Registrarse</button>
-                    <div class="sign__new text-center mt-20">
-                       <p>¿ Ya tienes una cuenta ? <a class="btn-reg" [routerLink]="['/sign-in']"> Ingresa!</a></p>
-                    </div>
-                 </form>
-              </div>
-           </div>
-        </div>
-     </div>
-  </div>
+                     <div class="sign__input-wrapper mb-10">
+                        <label for="confirmPassword">Confirma tu contraseña</label>
+                        <div class="sign__input" [ngClass]="{'is-invalid': registerForm.hasError('passwordMismatch') && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)}">
+                           <input type="password" id="confirmPassword" placeholder="Confirma tu contraseña" name="confirmPassword" formControlName="confirmPassword" required>
+                           <i class="fal fa-lock"></i>
+                        </div>
+                        <div *ngIf="registerForm.hasError('passwordMismatch') && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="error-message text-danger">
+                           <i class="fal fa-exclamation-circle"> </i>
+                           Las contraseñas no coinciden
+                        </div>
+                     </div>
+                     <p-toast position="bottom-center"></p-toast>
+                     <button type="submit" class="e-btn w-100" [disabled]="!formValid" [ngClass]="{'disabled-button': !formValid}">Registrarse</button>
+                     <div class="sign__new text-center mt-20">
+                        <p>¿Ya tienes una cuenta? <a class="btn-reg" [routerLink]="['/sign-in']">Ingresa!</a></p>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </section>

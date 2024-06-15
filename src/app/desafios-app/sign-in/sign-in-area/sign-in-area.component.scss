@@ -1,9 +1,37 @@
 .ui-toast.ui-widget.ui-toast-bottom-center {
     left: 50%;
     transform: translateX(-50%);
-    bottom: 50px; /* Ajusta este valor para mover el toast hacia arriba */
+    bottom: 50px;
+    /* Ajusta este valor para mover el toast hacia arriba */
 }
 
 .btn-reg:hover {
     color: #fa5b41 !important;
 }
+
+.sign__input {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sign__input i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+  
+  .has-error input {
+    border-color: red;
+  }
+
+  .disabled-button {
+    background-color: #ccc; 
+  }

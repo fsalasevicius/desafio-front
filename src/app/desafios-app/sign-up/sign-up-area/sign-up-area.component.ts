@@ -25,6 +25,7 @@ function ageValidator(control: AbstractControl): { [key: string]: any } | null {
   return calculatedAge >= 10 ? null : { 'invalidAge': true };
 }
 
+
 @Component({
   selector: 'app-sign-up-area',
   templateUrl: './sign-up-area.component.html',
@@ -32,10 +33,15 @@ function ageValidator(control: AbstractControl): { [key: string]: any } | null {
 })
 export class SignUpAreaComponent implements OnInit {
   passwordsMatch = true;
+  public formValid: boolean = false;
   age = true;
   registerForm!: FormGroup;
   constructor(private fb: FormBuilder, private _messageService: MessageService, private _userService:UserService, private _router: Router) { }
 
+  get birthdayControl(): AbstractControl | null {
+    return this.registerForm.get('birthday');
+  }
+  
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
@@ -49,6 +55,9 @@ export class SignUpAreaComponent implements OnInit {
     this.registerForm.valueChanges.subscribe(() => {
       this.passwordsMatch = this.registerForm.hasError('passwordMismatch') ? false : true;
       this.age = this.registerForm.hasError('age') ? false : true;
+    });
+    this.registerForm.valueChanges.subscribe(() => {
+      this.formValid = this.registerForm.valid;
     });
   }
 

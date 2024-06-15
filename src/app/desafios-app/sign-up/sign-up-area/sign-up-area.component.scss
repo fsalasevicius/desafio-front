@@ -1,3 +1,12 @@
 .btn-reg:hover {
     color: #fa5b41 !important;
 }
+
+.disabled-button {
+    background-color: #ccc; 
+  }
+
+  .is-invalid input {
+    border-color: red; // Cambia el color del borde a rojo
+    // background-color: lightcoral; // Cambia el color de fondo a rojo claro
+ }

@@ -14,18 +14,19 @@ export class SignInAreaComponent implements OnInit {
   public buttonText: string = 'Ingresar';
   public userName: string | null = null;
   public errorMessage: string | null = null;
+  public formValid: boolean = false;
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private _userService: UserService, private _authService: AuthService, private _router: Router, private _messageService: MessageService) { }
 
+  constructor(private fb: FormBuilder, private _userService: UserService, private _authService: AuthService, private _router: Router, private _messageService: MessageService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required)
     });
-  }
-
-  showSuccess() {
+    this.loginForm.valueChanges.subscribe(() => {
+      this.formValid = this.loginForm.valid;
+    });
   }
 
   onSubmit() {
@@ -43,9 +44,31 @@ export class SignInAreaComponent implements OnInit {
           this._messageService.add({ severity: 'error', summary: 'Credenciales Incorrectas', detail: 'Revise los datos ingresados.' });
         }
       });
+    } else {
+      // Mostrar errores si el formulario no es válido
+      Object.keys(this.loginForm.controls).forEach(field => {
+        const control = this.loginForm.get(field);
+        control?.markAsTouched({ onlySelf: true });
+      });
     }
   }
 
+  isFieldValid(field: string): boolean {
+    const control = this.loginForm.get(field);
+    return control !== null && control !== undefined && !control.valid && (control.touched || control.dirty);
+  }
+
+  getErrorMessage(field: string): string {
+    const control = this.loginForm.get(field);
+    if (control && control.errors) {
+      if (control.errors['required']) {
+        return ` ${field === 'email' ? 'El correo electronico es oblitorio' : 'La contraseña es obligatoria.'}`;
+      } else if (control.errors['email']) {
+        return 'Correo electrónico inválido';
+      }
+    }
+    return '';
+  }
 
   updateButtonText(): void {
     const token = this._authService.getToken();
@@ -64,5 +87,4 @@ export class SignInAreaComponent implements OnInit {
       this.buttonText = token ? (this.userName ? this.userName.toString() : 'Usuario') : 'Ingresar';
     }
   }
-
 }

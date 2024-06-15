@@ -23,19 +23,27 @@
                   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                      <div class="sign__input-wrapper mb-25">
                         <h5>Correo Electronico</h5>
-                        <div class="sign__input">
-                           <input type="text" formControlName="email" placeholder="Email" required>
+                        <div class="sign__input" [ngClass]="{'has-error': isFieldValid('email')}">
+                           <input type="text" formControlName="email" placeholder="Email" autocomplete="off" required >
                            <i class="fal fa-envelope"></i>
                         </div>
                      </div>
                      <div class="sign__input-wrapper mb-10">
                         <h5>Contraseña</h5>
-                        <div class="sign__input">
-                           <input type="password" formControlName="password" placeholder="Contraseña" required>
+                        <div class="sign__input" [ngClass]="{'has-error': isFieldValid('password')}">
+                           <input type="password" formControlName="password" placeholder="Contraseña" autocomplete="off" required>
                            <i class="fal fa-lock"></i>
                         </div>
                      </div>
-                     <button type="submit" class="e-btn w-100">Ingresar</button>
+                     <div *ngIf="isFieldValid('password')" class="error-message">
+                        <i class="fal fa-exclamation-circle"> </i>
+                        {{ getErrorMessage('password') }}
+                     </div>
+                     <div *ngIf="isFieldValid('email')" class="error-message mb-2">
+                        <i class="fal fa-exclamation-circle"> </i>
+                        {{ getErrorMessage('email') }}
+                     </div>
+                     <button type="submit" class="e-btn w-100" [disabled]="!formValid" [ngClass]="{'disabled-button': !formValid}">Ingresar</button>
                      <p-toast position="bottom-center"></p-toast>
                   </form>
                </div>
