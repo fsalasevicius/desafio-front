@@ -1,0 +1,15 @@
+.input-error {
+  border-color: red;
+}
+
+.has-error .input-error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+.disabled-button {
+  background-color: #ccc; 
+}

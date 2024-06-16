@@ -1,0 +1,13 @@
+.has-error input,
+.has-error textarea {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.disabled-button {
+  background-color: #ccc; 
+}
