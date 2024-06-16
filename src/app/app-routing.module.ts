@@ -50,10 +50,10 @@ const routes: Routes = [
     path: 'games-copa-america-join-tournament',
     component: JoinTournamentComponent, canActivate: [AuthGuard]
   },
-  // {
-  //   path: 'user-profile/:id',
-  //   component: ProfileUserComponent, canActivate: [AuthGuard]
-  // },
+  {
+    path: 'user-profile/:id',
+    component: ProfileUserComponent, canActivate: [AuthGuard]
+  },
   {
     path: 'tournament-detail/:id',
     component: TournamentDetailComponent, canActivate: [AuthGuard]

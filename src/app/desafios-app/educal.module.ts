@@ -55,6 +55,8 @@ import { CountdownComponent } from './Home/category/countdown/countdown.componen
 import { ProfileUserComponent } from './user/profile-user/profile-user.component';
 import { UserDataFormComponent } from './user/profile-user/user-data-form/user-data-form.component';
 import { UserSegurityFormComponent } from './user/profile-user/user-segurity-form/user-segurity-form.component';
+import { UserNotificationFormComponent } from './user/profile-user/user-notification-form/user-notification-form.component';
+import { UserTournamentFormComponent } from './user/profile-user/user-tournament-form/user-tournament-form.component';
 
 registerLocaleData(localeEsAr);
 
@@ -108,6 +110,8 @@ registerLocaleData(localeEsAr);
     ProfileUserComponent,
     UserDataFormComponent,
     UserSegurityFormComponent,
+    UserNotificationFormComponent,
+    UserTournamentFormComponent,
   ],
   imports: [
     CommonModule,
