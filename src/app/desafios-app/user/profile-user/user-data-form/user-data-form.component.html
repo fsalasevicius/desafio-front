@@ -1,61 +1,62 @@
 <h3>Datos de la Cuenta</h3>
-<form action="assets/mail.php">
-   <div class="row">
-      <div class="col-xxl-6 col-xl-6 col-md-6">
-         <div class="contact__form-input">
-            <label for="name">Nombre</label>
-            <input type="text" placeholder="Nombre" name="name">
-         </div>
+<form (ngSubmit)="onSubmit()">
+  <div class="row">
+    <!-- Campos del formulario, asegurándote de deshabilitar los no modificables -->
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <label for="name">Nombre</label>
+        <input type="text" placeholder="Nombre" name="name" [(ngModel)]="user.name" required />
       </div>
-      <div class="col-xxl-6 col-xl-6 col-md-6">
-         <div class="contact__form-input">
-            <label for="surname">Apellido</label>
-            <input type="text" placeholder="Apellido" name="surname">
-         </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <label for="surname">Apellido</label>
+        <input type="text" placeholder="Apellido" name="surname" [(ngModel)]="user.surname" required />
       </div>
-      <div class="col-xxl-6 col-xl-6 col-md-6">
-         <div class="contact__form-input">
-            <label for="birthday">Fecha de Nacimiento</label>
-            <input type="date" name="birthday">
-         </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <label for="birthday">Fecha de Nacimiento</label>
+        <input type="date" name="birthday" [(ngModel)]="user.birthday"  required/>
       </div>
-      <div class="col-xxl-6 col-xl-6 col-md-6">
-         <div class="contact__form-input">
-            <label for="email">Correo Electrónico</label>
-            <input type="email" placeholder="Correo Electrónico" name="email">
-         </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <label for="email">Correo Electrónico</label>
+        <input type="email" placeholder="Correo Electrónico" name="email" [value]="user.email" disabled />
       </div>
-      <div class="col-xxl-6 col-xl-6 col-md-6">
-         <div class="contact__form-input">
-            <label for="email">Rol</label>
-            <input type="text" placeholder="Rol" name="rol" disabled>
-         </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6" *ngIf="user.rol">
+      <div class="contact__form-input">
+        <label for="rol">Rol</label>
+        <input type="text" placeholder="Rol" name="rol" [value]="user.rol" disabled />
       </div>
-      <div class="col-xxl-6 col-xl-6 col-md-6">
-         <div class="contact__form-input">
-            <label for="createdAt">Fecha de Alta</label>
-            <input type="text" placeholder="Fecha de Alta" name="createdAt" disabled>
-         </div>
+    </div>
+    <div class="col-xxl-6 col-xl-6 col-md-6">
+      <div class="contact__form-input">
+        <label for="createdAt">Fecha de Alta</label>
+        <input type="text" placeholder="Fecha de Alta" name="createdAt" [value]="user.createdAt | date:'dd/MM/yyyy HH:mm'" disabled />
       </div>
-      <div class="col-xxl-12">
-         <div class="contact__form-input">
-            <label for="description">Descripción</label>
-            <textarea placeholder="Ingrese una descripción" name="description"></textarea>
-         </div>
+    </div>
+    <div class="col-xxl-12">
+      <div class="contact__form-input">
+        <label for="description">Descripción</label>
+        <textarea placeholder="Ingrese una descripción" name="description" [(ngModel)]="user.description"></textarea>
       </div>
-      <div class="col-xxl-12">
-         <div class="contact__btn">
-            <button type="submit" class="e-btn">Guardar Cambios</button>
-         </div>
+    </div>
+    <div class="col-xxl-12">
+      <div class="contact__btn">
+        <button type="submit" class="e-btn">Guardar Cambios</button>
       </div>
-   </div>
+    </div>
+  </div>
 </form>
-
-
+<p-toast position="bottom-center"></p-toast>
 <div class="course__description-list  mb-35 mt-35">
    <h4>¿Que campos no se pueden editar?</h4>
    <ul>
-      <li> * Rol del Usuario, Asignado por el administrador.</li>
-      <li> * Fecha de Alta, asignado el dia que se crea la cuenta.</li>
+      <li> * Email: Es el nombre de usuario de la aplicación, no se puede modificar.</li>
+      <li> * Rol del Usuario: Asignado por el administrador.</li>
+      <li> * Fecha de Alta: Asignado el dia que se crea la cuenta.</li>
    </ul>
 </div>
