@@ -8,7 +8,12 @@
                         <div class="col-xxl-12 col-xl-12 col-md-12">
                             <div class="contact__form-input" [ngClass]="{ 'has-error': isFieldInvalid('currentPassword') }">
                                 <label for="currentPassword">Contraseña Actual</label>
-                                <input type="password" formControlName="currentPassword" [ngClass]="isFieldInvalid('currentPassword')" />
+                                <div class="password-input">
+                                    <input [type]="showCurrentPassword ? 'text' : 'password'" formControlName="currentPassword" [ngClass]="isFieldInvalid('currentPassword')" />
+                                    <button type="button" (click)="togglePasswordVisibility('currentPassword')">
+                                        <i [ngClass]="showCurrentPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                                    </button>
+                                </div>
                                 <div *ngIf="passwordForm.get('currentPassword')?.invalid && (passwordForm.get('currentPassword')?.dirty || passwordForm.get('currentPassword')?.touched || submitted)" class="error-message">
                                     {{ getErrorMessage('currentPassword') }}
                                 </div>
@@ -17,7 +22,12 @@
                         <div class="col-xxl-6 col-xl-6 col-md-6">
                             <div class="contact__form-input" [ngClass]="{ 'has-error': isFieldInvalid('newPassword') }">
                                 <label for="newPassword">Nueva Contraseña</label>
-                                <input type="password" formControlName="newPassword" [ngClass]="isFieldInvalid('newPassword')" />
+                                <div class="password-input">
+                                    <input [type]="showNewPassword ? 'text' : 'password'" formControlName="newPassword" [ngClass]="isFieldInvalid('newPassword')" />
+                                    <button type="button" (click)="togglePasswordVisibility('newPassword')">
+                                        <i [ngClass]="showNewPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                                    </button>
+                                </div>
                                 <div *ngIf="passwordForm.get('newPassword')?.invalid && (passwordForm.get('newPassword')?.dirty || passwordForm.get('newPassword')?.touched || submitted)" class="error-message">
                                     {{ getErrorMessage('newPassword') }}
                                 </div>
@@ -26,7 +36,12 @@
                         <div class="col-xxl-6 col-xl-6 col-md-6">
                             <div class="contact__form-input" [ngClass]="{ 'has-error': isFieldInvalid('confirmPassword') }">
                                 <label for="confirmPassword">Confirma tu Contraseña</label>
-                                <input type="password" formControlName="confirmPassword" [ngClass]="isFieldInvalid('confirmPassword')" />
+                                <div class="password-input">
+                                    <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" [ngClass]="isFieldInvalid('confirmPassword')" />
+                                    <button type="button" (click)="togglePasswordVisibility('confirmPassword')">
+                                        <i [ngClass]="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                                    </button>
+                                </div>
                                 <div *ngIf="passwordForm.get('confirmPassword')?.invalid && (passwordForm.get('confirmPassword')?.dirty || passwordForm.get('confirmPassword')?.touched || submitted)" class="error-message">
                                     {{ getErrorMessage('confirmPassword') }}
                                 </div>
@@ -34,7 +49,7 @@
                         </div>
                         <div *ngIf="passwordsMatchError" class="error-message">
                             La nueva contraseña no puede ser igual a la contraseña actual.
-                          </div>
+                        </div>
                         <div class="col-xxl-12">
                             <div class="contact__btn">
                                 <button type="submit" class="e-btn" [disabled]="!formChanged || !passwordForm.valid" [ngClass]="{'disabled-button': !formChanged || !passwordForm.valid}">Cambiar Contraseña</button>

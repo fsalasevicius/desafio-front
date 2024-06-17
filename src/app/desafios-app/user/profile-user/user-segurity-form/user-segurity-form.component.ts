@@ -20,6 +20,9 @@ export class UserSegurityFormComponent implements OnInit {
   public submitted = false;
   public formChanged = false;
   public passwordsMatchError = false;
+  showCurrentPassword = false;
+  showNewPassword = false;
+  showConfirmPassword = false;
 
   constructor(
     private _userService: UserService,
@@ -45,6 +48,20 @@ export class UserSegurityFormComponent implements OnInit {
     }
 
     this.submitted = false;
+  }
+
+  togglePasswordVisibility(field: string): void {
+    switch (field) {
+      case 'currentPassword':
+        this.showCurrentPassword = !this.showCurrentPassword;
+        break;
+      case 'newPassword':
+        this.showNewPassword = !this.showNewPassword;
+        break;
+      case 'confirmPassword':
+        this.showConfirmPassword = !this.showConfirmPassword;
+        break;
+    }
   }
 
   matchPasswords(password: string) {

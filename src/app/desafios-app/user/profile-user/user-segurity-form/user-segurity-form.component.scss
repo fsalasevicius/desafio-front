@@ -13,3 +13,21 @@
 .disabled-button {
   background-color: #ccc; 
 }
+
+.password-input {
+  position: relative;
+}
+
+.password-input button {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-70%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.password-input button i {
+  font-size: 1.2em;
+}
