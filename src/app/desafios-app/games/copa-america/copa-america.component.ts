@@ -145,34 +145,40 @@ export class CopaAmericaComponent implements OnInit {
       }
 
       this._copaAmericaService
-        .register_prediction({ predictions: predictionsData }, this.token)
-        .subscribe(
-          (response) => {
-            if (response.data === undefined) {
+      .register_prediction({ predictions: predictionsData }, this.token)
+      .subscribe(
+        (response) => {
+          let hasWarnings = false; // Variable para verificar si hay advertencias
+          if (response.messages && response.messages.length > 0) {
+            hasWarnings = true; // Hay advertencias
+            response.messages.forEach((msg: string) => {
               this._messageService.add({
-                severity: 'error',
-                summary: 'Error!',
-                detail: response.message,
+                severity: 'warn',
+                summary: 'Advertencia',
+                detail: msg,
               });
-            } else {
-              this._messageService.add({
-                severity: 'success',
-                summary: 'Proceso Exitoso!',
-                detail: "Guardando Predicción",
-              });
-            }
-          },
-          (err) => {
-            this._messageService.add({
-              severity: 'error',
-              summary: 'Error!',
-              detail: err.message,
             });
           }
-        );
+    
+          if (!hasWarnings) {
+            // Solo mostrar el mensaje de éxito si no hay advertencias
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Proceso Exitoso!',
+              detail: "Guardando Predicción",
+            });
+          }
+        },
+        (err) => {
+          this._messageService.add({
+            severity: 'error',
+            summary: 'Error!',
+            detail: err.message,
+          });
+        }
+      );
     }
   }
-
   get predictions(): FormArray {
     return this.predictionForm.get('predictions') as FormArray;
   }
