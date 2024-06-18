@@ -63,7 +63,6 @@ export class SignUpAreaComponent implements OnInit {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm)
       const user = this.registerForm.value;
       this._userService.register_user(user).subscribe(
         response => {

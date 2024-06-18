@@ -19,7 +19,6 @@ export class UserTournamentFormComponent implements OnInit {
     if (this.token) {
       let obj_lc: any = localStorage.getItem('userData');
       this.user = JSON.parse(obj_lc);
-      console.log('User data from localStorage:', this.user);
     }
   }
 
@@ -30,7 +29,6 @@ export class UserTournamentFormComponent implements OnInit {
       this._copaAmericaService.getUserInvitations({ email }, this.token).subscribe(
         (response) => {
           this.invitations = response
-          console.log(this.invitations)
           this.loading = false;
         },
         (error) => {
@@ -40,7 +38,6 @@ export class UserTournamentFormComponent implements OnInit {
       );
     } else {
       this.loading = false;
-      console.log('No user or email found');
     }
   }
 
@@ -63,8 +60,6 @@ isPendingInvitation(tournament: any): boolean {
 }
 
   ngOnInit(): void {
-    console.log('User:', this.user);
     this.loadInvitations();
-    console.log('Invitations after loadInvitations:', this.invitations);
   }
 }

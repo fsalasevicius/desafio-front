@@ -42,8 +42,6 @@ export class CopaAmericaComponent implements OnInit {
         (response) => {
           this.userPredictions = response.data[0]?.predictions || [];
           this.prediccion = this.userPredictions.length > 0;
-          console.log(this.userPredictions)
-          console.log('Predicciones del usuario:', this.userPredictions);
           this.loadMatches();
         },
         (error) => {
@@ -53,12 +51,10 @@ export class CopaAmericaComponent implements OnInit {
       );
       // this._copaAmericaService.table_prediction(this.user, this.token).subscribe(
       //   (response) => {
-      //   console.log(response)
       //   }
       // );
       this._copaAmericaService.table_resultados().subscribe(
         (response) => {
-        console.log(response)
         }
       );
 
@@ -114,12 +110,9 @@ export class CopaAmericaComponent implements OnInit {
           teamB: [existingPrediction ? existingPrediction.predictedScore.teamB : '', Validators.required],
         }),
       });
-
       predictionsArray.push(partidoFormGroup);
     });
-
     this.predictionForm.markAllAsTouched();
-    console.log('Formulario inicializado:', this.predictionForm.value);
   }
 
   onSubmit(): void {

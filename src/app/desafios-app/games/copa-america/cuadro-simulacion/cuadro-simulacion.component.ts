@@ -36,8 +36,6 @@ export class CuadroSimulacionComponent implements OnInit {
       this._copaAmericaService.table_resultados().subscribe(
         (response: any) => {
           this.partidos = response.data;
-
-          console.log(this.partidos)
         },
         (error) => {
           console.error('Error al obtener los partidos:', error);

@@ -46,7 +46,6 @@ export class CuadroGrupoComponent implements OnInit {
             if (dateA > dateB) return 1;
             return a.group.localeCompare(b.group);
           });
-          console.log(this.partidos)
         },
         (error) => {
           console.error('Error al obtener los partidos:', error);

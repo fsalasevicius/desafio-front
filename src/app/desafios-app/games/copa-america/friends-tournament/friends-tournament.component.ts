@@ -89,7 +89,6 @@ export class FriendsTournamentComponent implements OnInit {
       };
       this._copaAmericaService.createTournament(formData, this.token).subscribe(
         (response) => {
-          console.log(formData)
           let nameTournament = formData.tournamentName
           this.tournamentLink = `${window.location.origin}/games-copa-america-join-tournament`;
           this.sendInvitationEmails(emails, nameTournament);

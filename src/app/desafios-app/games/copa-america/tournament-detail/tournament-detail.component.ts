@@ -48,8 +48,6 @@ export class TournamentDetailComponent implements OnInit {
             this.userPredictions = response.userPredictionDetails;
             this.tournamentName = response.tournamentName;
             this.owner = response.owner.surname + ' ' + response.owner.name;
-
-            console.log('Detalle de torneos', this.invitations);
           },
           (error) => {
             console.error('Error al obtener las invitaciones:', error);
@@ -85,7 +83,6 @@ export class TournamentDetailComponent implements OnInit {
       matches: this.userPredictions[user._id] || []
     };
     this.display = true;
-    console.log(this.selectedUser)
   }
 }
 
