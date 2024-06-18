@@ -18,10 +18,12 @@ export class FriendsTournamentComponent implements OnInit {
   tournamentForm!: FormGroup;
   tournamentLink: string | null = null;
   public torneoDetail: any;
+  public password: any;
   public loading: boolean = false;
   public selectedTournament: string | null = null;
   user: any = undefined;
   public token = localStorage.getItem('authToken');
+  public owner = localStorage.getItem('userName');
   whatsappLinks: string[] = [];
   i: number = 0;
   emailFormControl = new FormControl();
@@ -99,7 +101,8 @@ export class FriendsTournamentComponent implements OnInit {
         (response) => {
           let nameTournament = formData.tournamentName;
           this.tournamentLink = `${window.location.origin}/games-copa-america-join-tournament`;
-          this.sendInvitationEmails(emails, nameTournament);
+          let password = response.password;
+          this.sendInvitationEmails(emails, nameTournament,password);
           this.generateWhatsAppLinks(emails, nameTournament);
           this.loading = false;
         },
@@ -112,10 +115,11 @@ export class FriendsTournamentComponent implements OnInit {
     }
   }
 
-  sendInvitationEmails(emails: string[], nameTournament: string): void {
+  sendInvitationEmails(emails: string[], nameTournament: string, password: any): void {
+    let owner = this.owner;
     emails.forEach((email) => {
       this._copaAmericaService
-        .sendInvitationEmail({ email, nameTournament }, this.token)
+        .sendInvitationEmail({ email, nameTournament, owner,password}, this.token)
         .subscribe(
           (response) => {
             console.log('Correo enviado a:', email);
