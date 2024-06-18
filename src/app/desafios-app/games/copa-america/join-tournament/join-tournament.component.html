@@ -7,36 +7,44 @@
   <ng-container *ngIf="!loading">
     <section class="teacher__area pt-50 pb-110">
       <div class="container">
-        <div class="row">
-          <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6" *ngFor="let tournament of invitations">
-            <div class="banner__item p-relative mb-40"
-              [ngStyle]="{background:'url(assets/img/banner/banner-bg-2.jpg)',backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundPosition:'center'}">
-              <div class="banner__content">
-                <span>Participantes: {{ tournament.participants.length }}</span>
-                <p class="card-text">Organizado por: <br> {{ tournament.owner.surname }}, {{ tournament.owner.name }}
-                </p>
-                <h3 class="banner__title">
-                  <a [routerLink]="['/tournament-detail', tournament._id]">{{ tournament.tournamentName }}</a>
-                </h3>
-                <button *ngIf="isPendingInvitation(tournament)" (click)="joinTournament(tournament)"
-                  class="e-btn e-btn-2">
-                  Unirse al Torneo
-                </button>
-                <a [routerLink]="['/tournament-detail', tournament._id]" *ngIf="!isPendingInvitation(tournament)"
-                  disabled class="e-btn e-btn-2" style="background-color:rgb(29, 183, 47);cursor: pointer;margin-right: 1rem;">
-                  Ir al torneo
-                </a>
-                <!-- <a [routerLink]="['/games-config-tournament', tournament._id]" *ngIf="user._id == tournament.owner._id"
-                disabled class="e-btn e-btn-2" style="background-color:rgb(77, 100, 231);cursor: pointer;">
-                <i class="fas fa-cog spinner-icon"></i>
-              </a> -->
-              </div>
-              <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
-                <img src="assets/img/banner/banner-img-1.png" alt="">
+        <ng-container *ngIf="invitations.length > 0">
+          <div class="row">
+            <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6" *ngFor="let tournament of invitations">
+              <div class="banner__item p-relative mb-40"
+                [ngStyle]="{background:'url(assets/img/banner/banner-bg-2.jpg)',backgroundRepeat:'no-repeat',backgroundSize:'cover',backgroundPosition:'center'}">
+                <div class="banner__content">
+                  <span>Participantes: {{ tournament.participants.length }}</span>
+                  <p class="card-text">Organizado por: <br> {{ tournament.owner.surname }}, {{ tournament.owner.name }}
+                  </p>
+                  <h3 class="banner__title">
+                    <a [routerLink]="['/tournament-detail', tournament._id]">{{ tournament.tournamentName }}</a>
+                  </h3>
+                  <button *ngIf="isPendingInvitation(tournament)" (click)="joinTournament(tournament)"
+                    class="e-btn e-btn-2">
+                    Unirse al Torneo
+                  </button>
+                  <a [routerLink]="['/tournament-detail', tournament._id]" *ngIf="!isPendingInvitation(tournament)"
+                    disabled class="e-btn e-btn-2" style="background-color:rgb(29, 183, 47);cursor: pointer;margin-right: 1rem;">
+                    Ir al torneo
+                  </a>
+                </div>
+                <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
+                  <img src="assets/img/banner/banner-img-1.png" alt="">
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
+        <ng-container *ngIf="invitations.length == 0">
+          <div class="row">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
+              <div class="banner__item no-tournament">
+                <h4>No tienes invitaciones pendientes para aceptar.</h4>
+                <img src="../../../../../assets/img/icon/no-invitation.png" alt="No hay invitaciones disponibles">
+              </div>
+            </div>
+          </div>
+        </ng-container>
       </div>
     </section>
   </ng-container>

@@ -167,7 +167,7 @@
                         {{ buttonText.toUpperCase() }}
                       </a>
                       <ul class="dropdown-menu" [class.show]="isDropdownOpen">
-                        <li><a [routerLink]="['/user-profile']"><i class="fal fa-user-circle"></i> Ver perfil</a></li>
+                        <li><a [routerLink]="['/user-profile', user._id]"><i class="fal fa-user-circle"></i> Ver perfil</a></li>
                         <li><a [routerLink]="['/games-copa-america-join-tournament']"><i class="fal fa-user-circle"></i> Ver Desafios</a></li>
                         <li><a (click)="logout()"><i class="fal fa-sign-out-alt"></i> Cerrar sesión</a></li>
                       </ul>

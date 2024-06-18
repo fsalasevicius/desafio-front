@@ -1,0 +1,252 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    position: relative;
+  }
+  .match-title-mobile {
+    display: none;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-right: 1rem;
+  }
+  .card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  .img-fluid {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .table thead th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+  }
+  
+  .text-right {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .btn-sm {
+    background-color: #3498db; /* Color de fondo azul */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 16px;
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+    transition: background-color 0.3s; /* Transición suave al cambiar de color */
+  }
+  
+  .btn-sm:hover {
+    background-color: #2980b9; /* Cambio de color al pasar el mouse */
+  }
+  
+  .form-control-goles{
+    width: 4rem;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      width: 100%;
+    }
+  
+    .table-responsive {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  
+    .table thead {
+      display: none;
+    }
+  
+    .table tbody tr {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+  
+    .table tbody tr td {
+      padding: 8px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+    }
+  
+    .table tbody tr td::before {
+      content: attr(data-label);
+      flex-basis: 50%;
+      font-weight: bold;
+    }
+  }
+  
+  .partido {
+    background-color: #fff;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .partido a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .partido a:hover {
+    text-decoration: underline;
+  }
+  
+  .team-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .team-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .team-flag {
+    margin-right: 5px;
+  }
+  
+  .team-name {
+    font-weight: bold;
+  }
+  
+  .team-prediction {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .team-flag {
+    width: 40px; /* Tamaño deseado para la bandera */
+    margin-right: 10px;
+  }
+  
+  .winner-name {
+    font-weight: bold;
+    vertical-align: middle;
+  }
+  
+  @media (max-width: 768px) {
+    .teacher__area {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+    .match-title-mobile {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .card {
+      padding: 15px;
+      font-size: 16px;
+    }
+  
+    .team-column {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .team-info {
+      margin-bottom: 10px;
+    }
+  
+    .team-flag {
+      width: 30px;
+      margin-right: 5px;
+    }
+  
+    .team-name {
+      font-size: 14px;
+    }
+  
+    .team-prediction {
+      align-items: center;
+      margin-top: 5px;
+    }
+  
+    .form-control-goles {
+      width: 3rem;
+    }
+  
+    .winner-name {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
+  
+  .match-column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .match-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-evenly;
+    align-content: space-between;
+  }
+  
+  .match-team,
+  .match-prediction {
+    flex-basis: calc(50% - 10px); /* 50% width with 10px spacing */
+    margin-bottom: 10px;
+  }
+  
+  .team-flag {
+    width: 30px;
+    margin-right: 5px;
+  }
+  
+  .team-name {
+    font-weight: bold;
+  }
+  
+  .match-prediction {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  @media (max-width: 768px) {
+    .match-container {
+      flex-direction: column;
+    }
+  
+    .match-team,
+    .match-prediction {
+      flex-basis: 100%;
+    }
+  
+    .match-team {
+      text-align: center;
+    }
+  
+    .match-prediction {
+      align-items: center;
+    }
+  }

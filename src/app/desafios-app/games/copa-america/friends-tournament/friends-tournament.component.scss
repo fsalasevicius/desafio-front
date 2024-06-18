@@ -1,5 +1,5 @@
 .tournament-container {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -20,22 +20,33 @@
   margin: 10px 0 5px;
 }
 
-.tournament-container form input {
+.tournament-container form .form-control {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.tournament-container form button {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
+.tournament-container form .btn-add {
+  margin-top: 10px;
+}
+
+.tournament-container form .btn-remove {
+  margin-left: 10px;
+  background: none;
   border: none;
-  border-radius: 4px;
+  color: #dc3545;
   cursor: pointer;
 }
 
-.tournament-container form button:disabled {
-  background-color: #ccc;
+.tournament-container form .btn-remove i {
+  font-size: 1.2em;
+}
+
+.tournament-container form .btn-submit {
+  margin-top: 20px;
+  width: 200px;
+}
+
+.tournament-link {
+  margin-top: 30px;
 }

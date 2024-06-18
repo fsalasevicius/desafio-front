@@ -8,3 +8,25 @@
   top: 50%;
   transform: translateY(-50%);
 }
+.no-tournament {
+  background-color: #ffffff;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+.no-tournament h4 {
+  color: #555;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.no-tournament img {
+  display: block;
+  margin: 0 auto;
+  max-width: 120px;
+  opacity: 0.8;
+}

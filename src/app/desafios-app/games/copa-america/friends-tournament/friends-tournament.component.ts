@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
 
 @Component({
   selector: 'app-friends-tournament',
   templateUrl: './friends-tournament.component.html',
-  styleUrls: ['./friends-tournament.component.scss']
+  styleUrls: ['./friends-tournament.component.scss'],
 })
 export class FriendsTournamentComponent implements OnInit {
   tournamentForm!: FormGroup;
@@ -17,11 +22,13 @@ export class FriendsTournamentComponent implements OnInit {
   public selectedTournament: string | null = null;
   user: any = undefined;
   public token = localStorage.getItem('authToken');
+  whatsappLinks: string[] = [];
   i: number = 0;
   emailFormControl = new FormControl();
+
   constructor(
     private fb: FormBuilder,
-    private _copaAmericaService: CopaAmericaService,
+    private _copaAmericaService: CopaAmericaService
   ) {
     this.tournamentForm = this.fb.group({
       tournamentName: ['', Validators.required],
@@ -35,11 +42,9 @@ export class FriendsTournamentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._copaAmericaService.tournament_detail().subscribe(
-      response=>{
-        this.torneoDetail = response.data;
-      }
-    )
+    this._copaAmericaService.tournament_detail().subscribe((response) => {
+      this.torneoDetail = response.data;
+    });
     this.tournamentForm = this.fb.group({
       tournamentName: ['', Validators.required],
       tournamentDetail: ['', Validators.required],
@@ -57,7 +62,6 @@ export class FriendsTournamentComponent implements OnInit {
     return this.tournamentForm.get('friendsEmails') as FormArray;
   }
 
-
   addFriendEmail(): void {
     this.friendsEmails.push(this.createFriendEmail());
   }
@@ -71,27 +75,32 @@ export class FriendsTournamentComponent implements OnInit {
     if (this.tournamentForm.invalid) {
       return;
     }
-  
-    const { tournamentName,tournamentDetail, friendsEmails } = this.tournamentForm.value;
-    const emails = this.friendsEmails.controls.map((control: AbstractControl) => control.value.email);
+
+    const { tournamentName, tournamentDetail, friendsEmails } = this.tournamentForm.value;
+    const emails = this.friendsEmails.controls.map(
+      (control: AbstractControl) => control.value.email
+    );
     const tournamentId = this.generateTournamentId();
     const password = this.generatePassword();
     const ownerId = this.user._id;
-  
+
     const friendsEmailsControl = this.tournamentForm.get('friendsEmails');
     if (friendsEmailsControl) {
       const formData = {
         tournamentName: this.tournamentForm.value.tournamentName,
         tournamentDetail: this.tournamentForm.value.tournamentDetail,
-        friendsEmails: friendsEmailsControl.value.map((emailControl: any) => emailControl.email),
+        friendsEmails: friendsEmailsControl.value.map(
+          (emailControl: any) => emailControl.email
+        ),
         password,
         owner: ownerId,
       };
       this._copaAmericaService.createTournament(formData, this.token).subscribe(
         (response) => {
-          let nameTournament = formData.tournamentName
+          let nameTournament = formData.tournamentName;
           this.tournamentLink = `${window.location.origin}/games-copa-america-join-tournament`;
           this.sendInvitationEmails(emails, nameTournament);
+          this.generateWhatsAppLinks(emails, nameTournament);
           this.loading = false;
         },
         (error) => {
@@ -101,19 +110,30 @@ export class FriendsTournamentComponent implements OnInit {
         }
       );
     }
-  
   }
 
   sendInvitationEmails(emails: string[], nameTournament: string): void {
-    emails.forEach(email => {
-      this._copaAmericaService.sendInvitationEmail({ email, nameTournament }, this.token).subscribe(
-        (response) => {
-          console.log('Correo enviado a:', email);
-        },
-        (error) => {
-          console.error('Error al enviar el correo:', error);
-        }
-      );
+    emails.forEach((email) => {
+      this._copaAmericaService
+        .sendInvitationEmail({ email, nameTournament }, this.token)
+        .subscribe(
+          (response) => {
+            console.log('Correo enviado a:', email);
+          },
+          (error) => {
+            console.error('Error al enviar el correo:', error);
+          }
+        );
+    });
+  }
+
+  generateWhatsAppLinks(emails: string[], tournamentName: string): void {
+    this.whatsappLinks = emails.map(email => {
+      const invitationToken = this.generateInvitationToken();
+      const baseUrl = window.location.origin;
+      const message = `¡Te invito a unirte al torneo ${tournamentName}!\nCrea tu cuenta e ingresa al siguiente enlace para comenzar a jugar:\n\n${baseUrl}/games-copa-america-join-tournament?token=${invitationToken}`;
+      const encodedMessage = encodeURIComponent(message);
+      return `https://wa.me/?text=${encodedMessage}`;
     });
   }
 
@@ -123,5 +143,9 @@ export class FriendsTournamentComponent implements OnInit {
 
   generatePassword(): string {
     return Math.random().toString(36).substr(2, 8);
+  }
+
+  generateInvitationToken(): string {
+    return Math.random().toString(36).substr(2, 20);
   }
 }
