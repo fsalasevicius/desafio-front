@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Match } from 'src/app/interface/copa-america.interface';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
@@ -18,6 +18,7 @@ export class CopaAmericaComponent implements OnInit {
   loading = true;
   prediccion = false;
   userPredictions: any[] = [];
+  isSmallScreen: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +36,7 @@ export class CopaAmericaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkScreenSize();
     if (this.user && this.token) {
       this._copaAmericaService.view_prediction(this.user, this.token).subscribe(
         (response) => {
@@ -64,6 +66,15 @@ export class CopaAmericaComponent implements OnInit {
     } else {
       this.loadMatches();
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isSmallScreen = window.innerWidth < 768;
   }
 
   loadMatches(): void {
@@ -183,40 +194,24 @@ export class CopaAmericaComponent implements OnInit {
     return this.predictionForm.get('predictions') as FormArray;
   }
 
-  getWinnerName(pIndex: number): string {
-    const teamAName = this.matches[pIndex].teamA.name;
-    const teamBName = this.matches[pIndex].teamB.name;
-    const teamA = this.predictionForm.get([
-      'predictions',
-      pIndex,
-      'predictedScore',
-      'teamA',
-    ])?.value;
-    const teamB = this.predictionForm.get([
-      'predictions',
-      pIndex,
-      'predictedScore',
-      'teamB',
-    ])?.value;
-
-    if (
-      teamA === '' ||
-      teamB === '' ||
-      teamA === null ||
-      teamB === null ||
-      teamA < 0 ||
-      teamB < 0
-    ) {
-      return ''; 
+  getWinnerData(pIndex: number): { name: string; flag: string } {
+    const partido = this.matches[pIndex];
+    const teamA = this.predictionForm.get(['predictions', pIndex, 'predictedScore', 'teamA'])?.value;
+    const teamB = this.predictionForm.get(['predictions', pIndex, 'predictedScore', 'teamB'])?.value;
+  
+    if (teamA === null || teamB === null || teamA < 0 || teamB < 0) {
+      return { name: '', flag: '' };
     }
-
-    if (teamA > teamB) {
-      return teamAName; 
-    } else if (teamA < teamB) {
-      return teamBName; 
-    } else {
-      return 'Empate'; 
+  
+    const winnerName = teamA > teamB ? partido.teamA.name : teamA < teamB ? partido.teamB.name : 'Empate';
+    const winnerFlag = teamA > teamB ? partido.teamA.flag : teamA < teamB ? partido.teamB.flag : '';
+  
+    // Si es un empate, no mostrar la bandera
+    if (winnerName === 'Empate') {
+      return { name: winnerName, flag: '' };
     }
+  
+    return { name: winnerName, flag: winnerFlag };
   }
 
   clearPredictions(): void {

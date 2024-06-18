@@ -4,7 +4,12 @@
   justify-content: space-around;
   position: relative;
 }
-
+.match-title-mobile {
+  display: none;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-right: 1rem;
+}
 .card {
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -78,8 +83,6 @@ h2 {
   }
 
   .table tbody tr td {
-    display: flex;
-    justify-content: space-between;
     padding: 8px;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -107,4 +110,143 @@ h2 {
 
 .partido a:hover {
   text-decoration: underline;
+}
+
+.team-column {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+}
+
+.team-flag {
+  margin-right: 5px;
+}
+
+.team-name {
+  font-weight: bold;
+}
+
+.team-prediction {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.team-flag {
+  width: 40px; /* Tamaño deseado para la bandera */
+  margin-right: 10px;
+}
+
+.winner-name {
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .teacher__area {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .match-title-mobile {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .card {
+    padding: 15px;
+    font-size: 16px;
+  }
+
+  .team-column {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .team-info {
+    margin-bottom: 10px;
+  }
+
+  .team-flag {
+    width: 30px;
+    margin-right: 5px;
+  }
+
+  .team-name {
+    font-size: 14px;
+  }
+
+  .team-prediction {
+    align-items: center;
+    margin-top: 5px;
+  }
+
+  .form-control-goles {
+    width: 3rem;
+  }
+
+  .winner-name {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}
+
+.match-column {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.match-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: space-evenly;
+  align-content: space-between;
+}
+
+.match-team,
+.match-prediction {
+  flex-basis: calc(50% - 10px); /* 50% width with 10px spacing */
+  margin-bottom: 10px;
+}
+
+.team-flag {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.team-name {
+  font-weight: bold;
+}
+
+.match-prediction {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+@media (max-width: 768px) {
+  .match-container {
+    flex-direction: column;
+  }
+
+  .match-team,
+  .match-prediction {
+    flex-basis: 100%;
+  }
+
+  .match-team {
+    text-align: center;
+  }
+
+  .match-prediction {
+    align-items: center;
+  }
 }
