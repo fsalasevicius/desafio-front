@@ -26,6 +26,7 @@
                               <th>#</th>
                               <th>Grupo</th>
                               <th>Fecha / Hora</th>
+                              <th>Cierre Predicción </th>
                               <th>Encuentro</th>
                               <th>Predicción <br> </th>
                             </tr>
@@ -35,6 +36,7 @@
                               <td><div class="d-flex"><div class="match-title-mobile"># Partido: </div><div>{{partido.nmatch}}</div></div></td>
                               <td><div class="d-flex"><div class="match-title-mobile">Grupo: </div><div>{{partido.group}}</div></div></td>
                               <td><div class="d-flex"><div class="match-title-mobile">Fecha y Hora: </div><div>{{partido.date | date:"dd/MM/yyyy HH:mm"}}</div></div></td>
+                              <td><div class="d-flex"><div class="match-title-mobile">Cierre Predicción </div><div>{{ calcularTiempoRestante(partido.date) }}</div></div></td>
                               <td class="match-column">
                                 <div class="match-container">
                                   <div class="match-team">

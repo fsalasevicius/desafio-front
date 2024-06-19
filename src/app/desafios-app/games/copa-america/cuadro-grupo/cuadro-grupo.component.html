@@ -54,6 +54,7 @@
                                             </div>
                                             <div class="col-3 text-center match-date">
                                                 {{ formatFecha(partido.date) }} <br> {{ partido.date | date:'HH:mm' }}
+                                                <div>{{ calcularTiempoRestante(partido.date) }}</div>
                                             </div>
                                             <div class="col-1 result">
                                                 <div>

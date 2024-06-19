@@ -213,4 +213,25 @@ export class PredictionComponent implements OnInit {
       detail: 'Tus predicciones actuales han sido borradas. Si te arrepentiste recarga la pagina.',
     });
   }
+  calcularTiempoRestante(fechaPartidoStr: string): string {
+    const fechaPartido = new Date(fechaPartidoStr);
+    fechaPartido.setHours(fechaPartido.getHours() - 1); // Restar una hora a la fecha del partido
+    const ahora = new Date();
+    let diferencia = fechaPartido.getTime() - ahora.getTime();
+
+    if (diferencia < 0) {
+        diferencia = 0; // Si la diferencia es negativa, establecerla en 0
+    }
+
+    if (diferencia === 0) {
+        return 'Predicción cerrada'; // Devolver "Predicción cerrada" cuando la diferencia es cero
+    }
+    
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+    
+    return `${dias} d ${horas} h ${minutos} m ${segundos} s`;
+}
 }
