@@ -18,6 +18,7 @@ export interface Match {
   stadium: Stadium;
   teamA: Team;
   teamB: Team;
+  closed: boolean;
 }
 
 export interface Prediction {

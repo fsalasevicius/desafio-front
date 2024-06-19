@@ -1,51 +1,53 @@
 <main>
   <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
-  <ng-container *ngIf="loading">
-    <app-spinner></app-spinner>
-  </ng-container>
-  <ng-container *ngIf="!loading">
-    <section class="page__title-area pt-60 pb-90">
-      <div class="page__title-shape">
-        <img class="page-title-shape-5 d-none d-sm-block" src="assets/img/page-title/page-title-shape-1.png" alt="" />
-        <img class="page-title-shape-6" src="assets/img/page-title/page-title-shape-6.png" alt="" />
-        <img class="page-title-shape-7" src="assets/img/page-title/page-title-shape-4.png" alt="" />
-      </div>
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <h2>Buscar Torneo</h2>
-          <form [formGroup]="searchForm" (ngSubmit)="searchTournament()">
-            <div class="form-group">
-              <label for="tournamentName">Nombre del Torneo</label>
-              <input type="text" formControlName="tournamentName" class="form-control" id="tournamentName" required>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Buscar Torneo</button>
-          </form>
+  <section class="teacher__area pt-50 pb-110">
+    <ng-container *ngIf="loading">
+      <app-spinner></app-spinner>
+    </ng-container>
+    <ng-container *ngIf="!loading">
+      <section class="page__title-area pt-60 pb-90">
+        <div class="page__title-shape">
+          <img class="page-title-shape-5 d-none d-sm-block" src="assets/img/page-title/page-title-shape-1.png" alt="" />
+          <img class="page-title-shape-6" src="assets/img/page-title/page-title-shape-6.png" alt="" />
+          <img class="page-title-shape-7" src="assets/img/page-title/page-title-shape-4.png" alt="" />
         </div>
-      </div>
-      <div class="container-fluid" *ngIf="searchResult && searchResult.length > 0">
-        <div class="row justify-content-center">
-          <h3>Resultados de la Búsqueda:</h3>
-          <ul>
-            <li *ngFor="let tournament of searchResult" (click)="selectTournament(tournament)">
-              {{ tournament.tournamentName }}
-            </li>
-          </ul>
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <h2>Buscar Torneo</h2>
+            <form [formGroup]="searchForm" (ngSubmit)="searchTournament()">
+              <div class="form-group">
+                <label for="tournamentName">Nombre del Torneo</label>
+                <input type="text" formControlName="tournamentName" class="form-control" id="tournamentName" required>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Buscar Torneo</button>
+            </form>
+          </div>
         </div>
-      </div>
-      <div class="container-fluid" *ngIf="selectedTournament">
-        <div class="row justify-content-center">
-          <h3>Unirse al Torneo: {{ selectedTournament.tournamentName }}</h3>
-          <form [formGroup]="joinForm" (ngSubmit)="joinTournament()">
-            <div class="form-group">
-              <label for="password">Contraseña:</label>
-              <input id="password" formControlName="password" type="password" class="form-control" required />
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Unirse</button>
-          </form>
+        <div class="container-fluid" *ngIf="searchResult && searchResult.length > 0">
+          <div class="row justify-content-center">
+            <h3>Resultados de la Búsqueda:</h3>
+            <ul>
+              <li *ngFor="let tournament of searchResult" (click)="selectTournament(tournament)">
+                {{ tournament.tournamentName }}
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </section>
-  </ng-container>
-  <p-toast position="bottom-center"></p-toast>
+        <div class="container-fluid" *ngIf="selectedTournament">
+          <div class="row justify-content-center">
+            <h3>Unirse al Torneo: {{ selectedTournament.tournamentName }}</h3>
+            <form [formGroup]="joinForm" (ngSubmit)="joinTournament()">
+              <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input id="password" formControlName="password" type="password" class="form-control" required />
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Unirse</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+    <p-toast position="bottom-center"></p-toast>
+  </section>
   <app-footer></app-footer>
 </main>
