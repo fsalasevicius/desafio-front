@@ -68,7 +68,7 @@ export class CopaAmericaService {
 
   sendInvitationEmail(invitationData: any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
-    return this._http.post(this.url + "/send-invitation",invitationData,{headers})
+    return this._http.post(this.url + "send-invitation",invitationData,{headers})
   }
 
   getUserInvitations(userEmail: any,token:any):Observable<any>{
