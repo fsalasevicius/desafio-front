@@ -22,6 +22,16 @@ export class SearchTournamentComponent implements OnInit {
   public token = localStorage.getItem('authToken');
   displayModal: boolean = false;
 
+  getDialogWidth(): string {
+    if (window.innerWidth <= 576) { // Dispositivos móviles extra pequeños
+      return '90vw'; // Ancho del modal en porcentaje
+    } else if (window.innerWidth <= 768) { // Dispositivos móviles y tablets
+      return '70vw'; // Ancho del modal en porcentaje
+    } else {
+      return '30vw'; // Ancho del modal en porcentaje
+    }
+  }
+
   constructor(
     private fb: FormBuilder,
     private _copaAmericaService: CopaAmericaService,

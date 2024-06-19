@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-copaamerica2024comosejuega',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Copaamerica2024comosejuegaComponent implements OnInit {
 
-  constructor() { }
+  isSmallScreen$ = this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
+    .pipe(
+      map(result => result.matches)
+    );
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
   }
-
 }

@@ -6,7 +6,8 @@
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center'
-    }">
+    }"
+    *ngIf="!(isSmallScreen$ | async)">
     <div class="page__title-shape">
       <img class="page-title-shape-1" src="assets/img/page-title/page-title-shape-1.png" alt="">
       <img class="page-title-shape-2" src="assets/img/page-title/page-title-shape-2.png" alt="">
@@ -15,7 +16,7 @@
     </div>
   </section>
 
-    <section class="blog__area pt-120 pb-120">
+    <section class="blog__area pt-80 pb-120">
         <div class="container">
             <div class="row">
                 <div class="col-xxl-8 col-xl-8 col-lg-8">
@@ -24,7 +25,6 @@
                             <p></p>
                         </div>
                         <div class="blog__quote grey-bg mb-45 p-relative fix">
-                            <img class="quote" src="assets/img/american-cup/logo-copa-america-2024.png" width="10%" alt="Logo Copa America 2024">
                             <blockquote>
                                 <p>¿Como Jugar a Predicciones Copa America 2024?</p>
                             </blockquote>

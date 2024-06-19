@@ -50,8 +50,7 @@
 
   <!-- Modal -->
   <div class="container-fluid">
-    <p-dialog header="Ingresa la contraseña de acceso" [(visible)]="displayModal" [style]="{width: '30vw'}"
-      [modal]="true" [closable]="false">
+    <p-dialog header="Ingresa la contraseña de acceso" [(visible)]="displayModal" [style]="{width: getDialogWidth()}" [modal]="true" [closable]="false">
       <form [formGroup]="joinForm" (ngSubmit)="joinTournament()">
         <div class="p-fluid">
           <div class="p-field">

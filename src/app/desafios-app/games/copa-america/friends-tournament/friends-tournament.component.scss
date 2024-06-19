@@ -50,3 +50,42 @@
 .tournament-link {
   margin-top: 30px;
 }
+
+.whatsapp-button {
+  display: inline-block;
+  background-color: #25d366; /* Color de WhatsApp */
+  color: #fff; /* Color de texto */
+  font-size: 16px;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.whatsapp-button:hover {
+  background-color: #128c7e; /* Color de WhatsApp al pasar el mouse */
+}
+
+.whatsapp-logo {
+  width: 20px; /* Tamaño del logo de WhatsApp */
+  margin-right: 10px; /* Espacio entre el logo y el texto */
+}
+
+.email-button {
+  display: inline-block;
+  background-color: #007bff; /* Color azul para el botón */
+  color: #fff; /* Color de texto */
+  font-size: 16px;
+  padding: 10px 20px;
+  margin-top: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.email-button:hover {
+  background-color: #0056b3; /* Color azul más oscuro al pasar el mouse */
+}
+
+.email-icon {
+  width: 20px; /* Tamaño del icono de sobre */
+  margin-right: 10px; /* Espacio entre el icono y el texto */
+}

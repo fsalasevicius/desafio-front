@@ -56,7 +56,16 @@ export class TournamentDetailComponent implements OnInit {
     });
   }
 
-
+  getDialogWidth(): string {
+    if (window.innerWidth <= 576) { // Dispositivos móviles extra pequeños
+      return '90vw'; // Ancho del modal en porcentaje
+    } else if (window.innerWidth <= 768) { // Dispositivos móviles y tablets
+      return '70vw'; // Ancho del modal en porcentaje
+    } else {
+      return '30vw'; // Ancho del modal en porcentaje
+    }
+  }
+  
   calculatePoints(): void {
     this.loading = true;
     let id = this.id;

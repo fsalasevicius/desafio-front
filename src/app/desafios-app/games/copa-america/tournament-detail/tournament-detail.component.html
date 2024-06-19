@@ -2,7 +2,7 @@
     <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
     <ng-container *ngIf="loading">
         <app-spinner></app-spinner>
-      </ng-container>
+    </ng-container>
     <ng-container *ngIf="!loading">
         <section class="teacher__area pt-50 pb-110">
             <div class="container">
@@ -16,25 +16,29 @@
                     </div>
                 </div>
                 <div class="row" *ngFor="let tournament of invitations; let i = index">
-                    <div class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
-                        <div class="events__item mb-10 hover__active">
-                            <div class="events__item-inner d-sm-flex align-items-center justify-content-between white-bg">
-                                <div style="font-weight: 600;color: black;">{{i+1}}</div>
-                                <div class="events__content">
-                                    <h3 class="events__title"><a>{{tournament.surname}}, {{tournament.name}}</a></h3>
-                                </div>
-                                <div class="events__more" style="font-weight: 600;color: black;">
-                                    <a (click)="showPointsDetail(tournament)" icon="pi pi-external-link" label="Show"
-                                        style="cursor: pointer;"> {{userPoints[tournament._id] || 0}} Puntos </a>
+                    <a (click)="showPointsDetail(tournament)" icon="pi pi-external-link" label="Show"
+                        style="cursor: pointer;"> 
+                        <div class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
+                            <div class="events__item mb-10 hover__active">
+                                <div
+                                    class="events__item-inner d-sm-flex align-items-center justify-content-between white-bg">
+                                    <div style="font-weight: 600;color: black;">{{i+1}}</div>
+                                    <div class="events__content">
+                                        <h3 class="events__title"><a>{{tournament.surname}}, {{tournament.name}}</a>
+                                        </h3>
+                                    </div>
+                                    <div class="events__more" style="font-weight: 600;color: black;">
+                                        {{userPoints[tournament._id] || 0}} Puntos
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
-    
-        <p-dialog header="Detalles de Puntos obtenidos" [(visible)]="display" [style]="{width: '50vw'}" [baseZIndex]="10000">
+        <p-dialog header="Detalles de Puntos obtenidos" [(visible)]="display" [style]="{width: getDialogWidth()}"
+            [baseZIndex]="10000">
             <div *ngIf="selectedUser">
                 <p><strong>Participante:</strong> {{selectedUser.surname}}, {{selectedUser.name}} </p>
                 <p><strong>Puntos Totales:</strong> {{userPoints[selectedUser._id] || 0}}</p>
@@ -51,17 +55,19 @@
                         <tbody>
                             <tr *ngFor="let match of selectedUser.matches">
                                 <td>{{ match.matchId.date | date:"dd/MM/yyyy"}}</td>
-                                <td colspan="2">{{ match.matchId.teamA.name }} {{ match.predictedScore.teamA }} - {{ match.predictedScore.teamB }} {{ match.matchId.teamB.name }} <br>
-                                    {{ match.matchId.teamA.name }} {{match.matchId.result.teamA}} - {{match.matchId.result.teamB}} {{ match.matchId.teamB.name }} 
+                                <td colspan="2">{{ match.matchId.teamA.name }} {{ match.predictedScore.teamA }} - {{
+                                    match.predictedScore.teamB }} {{ match.matchId.teamB.name }} <br>
+                                    {{ match.matchId.teamA.name }} {{match.matchId.result.teamA}} -
+                                    {{match.matchId.result.teamB}} {{ match.matchId.teamB.name }}
                                 </td>
                                 <td>
-                                            <ul>
-                                                <li *ngFor="let detail of match.pointsDetails">
-                                                    <ng-container *ngIf="detail.points > 0">
-                                                        {{ detail.type }}: {{ detail.points }} 
-                                                    </ng-container>
-                                                </li>
-                                            </ul>
+                                    <ul>
+                                        <li *ngFor="let detail of match.pointsDetails">
+                                            <ng-container *ngIf="detail.points > 0">
+                                                {{ detail.type }}: {{ detail.points }}
+                                            </ng-container>
+                                        </li>
+                                    </ul>
                                 </td>
                                 <td>{{ match.points }} </td>
                             </tr>
@@ -70,7 +76,8 @@
                 </div>
             </div>
             <div class="p-dialog-footer">
-                <button type="button" pButton label="Cerrar" (click)="display = false" class="p-button-secondary"></button>
+                <button type="button" pButton label="Cerrar" (click)="display = false"
+                    class="p-button-secondary"></button>
             </div>
         </p-dialog>
     </ng-container>
