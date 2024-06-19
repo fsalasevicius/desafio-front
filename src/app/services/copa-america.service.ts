@@ -66,6 +66,16 @@ export class CopaAmericaService {
     return this._http.post(this.url + "joinTournament",userEmail,{headers})
   }
 
+  joinTournamentPass(userEmail: any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "joinTournamentPass",userEmail,{headers})
+  }
+
+  searchTournament(data: any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "searchTournament",data,{headers})
+  }
+
   sendInvitationEmail(invitationData: any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.post(this.url + "send-invitation",invitationData,{headers})

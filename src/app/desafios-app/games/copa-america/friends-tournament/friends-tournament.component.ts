@@ -5,9 +5,10 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormControl
+  FormControl,
 } from '@angular/forms';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-friends-tournament',
@@ -30,7 +31,8 @@ export class FriendsTournamentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _copaAmericaService: CopaAmericaService
+    private _copaAmericaService: CopaAmericaService,
+    private _messageService: MessageService
   ) {
     this.tournamentForm = this.fb.group({
       tournamentName: ['', Validators.required],
@@ -78,7 +80,8 @@ export class FriendsTournamentComponent implements OnInit {
       return;
     }
 
-    const { tournamentName, tournamentDetail, friendsEmails } = this.tournamentForm.value;
+    const { tournamentName, tournamentDetail, friendsEmails } =
+      this.tournamentForm.value;
     const emails = this.friendsEmails.controls.map(
       (control: AbstractControl) => control.value.email
     );
@@ -102,24 +105,48 @@ export class FriendsTournamentComponent implements OnInit {
           let nameTournament = formData.tournamentName;
           this.tournamentLink = `${window.location.origin}/games-copa-america-join-tournament`;
           let password = response.password;
-          this.sendInvitationEmails(emails, nameTournament,password);
+          this.sendInvitationEmails(emails, nameTournament, password);
           this.generateWhatsAppLinks(emails, nameTournament);
           this.loading = false;
+          if (response != undefined) {
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Proceso Exitoso!',
+              detail: 'Guardando Predicción',
+            });
+          }else{
+            this._messageService.add({
+              severity: 'danger',
+              summary: 'Error al crear el torneo',
+              detail: 'Revise la informacion y vuelva a intentar.',
+            });
+          }
         },
         (error) => {
           this.loading = true;
-          console.error('Error al crear el torneo:', error);
+          this._messageService.add({
+            severity: 'danger',
+            summary: 'Error al crear el torneo',
+            detail: error,
+          });
           this.loading = false;
         }
       );
     }
   }
 
-  sendInvitationEmails(emails: string[], nameTournament: string, password: any): void {
+  sendInvitationEmails(
+    emails: string[],
+    nameTournament: string,
+    password: any
+  ): void {
     let owner = this.owner;
     emails.forEach((email) => {
       this._copaAmericaService
-        .sendInvitationEmail({ email, nameTournament, owner,password}, this.token)
+        .sendInvitationEmail(
+          { email, nameTournament, owner, password },
+          this.token
+        )
         .subscribe(
           (response) => {
             console.log('Correo enviado a:', email);
@@ -132,7 +159,7 @@ export class FriendsTournamentComponent implements OnInit {
   }
 
   generateWhatsAppLinks(emails: string[], tournamentName: string): void {
-    this.whatsappLinks = emails.map(email => {
+    this.whatsappLinks = emails.map((email) => {
       const invitationToken = this.generateInvitationToken();
       const baseUrl = window.location.origin;
       const message = `¡Te invito a unirte al torneo ${tournamentName}!\nCrea tu cuenta e ingresa al siguiente enlace para comenzar a jugar:\n\n${baseUrl}/games-copa-america-join-tournament?token=${invitationToken}`;

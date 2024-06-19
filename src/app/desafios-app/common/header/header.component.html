@@ -94,7 +94,7 @@
                            </button>
                            <div class="dropdown-menu" [class.show]="isDropdownOpen">
                               <a [routerLink]="['/user-profile', user._id]" class="dropdown-item"><i class="fal fa-user-circle"></i> Ver perfil</a>
-                              <a [routerLink]="['/games-copa-america-join-tournament']"><i class="fal fa-hand-point-right"></i> Ver Desafios</a>
+                              <a [routerLink]="['/games-copa-america']"><i class="fal fa-hand-point-right"></i> Ver Desafios</a>
                               <a class="dropdown-item" style="cursor: pointer;" (click)="logout()"><i class="fal fa-sign-out-alt"></i>
                                  Cerrar sesión</a>
                            </div>
@@ -168,7 +168,7 @@
                       </a>
                       <ul class="dropdown-menu" [class.show]="isDropdownOpen">
                         <li><a [routerLink]="['/user-profile', user._id]"><i class="fal fa-user-circle"></i> Ver perfil</a></li>
-                        <li><a [routerLink]="['/games-copa-america-join-tournament']"><i class="fal fa-user-circle"></i> Ver Desafios</a></li>
+                        <li><a [routerLink]="['/games-copa-america']"><i class="fal fa-user-circle"></i> Ver Desafios</a></li>
                         <li><a (click)="logout()"><i class="fal fa-sign-out-alt"></i> Cerrar sesión</a></li>
                       </ul>
                     </div>

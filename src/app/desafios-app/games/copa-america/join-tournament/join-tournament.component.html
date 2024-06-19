@@ -19,14 +19,9 @@
                   <h3 class="banner__title">
                     <a [routerLink]="['/tournament-detail', tournament._id]">{{ tournament.tournamentName }}</a>
                   </h3>
-                  <button *ngIf="isPendingInvitation(tournament)" (click)="joinTournament(tournament)"
-                    class="e-btn e-btn-2">
+                  <button (click)="joinTournament(tournament)" class="e-btn e-btn-2">
                     Unirse al Torneo
                   </button>
-                  <a [routerLink]="['/tournament-detail', tournament._id]" *ngIf="!isPendingInvitation(tournament)"
-                    disabled class="e-btn e-btn-2" style="background-color:rgb(29, 183, 47);cursor: pointer;margin-right: 1rem;">
-                    Ir al torneo
-                  </a>
                 </div>
                 <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
                   <img src="assets/img/banner/banner-img-1.png" alt="">
@@ -49,4 +44,5 @@
     </section>
   </ng-container>
   <app-footer></app-footer>
+  <p-toast position="bottom-center"></p-toast>
 </main>

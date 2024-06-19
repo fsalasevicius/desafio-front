@@ -127,12 +127,10 @@ export class PredictionComponent implements OnInit {
     } else {
       const predictionsData = this.predictionForm.value.predictions.map(
         (prediction: any, index: number) => {
-          const matchId = this.matches[index]._id; // Obtener el ID correcto del partido
-
-          // Verificar que el ID del partido en predictedScore coincida con el ID correcto
+          const matchId = this.matches[index]._id; 
           if (prediction.matchId !== matchId) {
             console.error('ID del partido incorrecto:', prediction.matchId);
-            return null; // Devolver null para indicar un error
+            return null; 
           }
 
           return {
@@ -165,7 +163,6 @@ export class PredictionComponent implements OnInit {
           }
     
           if (!hasWarnings) {
-            // Solo mostrar el mensaje de éxito si no hay advertencias
             this._messageService.add({
               severity: 'success',
               summary: 'Proceso Exitoso!',
