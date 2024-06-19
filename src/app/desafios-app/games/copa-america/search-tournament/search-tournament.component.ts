@@ -123,7 +123,7 @@ export class SearchTournamentComponent implements OnInit {
             });
             this.loading = false;
             this.closeModal();
-            this._router.navigate(['/games-copa-america-view-tournament', tournamentId]);
+            this._router.navigate(['/games-copa-america-view-tournament']);
           } else {
             this._messageService.add({
               severity: 'error',

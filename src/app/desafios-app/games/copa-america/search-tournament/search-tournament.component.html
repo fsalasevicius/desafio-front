@@ -26,11 +26,17 @@
           <div class="row justify-content-center">
             <h3>Resultados de la Búsqueda:</h3>
             <div class="row">
-              <div class="col-md-4" *ngFor="let tournament of searchResult">
-                <div class="card-modern" (click)="selectTournament(tournament)">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ tournament.tournamentName }}</h5>
-                    <p class="card-text">Creado por: {{tournament.owner.surname}}, {{tournament.owner.name}}</p>
+              <div class="col-md-6" *ngFor="let tournament of searchResult">
+                <div class="banner__item p-relative mb-40"
+                  [ngStyle]="{background: 'url(assets/img/banner/banner-bg-2.jpg) no-repeat center/cover'}"
+                  (click)="selectTournament(tournament)">
+                  <div class="banner__content">
+                    <h3 class="banner__title">{{ tournament.tournamentName }}</h3>
+                    <p class="card-text">Creado por: <br>{{ tournament.owner.surname }}, {{ tournament.owner.name }}</p>
+                    <button class="e-btn e-btn-2" (click)="selectTournament(tournament)">Unirse al Torneo</button>
+                  </div>
+                  <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
+                    <img src="assets/img/banner/banner-img-1.png" alt="">
                   </div>
                 </div>
               </div>
@@ -44,7 +50,8 @@
 
   <!-- Modal -->
   <div class="container-fluid">
-    <p-dialog header="Ingresa la contraseña de acceso" [(visible)]="displayModal" [style]="{width: '30vw'}" [modal]="true" [closable]="false">
+    <p-dialog header="Ingresa la contraseña de acceso" [(visible)]="displayModal" [style]="{width: '30vw'}"
+      [modal]="true" [closable]="false">
       <form [formGroup]="joinForm" (ngSubmit)="joinTournament()">
         <div class="p-fluid">
           <div class="p-field">
