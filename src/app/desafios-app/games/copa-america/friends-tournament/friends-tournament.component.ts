@@ -20,7 +20,6 @@ export class FriendsTournamentComponent implements OnInit {
   tournamentLink: string | null = null;
   public torneoDetail: any;
   public password: any;
-  public loading: boolean = false;
   public selectedTournament: string | null = null;
   user: any = undefined;
   public token = localStorage.getItem('authToken');
@@ -75,7 +74,6 @@ export class FriendsTournamentComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.loading = true;
     if (this.tournamentForm.invalid) {
       return;
     }
@@ -107,29 +105,36 @@ export class FriendsTournamentComponent implements OnInit {
           let password = response.password;
           this.sendInvitationEmails(emails, nameTournament, password);
           this.generateWhatsAppLinks(emails, nameTournament);
-          this.loading = false;
-          if (response != undefined) {
+      
+          // Verificar si la respuesta contiene datos válidos
+          if (response && response.password) {
             this._messageService.add({
               severity: 'success',
               summary: 'Proceso Exitoso!',
-              detail: 'Guardando Predicción',
+              detail: 'Creando Torneo',
             });
-          }else{
+          } else {
             this._messageService.add({
-              severity: 'danger',
+              severity: 'error',
               summary: 'Error al crear el torneo',
-              detail: 'Revise la informacion y vuelva a intentar.',
+              detail: 'El nombre del torneo ya está en uso. Por favor, elige otro nombre.',
             });
           }
         },
         (error) => {
-          this.loading = true;
-          this._messageService.add({
-            severity: 'danger',
-            summary: 'Error al crear el torneo',
-            detail: error,
-          });
-          this.loading = false;
+          if (error.status === 400 && error.error && error.error.message) {
+            this._messageService.add({
+              severity: 'error',
+              summary: 'Error al crear el torneo',
+              detail: error.error.message,
+            });
+          } else {
+            this._messageService.add({
+              severity: 'error',
+              summary: 'Error al crear el torneo',
+              detail: 'Ocurrió un error al procesar la solicitud. Por favor, inténtelo de nuevo más tarde.',
+            });
+          }
         }
       );
     }

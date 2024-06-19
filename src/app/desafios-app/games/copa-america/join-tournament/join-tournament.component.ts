@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-join-tournament',
@@ -19,7 +20,8 @@ export class JoinTournamentComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _copaAmericaService: CopaAmericaService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _router: Router
   ) {
     if (this.token) {
       let obj_lc: any = localStorage.getItem('userData');
@@ -63,8 +65,11 @@ export class JoinTournamentComponent implements OnInit {
         this._messageService.add({
           severity: 'success',
           summary: 'Proceso Exitoso!',
-          detail: response.message
+          detail: `Ya formas parte de '${tournament.tournamentName}'.\nSerás redirigido al Torneo de Amigos.`
         });
+        setTimeout(() => {
+          this._router.navigate(['/games-copa-america-view-tournament']);
+        }, 5000);
       },
       (error) => {
         console.error('Error al unirse al torneo:', error);

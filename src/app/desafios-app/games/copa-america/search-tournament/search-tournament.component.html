@@ -7,7 +7,6 @@
     <ng-container *ngIf="!loading">
       <section class="page__title-area pt-60 pb-90">
         <div class="page__title-shape">
-          <img class="page-title-shape-5 d-none d-sm-block" src="assets/img/page-title/page-title-shape-1.png" alt="" />
           <img class="page-title-shape-6" src="assets/img/page-title/page-title-shape-6.png" alt="" />
           <img class="page-title-shape-7" src="assets/img/page-title/page-title-shape-4.png" alt="" />
         </div>
@@ -23,31 +22,43 @@
             </form>
           </div>
         </div>
-        <div class="container-fluid" *ngIf="searchResult && searchResult.length > 0">
+        <div class="container-fluid mt-4" *ngIf="searchResult && searchResult.length > 0">
           <div class="row justify-content-center">
             <h3>Resultados de la Búsqueda:</h3>
-            <ul>
-              <li *ngFor="let tournament of searchResult" (click)="selectTournament(tournament)">
-                {{ tournament.tournamentName }}
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="container-fluid" *ngIf="selectedTournament">
-          <div class="row justify-content-center">
-            <h3>Unirse al Torneo: {{ selectedTournament.tournamentName }}</h3>
-            <form [formGroup]="joinForm" (ngSubmit)="joinTournament()">
-              <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input id="password" formControlName="password" type="password" class="form-control" required />
+            <div class="row">
+              <div class="col-md-4" *ngFor="let tournament of searchResult">
+                <div class="card-modern" (click)="selectTournament(tournament)">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ tournament.tournamentName }}</h5>
+                    <p class="card-text">Creado por: {{tournament.owner.surname}}, {{tournament.owner.name}}</p>
+                  </div>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary mt-3">Unirse</button>
-            </form>
+            </div>
           </div>
         </div>
       </section>
     </ng-container>
     <p-toast position="bottom-center"></p-toast>
   </section>
+
+  <!-- Modal -->
+  <div class="container-fluid">
+    <p-dialog header="Ingresa la contraseña de acceso" [(visible)]="displayModal" [style]="{width: '30vw'}" [modal]="true" [closable]="false">
+      <form [formGroup]="joinForm" (ngSubmit)="joinTournament()">
+        <div class="p-fluid">
+          <div class="p-field">
+            <label for="password">Contraseña:</label>
+            <input id="password" formControlName="password" type="password" class="form-control" required />
+          </div>
+          <div class="p-field d-flex justify-content-between">
+            <button type="submit" class="btn btn-success mt-3" style="margin-right: 1rem;">Unirse</button>
+            <button type="button" class="btn btn-danger mt-3" (click)="closeModal()">Cancelar</button>
+          </div>
+        </div>
+      </form>
+    </p-dialog>
+  </div>
+
   <app-footer></app-footer>
 </main>
