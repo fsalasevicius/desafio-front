@@ -60,6 +60,7 @@ import { UserTournamentFormComponent } from './user/profile-user/user-tournament
 import { PredictionComponent } from './games/copa-america/prediction/prediction.component';
 import { ViewTournamentComponent } from './games/copa-america/view-tournament/view-tournament.component';
 import { SearchTournamentComponent } from './games/copa-america/search-tournament/search-tournament.component';
+import { UnauthorizedTournamentComponent } from './games/copa-america/tournament-config/unauthorized-tournament/unauthorized-tournament.component';
 
 registerLocaleData(localeEsAr);
 
@@ -118,6 +119,7 @@ registerLocaleData(localeEsAr);
     PredictionComponent,
     ViewTournamentComponent,
     SearchTournamentComponent,
+    UnauthorizedTournamentComponent,
   ],
   imports: [
     CommonModule,

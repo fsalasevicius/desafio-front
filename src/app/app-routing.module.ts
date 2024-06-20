@@ -23,6 +23,7 @@ import { ProfileUserComponent } from './desafios-app/user/profile-user/profile-u
 import { PredictionComponent } from './desafios-app/games/copa-america/prediction/prediction.component';
 import { ViewTournamentComponent } from './desafios-app/games/copa-america/view-tournament/view-tournament.component';
 import { SearchTournamentComponent } from './desafios-app/games/copa-america/search-tournament/search-tournament.component';
+import { UnauthorizedTournamentComponent } from './desafios-app/games/copa-america/tournament-config/unauthorized-tournament/unauthorized-tournament.component';
 
 
 
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'games-config-tournament/:id',
     component: TournamentConfigComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'unauthorized-tournament',
+    component: UnauthorizedTournamentComponent, canActivate: [AuthGuard]
   },
   {
     path: 'games-copa-america-create-tournament',

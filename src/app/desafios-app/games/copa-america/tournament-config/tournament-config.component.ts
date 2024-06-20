@@ -1,85 +1,68 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { CopaAmericaService } from 'src/app/services/copa-america.service';
 
 @Component({
   selector: 'app-tournament-config',
   templateUrl: './tournament-config.component.html',
-  styleUrls: ['./tournament-config.component.scss']
+  styleUrls: ['./tournament-config.component.scss'],
+  providers: [MessageService]
 })
 export class TournamentConfigComponent implements OnInit {
-  courseData = [
-    {
-      id: 1,
-      courseImage: "assets/img/course/course-1.jpg",
-      listImg: "assets/img/course/list/course-1.jpg",
-      lesson: "43",
-      title: "Become a product Manager learn the skills & job.",
-      rating: "4.5",
-      teacherImg: "assets/img/course/teacher/teacher-1.jpg",
-      teacherName: "Jim Séchen",
-      category: "Art & Design",
-      price: "21.00",
-      oldPrice: "33.00"
-    },
-    {
-      id: 2,
-      courseImage: "assets/img/course/course-2.jpg",
-      listImg: "assets/img/course/list/course-2.jpg",
-      lesson: "72",
-      title: "Fundamentals of music theory Learn new",
-      rating: "4.0",
-      teacherImg: "assets/img/course/teacher/teacher-2.jpg",
-      teacherName: "Barry Tone",
-      category: "UX Design",
-      price: "32.00",
-      oldPrice: "68.00",
-      color: "sky-blue"
-    },
-    {
-      id: 3,
-      courseImage: "assets/img/course/course-3.jpg",
-      listImg: "assets/img/course/list/course-3.jpg",
-      lesson: "35",
-      title: "Bases Matemáticas dios Álgebra Ecuacion",
-      rating: "4.3",
-      teacherImg: "assets/img/course/teacher/teacher-3.jpg",
-      teacherName: "Samuel Serif",
-      category: "Development",
-      price: "13.00",
-      oldPrice: "19.00",
-      color: "green"
-    },
-    {
-      id: 4,
-      courseImage: "assets/img/course/course-4.jpg",
-      listImg: "assets/img/course/list/course-4.jpg",
-      lesson: "60",
-      title: "Strategy law and organization Foundation",
-      rating: "3.5",
-      teacherImg: "assets/img/course/teacher/teacher-4.jpg",
-      teacherName: "Elon Gated",
-      category: "Development",
-      price: "62.00",
-      oldPrice: "97.00",
-      color: "blue"
-    },
-    {
-      id: 5,
-      courseImage: "assets/img/course/course-5.jpg",
-      listImg: "assets/img/course/list/course-5.jpg",
-      lesson: "28",
-      title: "The business Intelligence analyst Course 2022",
-      rating: "4.5",
-      teacherImg: "assets/img/course/teacher/teacher-5.jpg",
-      teacherName: "Eleanor Fant",
-      category: "Marketing",
-      price: "25.00",
-      oldPrice: "36.00",
-      color: "orange"
-    },
-  ]
-  constructor() { }
+  tournamentId: string | undefined;
+  loggedInUserId: string | undefined;
+  public token = localStorage.getItem('authToken');
+  user: any = undefined;
+  isOwner: boolean = false;
+  tournament: any;
 
-  ngOnInit(): void {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private messageService: MessageService,
+    private _copaAmericaService: CopaAmericaService,
+  ) {
+    if (this.token) {
+      let obj_lc: any = localStorage.getItem('userData');
+      this.user = JSON.parse(obj_lc);
+    }
   }
 
+  ngOnInit(): void {
+    this.tournamentId = this.route.snapshot.params['id'];
+    this.loggedInUserId = this.user?._id;
+
+    const requestData = {
+      tournamentId: this.tournamentId,
+      userId: this.loggedInUserId
+    };
+
+    this._copaAmericaService.getTournamentId(requestData, this.token).subscribe(
+      response => {
+        if (response.success) {
+          this.tournament = response.tournament;
+          console.log(this.tournament)
+          this.isOwner = this.tournament.owner._id === this.user._id;
+
+          if (!this.isOwner) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'No tienes permiso para acceder a este torneo',
+            });
+            this.router.navigate(['/unauthorized-tournament']);
+          }
+        }
+      },
+      error => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'No tienes permiso para acceder a este torneo',
+        });
+        this.router.navigate(['/unauthorized-tournament']);
+      }
+    );
+  }
 }

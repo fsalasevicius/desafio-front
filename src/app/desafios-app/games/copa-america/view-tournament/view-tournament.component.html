@@ -19,10 +19,17 @@
                     <h3 class="banner__title">
                       <a [routerLink]="['/tournament-detail', tournament._id]">{{ tournament.tournamentName }}</a>
                     </h3>
-                    <a [routerLink]="['/tournament-detail', tournament._id]" 
+                    <div class="d-flex">
+                      <a [routerLink]="['/tournament-detail', tournament._id]" 
                       disabled class="e-btn e-btn-2" style="background-color:rgb(29, 183, 47);cursor: pointer;margin-right: 1rem;">
                       Ir al torneo
                     </a>
+                    <ng-container *ngIf="tournament.owner._id === user._id">
+                      <a [routerLink]="['/games-config-tournament', tournament._id]" class="e-btn e-btn-2" style="background-color: rgb(30, 71, 192);">
+                        <i class="fa fa-cog"></i>
+                      </a>
+                    </ng-container>
+                    </div>
                   </div>
                   <div class="banner__thumb d-none d-sm-block d-md-none d-lg-block">
                     <img src="assets/img/banner/banner-img-1.png" alt="">

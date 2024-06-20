@@ -96,6 +96,11 @@ export class CopaAmericaService {
     return this._http.get(this.url + "getParticipantsTournament/" + id,{headers})
   }
 
+  getTournamentId(data:any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "getTournamentId/", data,{headers})
+  }
+
   calculatePoints(id: any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.post(this.url + "calculatePoints",id,{headers})
