@@ -47,5 +47,17 @@ export class ViewTournamentComponent implements OnInit {
       );
     }
   }
+
+  sendWhatsAppInvitation(tournament:any) {
+    const invitationText = this.generateInvitationText(tournament);
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(invitationText)}`;
+    window.open(whatsappUrl, '_blank');
+  }
+  
+  generateInvitationText(tournament:any): string {
+    const userName = this.user.name ? `${this.user.name},  ${this.user.surname}` : 'Un amigo';
+    const invitationMessage = `¡Hola!\n${userName} te invita a participar de su torneo de amigos: '${tournament.tournamentName}' en Desafíos App. Crea tu cuenta en https://www.desafios.com.ar y empieza a divertirte con tus amigos.\nPara acceder al torneo después de ingresar con tu usuario, dirígete al siguiente enlace https://www.desafios.com.ar/games-copa-america-search-tournament , busca el \nTorneo: ${tournament.tournamentName}\nContraseña: ${tournament.password}`;
+    return invitationMessage;
+  }
   
 }

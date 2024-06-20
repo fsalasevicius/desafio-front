@@ -46,7 +46,7 @@
                   <i class="fal fa-user"></i> <span>Administrar Invitados</span>
                   </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                   <button
                     class="nav-link"
                     id="curriculum-tab"
@@ -59,7 +59,7 @@
                   >
                   <i class="fal fa-cog"></i> <span>Configuraciones</span>
                   </button>
-                </li>
+                </li> -->
               </ul>
             </div>
             <div class="course__tab-content mb-95">
@@ -71,7 +71,9 @@
                   aria-labelledby="description-tab"
                 >
                   <div class="course__description">
-                      <app-user-data-form></app-user-data-form>
+                    <button class="btn btn-success" (click)="sendWhatsAppInvitation()">
+                      <i class="fab fa-whatsapp"></i> Invitar a Amigos
+                    </button>
                   </div>
                 </div>
   
@@ -82,29 +84,7 @@
                   aria-labelledby="curriculum-tab"
                 >
                   <div class="course__curriculum">
-                      <app-user-segurity-form></app-user-segurity-form>
-                  </div>
-                </div>
-  
-                <div
-                  class="tab-pane fade"
-                  id="review"
-                  role="tabpanel"
-                  aria-labelledby="review-tab"
-                >
-                  <div class="course__review">
-                      <app-user-notification-form></app-user-notification-form>
-                  </div>
-                </div>
-  
-                <div
-                  class="tab-pane fade"
-                  id="member"
-                  role="tabpanel"
-                  aria-labelledby="member-tab"
-                >
-                  <div class="course__member mb-45">
-                    <app-user-tournament-form></app-user-tournament-form>
+                      <app-config></app-config>
                   </div>
                 </div>
               </div>

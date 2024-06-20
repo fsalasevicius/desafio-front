@@ -61,6 +61,8 @@ import { PredictionComponent } from './games/copa-america/prediction/prediction.
 import { ViewTournamentComponent } from './games/copa-america/view-tournament/view-tournament.component';
 import { SearchTournamentComponent } from './games/copa-america/search-tournament/search-tournament.component';
 import { UnauthorizedTournamentComponent } from './games/copa-america/tournament-config/unauthorized-tournament/unauthorized-tournament.component';
+import { FriendInvitationComponent } from './games/copa-america/tournament-config/friend-invitation/friend-invitation.component';
+import { ConfigComponent } from './games/copa-america/tournament-config/config/config.component';
 
 registerLocaleData(localeEsAr);
 
@@ -120,6 +122,8 @@ registerLocaleData(localeEsAr);
     ViewTournamentComponent,
     SearchTournamentComponent,
     UnauthorizedTournamentComponent,
+    FriendInvitationComponent,
+    ConfigComponent,
   ],
   imports: [
     CommonModule,
