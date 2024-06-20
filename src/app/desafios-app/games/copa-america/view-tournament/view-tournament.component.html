@@ -25,7 +25,7 @@
                       Ir al torneo
                     </a>
                     <ng-container *ngIf="tournament.owner._id === user._id">
-                      <a (click)="sendWhatsAppInvitation(tournament)" title="Invitar Amigos por Whatsapp" class="e-btn e-btn-2" style="background-color: rgb(30, 71, 192);">
+                      <a (click)="sendWhatsAppInvitation(tournament)" title="Invitar Amigos por Whatsapp" class="e-btn e-btn-2" style="background-color: rgb(30, 71, 192);cursor: pointer;">
                         <i class="fab fa-whatsapp"></i>
                       </a>
                       <!-- <a [routerLink]="['/games-config-tournament', tournament._id]" class="e-btn e-btn-2" style="background-color: rgb(30, 71, 192);">
