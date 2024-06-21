@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Match } from 'src/app/interface/copa-america.interface';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
 import { MessageService } from 'primeng/api';
@@ -19,6 +19,7 @@ export class PredictionComponent implements OnInit {
   prediccion = false;
   userPredictions: any[] = [];
   isSmallScreen: boolean = false;
+  closedPredictionsCount: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -49,16 +50,9 @@ export class PredictionComponent implements OnInit {
           this.loadMatches(); // Intentar cargar los partidos aunque haya error con predicciones
         }
       );
-      // this._copaAmericaService.table_prediction(this.user, this.token).subscribe(
-      //   (response) => {
-      //   }
-      // );
       this._copaAmericaService.table_resultados().subscribe(
-        (response) => {
-        }
+        (response) => {}
       );
-
-
     } else {
       this.loadMatches();
     }
@@ -96,6 +90,7 @@ export class PredictionComponent implements OnInit {
   initializeForm() {
     const predictionsArray = this.predictionForm.get('predictions') as FormArray;
     predictionsArray.clear(); // Clear the form array to avoid duplicates
+    this.closedPredictionsCount = 0; // Reset closed predictions count
 
     this.matches.forEach((partido) => {
       const existingPrediction = this.userPredictions.find(
@@ -103,56 +98,69 @@ export class PredictionComponent implements OnInit {
       );
 
       const partidoFormGroup = this.fb.group({
-        matchId: [partido._id, Validators.required],
+        matchId: [partido._id],
         user: this.user ? this.user._id : null,
         predictedScore: this.fb.group({
-          teamA: [existingPrediction ? existingPrediction.predictedScore.teamA : '', Validators.required],
-          teamB: [existingPrediction ? existingPrediction.predictedScore.teamB : '', Validators.required],
+          teamA: [existingPrediction ? existingPrediction.predictedScore.teamA : ''],
+          teamB: [existingPrediction ? existingPrediction.predictedScore.teamB : ''],
         }),
       });
+
+
       predictionsArray.push(partidoFormGroup);
     });
-    this.predictionForm.markAllAsTouched();
+  }
+
+  countClosedPredictions() {
+    this.closedPredictionsCount = this.matches.filter(match => this.isPredictionClosed(match.date)).length;
+  }
+
+
+  isPredictionClosed(matchDate: string): boolean {
+    const matchDateTime = new Date(matchDate).getTime();
+    const now = new Date().getTime();
+    return now > matchDateTime;
   }
 
   onSubmit(): void {
-    if (this.predictionForm.invalid) {
-      this.predictionForm.markAllAsTouched();
-      this._messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Faltan realizar predicciones.',
-      });
-      return;
-    } else {
-      const predictionsData = this.predictionForm.value.predictions.map(
-        (prediction: any, index: number) => {
-          const matchId = this.matches[index]._id; 
-          if (prediction.matchId !== matchId) {
-            console.error('ID del partido incorrecto:', prediction.matchId);
-            return null; 
-          }
-
+    let hasValidPrediction = false; // Variable bandera para indicar si al menos una predicción es válida
+  
+    const predictionsData = this.predictionForm.value.predictions.map(
+      (prediction: any, index: number) => {
+        const matchId = this.matches[index]._id;
+        if (prediction.matchId !== matchId) {
+          console.error('ID del partido incorrecto:', prediction.matchId);
+          return null;
+        }
+  
+        // Validar que al menos un campo tenga un valor numérico antes de enviar la predicción
+        if ((prediction.predictedScore.teamA !== null && !isNaN(prediction.predictedScore.teamA)) || 
+            (prediction.predictedScore.teamB !== null && !isNaN(prediction.predictedScore.teamB))) {
+          hasValidPrediction = true; // Al menos una predicción es válida
           return {
             ...prediction,
             matchId,
           };
+        } else {
+          console.error('No se han ingresado predicciones válidas para el partido', matchId);
+          return null;
         }
-      );
-
-      // Verificar si hay errores antes de enviar la solicitud al backend
-      if (predictionsData.includes(null)) {
-        console.error('Error en las predicciones.');
-        return;
       }
-
-      this._copaAmericaService
+    ).filter((prediction: any) => prediction !== null); // Filtrar las predicciones nulas
+  
+    // Verificar si no hay predicciones válidas antes de enviar la solicitud al backend
+    if (!hasValidPrediction) {
+      console.error('Debe completar al menos una predicción válida.');
+      return;
+    }
+  
+    this._copaAmericaService
       .register_prediction({ predictions: predictionsData }, this.token)
       .subscribe(
         (response) => {
-          let hasWarnings = false; // Variable para verificar si hay advertencias
+          let hasWarnings = false;
           if (response.messages && response.messages.length > 0) {
-            hasWarnings = true; // Hay advertencias
+            hasWarnings = true;
             response.messages.forEach((msg: string) => {
               this._messageService.add({
                 severity: 'warn',
@@ -161,7 +169,7 @@ export class PredictionComponent implements OnInit {
               });
             });
           }
-    
+  
           if (!hasWarnings) {
             this._messageService.add({
               severity: 'success',
@@ -178,8 +186,8 @@ export class PredictionComponent implements OnInit {
           });
         }
       );
-    }
   }
+
   get predictions(): FormArray {
     return this.predictionForm.get('predictions') as FormArray;
   }
@@ -188,50 +196,50 @@ export class PredictionComponent implements OnInit {
     const partido = this.matches[pIndex];
     const teamA = this.predictionForm.get(['predictions', pIndex, 'predictedScore', 'teamA'])?.value;
     const teamB = this.predictionForm.get(['predictions', pIndex, 'predictedScore', 'teamB'])?.value;
-  
+
     if (teamA === null || teamB === null || teamA < 0 || teamB < 0) {
       return { name: '', flag: '' };
     }
-  
+
     const winnerName = teamA > teamB ? partido.teamA.name : teamA < teamB ? partido.teamB.name : 'Empate';
     const winnerFlag = teamA > teamB ? partido.teamA.flag : teamA < teamB ? partido.teamB.flag : '';
-  
-    // Si es un empate, no mostrar la bandera
+
     if (winnerName === 'Empate') {
       return { name: winnerName, flag: '' };
     }
-  
+
     return { name: winnerName, flag: winnerFlag };
   }
 
   clearPredictions(): void {
     this.predictionForm.reset();
-    this.initializeForm(); // Reinitialize the form to reset it completely
+    this.initializeForm();
     this._messageService.add({
       severity: 'info',
       summary: 'Predicciones borradas',
       detail: 'Tus predicciones actuales han sido borradas. Si te arrepentiste recarga la pagina.',
     });
   }
+
   calcularTiempoRestante(fechaPartidoStr: string): string {
     const fechaPartido = new Date(fechaPartidoStr);
-    fechaPartido.setHours(fechaPartido.getHours() - 1); // Restar una hora a la fecha del partido
+    fechaPartido.setHours(fechaPartido.getHours() - 1);
     const ahora = new Date();
     let diferencia = fechaPartido.getTime() - ahora.getTime();
 
     if (diferencia < 0) {
-        diferencia = 0; // Si la diferencia es negativa, establecerla en 0
+      diferencia = 0;
     }
 
     if (diferencia === 0) {
-        return 'Predicción cerrada'; // Devolver "Predicción cerrada" cuando la diferencia es cero
+      return 'Predicción cerrada';
     }
-    
+
     const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
     const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
     const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-    
+
     return `${dias} d ${horas} h ${minutos} m ${segundos} s`;
-}
+  }
 }
