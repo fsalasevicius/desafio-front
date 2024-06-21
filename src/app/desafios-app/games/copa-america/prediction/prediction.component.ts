@@ -223,16 +223,16 @@ export class PredictionComponent implements OnInit {
 
   calcularTiempoRestante(fechaPartidoStr: string): string {
     const fechaPartido = new Date(fechaPartidoStr);
-    fechaPartido.setHours(fechaPartido.getHours() - 1);
+    fechaPartido.setMinutes(fechaPartido.getMinutes() - 5); // Restar 5 minutos en lugar de 1 hora
     const ahora = new Date();
     let diferencia = fechaPartido.getTime() - ahora.getTime();
 
     if (diferencia < 0) {
-      diferencia = 0;
+        diferencia = 0;
     }
 
     if (diferencia === 0) {
-      return 'Predicción cerrada';
+        return 'Predicción cerrada';
     }
 
     const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
@@ -241,5 +241,6 @@ export class PredictionComponent implements OnInit {
     const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
     return `${dias} d ${horas} h ${minutos} m ${segundos} s`;
-  }
+}
+
 }
