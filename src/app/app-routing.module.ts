@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './desafios-app/Home/Home/home.component';
-import { AboutMainComponent } from './desafios-app/about/about-main/about-main.component';
-import { InstructorMainComponent } from './desafios-app/instructor/instructor-main/instructor-main.component';
-import { InstructorDetailsComponent } from './desafios-app/instructor-details/instructor-details-main/instructor-details.component';
-import { EventDetailsMainComponent } from './desafios-app/event-details/event-details-main/event-details-main.component';
 import { SignInMainComponent } from './desafios-app/sign-in/sign-in-main/sign-in-main.component';
 import { SignUpMainComponent } from './desafios-app/sign-up/sign-up-main/sign-up-main.component';
 import { ErrorPageComponent } from './desafios-app/error-page/error-page.component';
 import { ContactMainComponent } from './desafios-app/contact/contact-main/contact-main.component';
 import { CopaAmericaComponent } from './desafios-app/games/copa-america/copa-america.component';
 import { AuthGuard } from './guard/auth.guard';
-import { RegisterComponent } from './desafios-app/register/register.component';
 import { CuadroGrupoComponent } from './desafios-app/games/copa-america/cuadro-grupo/cuadro-grupo.component';
 import { FriendsTournamentComponent } from './desafios-app/games/copa-america/friends-tournament/friends-tournament.component';
 import { JoinTournamentComponent } from './desafios-app/games/copa-america/join-tournament/join-tournament.component';
