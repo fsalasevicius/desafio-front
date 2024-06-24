@@ -38,10 +38,6 @@ const routes: Routes = [
     component: Copaamerica2024comosejuegaComponent
   },
   {
-    path: 'games-tabla-real',
-    component: CuadroGrupoComponent
-  },
-  {
     path: 'games-config-tournament/:id',
     component: TournamentConfigComponent, canActivate: [AuthGuard]
   },

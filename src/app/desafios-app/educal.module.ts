@@ -63,6 +63,7 @@ import { SearchTournamentComponent } from './games/copa-america/search-tournamen
 import { UnauthorizedTournamentComponent } from './games/copa-america/tournament-config/unauthorized-tournament/unauthorized-tournament.component';
 import { FriendInvitationComponent } from './games/copa-america/tournament-config/friend-invitation/friend-invitation.component';
 import { ConfigComponent } from './games/copa-america/tournament-config/config/config.component';
+import { CopaMenuComponent } from './home/copa-menu/copa-menu.component';
 
 registerLocaleData(localeEsAr);
 
@@ -124,6 +125,7 @@ registerLocaleData(localeEsAr);
     UnauthorizedTournamentComponent,
     FriendInvitationComponent,
     ConfigComponent,
+    CopaMenuComponent,
   ],
   imports: [
     CommonModule,
