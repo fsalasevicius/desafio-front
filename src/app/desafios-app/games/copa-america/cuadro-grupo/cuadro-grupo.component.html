@@ -55,6 +55,10 @@
                                             <div class="col-3 text-center match-date">
                                                 {{ formatFecha(partido.date) }} <br> {{ partido.date | date:'HH:mm' }}
                                                 <div>{{ calcularTiempoRestante(partido.date) }}</div>
+                                                <div *ngIf="partido.state == 'Finalizado'">Finalizado</div>
+                                                <div *ngIf="partido.state == 'En Juego'" [ngStyle]="{'opacity': 1, 'transition': 'opacity 1s'}">
+                                                    <i class="fas fa-play-circle text-success" title="En Juego"></i> Juego
+                                                  </div>
                                             </div>
                                             <div class="col-1 result">
                                                 <div>

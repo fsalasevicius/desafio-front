@@ -40,6 +40,9 @@
                       <ng-container *ngFor="let team of group.teams; let j = index">
                         <tr [ngClass]="{ 'group-highlight': j < 2 }">
                           <td>
+                            <span *ngIf="team.stats.state === 'En Juego'">
+                              <i class="fas fa-play-circle text-success" title="En Juego"></i>
+                            </span>
                             {{ team.stats.name }}
                             <span class="indicator" [ngClass]="{ 'check': j < 2, 'x': j >= 2 }"
                               [title]="j < 2 ? 'Clasifica a la siguiente fase' : 'Queda Eliminado'"></span>
@@ -51,7 +54,10 @@
                           <td>{{ team.stats.losses }}</td>
                           <td>{{ team.stats.goalsFor }}</td>
                           <td>{{ team.stats.goalsAgainst }}</td>
-                          <td><span *ngIf="team.stats.goalDifference > 0">+{{ team.stats.goalDifference }}</span><span *ngIf="team.stats.goalDifference <= 0">{{ team.stats.goalDifference }}</span></td>
+                          <td>
+                            <span *ngIf="team.stats.goalDifference > 0">+{{ team.stats.goalDifference }}</span>
+                            <span *ngIf="team.stats.goalDifference <= 0">{{ team.stats.goalDifference }}</span>
+                          </td>
                         </tr>
                       </ng-container>
                     </tbody>
