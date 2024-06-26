@@ -16,7 +16,6 @@ ngOnInit(): void {
     response => {
       this.groupStats = response.groupStats;
       this.loading = false;
-      console.log(this.groupStats);
       this.groupedStats = this.groupByGroup();
     },
     error => {
