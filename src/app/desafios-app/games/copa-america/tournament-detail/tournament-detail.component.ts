@@ -51,7 +51,6 @@ export class TournamentDetailComponent implements OnInit {
       this.id = params['id'];
       this.load_data = true;
 
-      this.calculatePoints();
 
       this._copaAmericaService
         .getParticipantsTournament(this.id, this.token)
@@ -69,12 +68,12 @@ export class TournamentDetailComponent implements OnInit {
         this._copaAmericaService.getMessageTournament(this.id, this.token).subscribe(
           (response) => {
             this.messagesView = response.messages;
-            console.log(this.messagesView)
           },
           (error) => {
             console.error('Error al obtener los mensajes:', error);
           }
         );
+        this.calculatePoints();
     });
     
   }
