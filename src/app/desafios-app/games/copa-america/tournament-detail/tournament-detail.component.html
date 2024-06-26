@@ -55,7 +55,12 @@
                                 <div class="messages-window mt-3" style="max-height: 160px; overflow-y: scroll;">
                                   <div *ngFor="let msg of messagesView">
                                     <div class="message">
-                                      <p><strong>{{ msg.userid.surname }}, {{ msg.userid.name }}:</strong> {{ msg.text }}</p>
+                                        <p>
+                                            <strong>{{ msg.userid.surname }}, {{ msg.userid.name }} - {{ msg.createdAt | date: 'dd/MM/yyyy HH:mm' }}</strong>
+                                            <br>
+                                             {{ msg.text }}
+                                          </p>
+                                          <hr>
                                     </div>
                                   </div>
                                 </div>
