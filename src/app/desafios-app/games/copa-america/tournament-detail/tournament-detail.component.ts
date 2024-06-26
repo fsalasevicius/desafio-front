@@ -2,7 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
 import { DialogService } from 'primeng/dynamicdialog';
-
+interface Message {
+  _id: string;
+  userid: {
+    _id: string;
+    name: string;
+    surname: string;
+  };
+  tournamentid: string;
+  text: string;
+  createdAt: Date;
+}
 @Component({
   selector: 'app-tournament-detail',
   templateUrl: './tournament-detail.component.html',
@@ -22,6 +32,9 @@ export class TournamentDetailComponent implements OnInit {
   userPredictions: any[] = [];
   public userPoints: any = {};
   public display: boolean | undefined;
+  newMessage: string = '';
+  messages: { userid: string, tournamentid:string, text: string, }[] = [];
+  messagesView: Message[] = [];
   constructor(
     private _route: ActivatedRoute,
     private _copaAmericaService: CopaAmericaService,
@@ -53,7 +66,17 @@ export class TournamentDetailComponent implements OnInit {
             console.error('Error al obtener las invitaciones:', error);
           }
         );
+        this._copaAmericaService.getMessageTournament(this.id, this.token).subscribe(
+          (response) => {
+            this.messagesView = response.messages;
+            console.log(this.messagesView)
+          },
+          (error) => {
+            console.error('Error al obtener los mensajes:', error);
+          }
+        );
     });
+    
   }
 
   getDialogWidth(): string {
@@ -93,6 +116,29 @@ export class TournamentDetailComponent implements OnInit {
     };
     this.display = true;
   }
+
+  submitMessage() {
+    if (this.newMessage.trim() && this.user.name) {
+      const message = {
+        username: this.user.surname + ", " + this.user.name,
+        userid: this.user._id,
+        tournamentid: this.id,
+        text: this.newMessage.trim()
+      };
+      this._copaAmericaService.createMessage(message, this.token).subscribe(
+        (response) => {
+          this.messages.push(response);
+          this.newMessage = '';
+          window.location.reload();
+        },
+        (error) => {
+          console.error('Error al enviar el mensaje:', error);
+        }
+      );
+    }
+  }
+
+
 }
 
 

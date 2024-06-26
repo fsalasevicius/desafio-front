@@ -4,7 +4,7 @@
         <app-spinner></app-spinner>
     </ng-container>
     <ng-container *ngIf="!loading">
-        <section class="teacher__area pt-50 pb-110">
+        <section class="teacher__area pt-30 pb-110">
             <div class="container">
                 <div class="row">
                     <div class="col-xxl-4 offset-xxl-4">
@@ -15,25 +15,67 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" *ngFor="let tournament of invitations; let i = index">
-                    <a (click)="showPointsDetail(tournament)" icon="pi pi-external-link" label="Show"
-                        style="cursor: pointer;"> 
-                        <div class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
-                            <div class="events__item mb-10 hover__active">
-                                <div
-                                    class="events__item-inner d-sm-flex align-items-center justify-content-between white-bg">
-                                    <div style="font-weight: 600;color: black;">{{i+1}}</div>
-                                    <div class="events__content">
-                                        <h3 class="events__title"><a>{{tournament.surname}}, {{tournament.name}}</a>
-                                        </h3>
-                                    </div>
-                                    <div class="events__more" style="font-weight: 600;color: black;">
-                                        {{userPoints[tournament._id] || 0}} Puntos
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="row">
+                                <div class="col-xxl-4 offset-xxl-4">
+                                    <div class="section__title-wrapper mb-60 text-center">
+                                        <div class="section__title mt-2" style="font-size: 2rem;font-weight: 400;"><u>Tabla</u></div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" *ngFor="let tournament of invitations; let i = index">
+                                <a (click)="showPointsDetail(tournament)" icon="pi pi-external-link" label="Show" style="cursor: pointer;">
+                                    <div class="col-xxl-10 offset-xxl-1 col-xl-10 offset-xl-1 col-lg-10 offset-lg-1">
+                                        <div class="events__item mb-10 hover__active">
+                                            <div class="events__item-inner d-sm-flex align-items-center justify-content-between white-bg">
+                                                <div style="font-weight: 600;color: black;">{{i+1}}</div>
+                                                <div class="events__content">
+                                                    <h3 class="events__title"><a>{{tournament.surname}}, {{tournament.name}}</a></h3>
+                                                </div>
+                                                <div class="events__more" style="font-weight: 600;color: black;">
+                                                    {{userPoints[tournament._id] || 0}} Puntos
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </a>
+                        <div class="col-lg-5">
+                            <div class="row">
+                                <div class="col-xxl-4 offset-xxl-4">
+                                    <div class="section__title-wrapper mb-60 text-center">
+                                        <div class="section__title mt-2" style="font-size: 2rem;font-weight: 400;"><u>Mensajes</u></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="messagesView.length > 0">
+                                <div class="messages-window mt-3" style="max-height: 160px; overflow-y: scroll;">
+                                  <div *ngFor="let msg of messagesView">
+                                    <div class="message">
+                                      <p><strong>{{ msg.userid.surname }}, {{ msg.userid.name }}:</strong> {{ msg.text }}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </ng-container>
+                              
+                              <ng-container *ngIf="messagesView.length == 0">
+                                <div class="messages-window mt-3" style="max-height: 160px; overflow-y: scroll;">
+                                  <div class="message">
+                                    <p>Se el primero en dejar un mensaje.</p>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            <form (ngSubmit)="submitMessage()">
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="message" [(ngModel)]="newMessage" name="message" rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -40,7 +40,7 @@
                       <ng-container *ngFor="let team of group.teams; let j = index">
                         <tr [ngClass]="{ 'group-highlight': j < 2 }">
                           <td>
-                            {{ team.stats.name }}
+                            {{ team.stats.name }} <br>
                             <span class="indicator" [ngClass]="{ 'check': j < 2, 'x': j >= 2 }"
                               [title]="j < 2 ? 'Clasifica a la siguiente fase' : 'Queda Eliminado'"></span>
                           </td>
