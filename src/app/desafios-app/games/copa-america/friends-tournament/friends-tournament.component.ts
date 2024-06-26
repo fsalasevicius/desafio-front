@@ -154,7 +154,6 @@ export class FriendsTournamentComponent implements OnInit {
         )
         .subscribe(
           (response) => {
-            console.log('Correo enviado a:', email);
           },
           (error) => {
             console.error('Error al enviar el correo:', error);
