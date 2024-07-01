@@ -1,89 +1,92 @@
 <main>
     <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
-    <ng-container *ngIf="!loading">
-        <app-spinner></app-spinner>
-    </ng-container>
-    <ng-container *ngIf="loading">
-        <section class="events__area pt-115 pb-120 p-relative">
-            <div class="events__shape">
-                <img class="events-1-shape" src="assets/img/events/events-shape.png" alt="">
+      <section class="events__area pt-115 pb-120 p-relative">
+        <div class="events__shape">
+          <img class="events-1-shape" src="assets/img/events/events-shape.png" alt="">
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xxl-12 offset-xxl-12">
+              <div class="section__title-wrapper mb-60 text-center">
+                <h2 class="section__title">Detalle de <span class="yellow-bg yellow-bg-big">Partidos<img
+                      src="assets/img/shape/yellow-bg.png" alt=""></span></h2>
+                <p>Copa America del 20/06 al 14/07.</p>
+              </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xxl-12 offset-xxl-12">
-                        <div class="section__title-wrapper mb-60 text-center">
-                            <h2 class="section__title">Detalle de <span class="yellow-bg yellow-bg-big">Partidos<img
-                                        src="assets/img/shape/yellow-bg.png" alt=""></span></h2>
-                            <p>Copa America del 20/06 al 14/07.</p>
-                        </div>
+          </div>
+          <div class="row">
+            <div class="d-flex mb-3">
+                <button class="btn btn-primary" style="margin-right: 0.5rem;"
+                        [class.btn-primary-active]="filtroActivo === 'next'"
+                        (click)="filter('next')">Próximos Partidos</button>
+                <button class="btn btn-primary" style="margin-right: 0.5rem;"
+                        [class.btn-primary-active]="filtroActivo === 'previous'"
+                        (click)="filter('previous')">Partidos ya Jugados</button>
+                <button class="btn btn-primary"
+                        [class.btn-primary-active]="filtroActivo === 'all'"
+                        (click)="filter('all')">Todos</button>
+              </div>
+            <div class="col-xxl-12 col-xl-12 col-lg-12" *ngFor="let partido of filteredPartidos; let i = index">
+              <div class="events__item mb-10 hover__active">
+                <div class="events__item-inner white-bg">
+                  <div class="events__content">
+                    <div class="events__meta">
+                      <span>Grupo {{ partido.group }}</span>
+                      <span>{{ partido.stadium.name }} - {{ partido.stadium.localidad }}, {{ partido.stadium.estado }}</span>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-12 col-xl-12 col-lg-12" *ngFor="let partido of partidos; let i = index">
-                        <div class="events__item mb-10 hover__active">
-                            <div class="events__item-inner white-bg">
-                                <div class="events__content">
-                                    <div class="events__meta">
-                                        <span>Grupo {{ partido.group }}</span>
-                                        <span>{{ partido.stadium.name }} - {{ partido.stadium.localidad }},
-                                            {{ partido.stadium.estado }}</span>
-                                    </div>
-                                    <h3 class="events__title">
-                                        <div class="d-flex justify-content-between align-items-center events__details">
-                                            <div class="col-1 text-center event-number">
-                                                # {{ i + 1 }}
-                                            </div>
-                                            <div class="col-3 team-info">
-                                                <div class="d-flex align-items-center">
-                                                    <div>
-                                                        <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag"
-                                                            alt="{{ partido.teamA.name }}"
-                                                            class="img-fluid rounded-circle"
-                                                            style="width: 30px; height: 30px; margin-right: 10px;">
-                                                    </div>
-                                                    <div>
-                                                        {{ partido.teamA.name }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-1 result">
-                                                <div>
-                                                    <span>{{ partido.result.teamA !== undefined ? partido.result.teamA :
-                                                        '-' }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-3 text-center match-date">
-                                                {{ formatFecha(partido.date) }} <br> {{ partido.date | date:'HH:mm' }}
-                                                <div>{{ calcularTiempoRestante(partido.date) }}</div>
-                                                <div *ngIf="partido.state == 'Finalizado'">Finalizado</div>
-                                                <div *ngIf="partido.state == 'En Juego'" [ngStyle]="{'opacity': 1, 'transition': 'opacity 1s'}">
-                                                    <i class="fas fa-play-circle text-success" title="En Juego"></i> Juego
-                                                  </div>
-                                            </div>
-                                            <div class="col-1 result">
-                                                <div>
-                                                    <span>{{ partido.result.teamB !== undefined ? partido.result.teamB :
-                                                        '-' }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-3 d-flex align-items-center justify-content-end team-info">
-                                                <div>
-                                                    <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag"
-                                                        alt="{{ partido.teamB.name }}" class="img-fluid rounded-circle"
-                                                        style="width: 30px; height: 30px; margin-right: 10px;">
-                                                </div>
-                                                <div>
-                                                    {{ partido.teamB.name }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </h3>
-                                </div>
+                    <h3 class="events__title">
+                      <div class="d-flex justify-content-between align-items-center events__details">
+                        <div class="col-1 text-center event-number">
+                          # {{ partido.nmatch }}
+                        </div>
+                        <div class="col-3 team-info">
+                          <div class="d-flex align-items-center">
+                            <div>
+                              <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag"
+                                alt="{{ partido.teamA.name }}"
+                                class="img-fluid rounded-circle"
+                                style="width: 30px; height: 30px; margin-right: 10px;">
                             </div>
+                            <div>
+                              {{ partido.teamA.name }}
+                            </div>
+                          </div>
                         </div>
-                    </div>
+                        <div class="col-1 result">
+                          <div>
+                            <span>{{ partido.result.teamA !== undefined ? partido.result.teamA : '-' }}</span>
+                          </div>
+                        </div>
+                        <div class="col-3 text-center match-date">
+                          {{ formatFecha(partido.date) }} <br> {{ partido.date | date:'HH:mm' }}
+                          <div *ngIf="partido.state != 'Finalizado'">{{ calcularTiempoRestante(partido.date) }}</div>
+                          <div *ngIf="partido.state == 'Finalizado'">Finalizado</div>
+                          <div *ngIf="partido.state == 'En Juego'" [ngStyle]="{'opacity': 1, 'transition': 'opacity 1s'}">
+                            <i class="fas fa-play-circle text-success" title="En Juego"></i> Juego
+                          </div>
+                        </div>
+                        <div class="col-1 result">
+                          <div>
+                            <span>{{ partido.result.teamB !== undefined ? partido.result.teamB : '-' }}</span>
+                          </div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center justify-content-end team-info">
+                          <div>
+                            <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag"
+                              alt="{{ partido.teamB.name }}" class="img-fluid rounded-circle"
+                              style="width: 30px; height: 30px; margin-right: 10px;">
+                          </div>
+                          <div>
+                            {{ partido.teamB.name }}
+                          </div>
+                        </div>
+                      </div>
+                    </h3>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
-    </ng-container>
-</main>
+          </div>
+        </div>
+      </section>
+  </main>
