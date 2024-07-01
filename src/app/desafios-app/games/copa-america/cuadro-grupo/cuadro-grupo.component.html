@@ -30,8 +30,10 @@
               <div class="events__item mb-10 hover__active">
                 <div class="events__item-inner white-bg">
                   <div class="events__content">
+                    
                     <div class="events__meta">
-                      <span>Grupo {{ partido.group }}</span>
+                      <span *ngIf="partido.group === 'A' || partido.group === 'B' || partido.group === 'C' || partido.group === 'D'">Grupo: {{partido.group}}</span>
+                      <span *ngIf="partido.group !== 'A' && partido.group !== 'B' && partido.group !== 'C' && partido.group !== 'D'">Fase: {{partido.group}}</span> 
                       <span>{{ partido.stadium.name }} - {{ partido.stadium.localidad }}, {{ partido.stadium.estado }}</span>
                     </div>
                     <h3 class="events__title">
