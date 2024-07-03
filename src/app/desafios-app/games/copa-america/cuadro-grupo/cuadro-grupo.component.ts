@@ -37,7 +37,6 @@ export class CuadroGrupoComponent implements OnInit {
     this._copaAmericaService.match_list().subscribe(
       (response: any) => {
         this.partidos = response.data;
-        console.log('Partidos obtenidos:', this.partidos); // Debug: Ver los partidos obtenidos
         this.partidos.sort((a: { date: string; group: string; }, b: { date: string; group: any; }) => {
           const dateA = this.formatDate(a.date);
           const dateB = this.formatDate(b.date);
@@ -95,6 +94,5 @@ export class CuadroGrupoComponent implements OnInit {
     } else if (type === 'all') {
       this.filteredPartidos = this.partidos;
     }
-    console.log('Filtered matches:', this.filteredPartidos);
   }
 }

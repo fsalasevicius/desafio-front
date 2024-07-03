@@ -19,6 +19,7 @@ import { PredictionComponent } from './desafios-app/games/copa-america/predictio
 import { ViewTournamentComponent } from './desafios-app/games/copa-america/view-tournament/view-tournament.component';
 import { SearchTournamentComponent } from './desafios-app/games/copa-america/search-tournament/search-tournament.component';
 import { UnauthorizedTournamentComponent } from './desafios-app/games/copa-america/tournament-config/unauthorized-tournament/unauthorized-tournament.component';
+import { TopTresComponent } from './desafios-app/games/copa-america/prediction/top-tres/top-tres.component';
 
 
 
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'games-copa-america',
     component: CopaAmericaComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'games-top-tres',
+    component: TopTresComponent, canActivate: [AuthGuard]
   },
   {
     path: 'games-copa-america-como-jugar',

@@ -15,8 +15,11 @@ export class PredictionComponent implements OnInit {
   userId: any;
   predictionForm!: FormGroup;
   matches: Match[] = [];
+  matchesAux: Match[] = [];
   loading = true;
   prediccion = false;
+  activeBtn: boolean = true;
+  faseActual: string = 'Cuartos';
   userPredictions: any[] = [];
   isSmallScreen: boolean = false;
   closedPredictionsCount: number = 0;
@@ -70,13 +73,16 @@ export class PredictionComponent implements OnInit {
   loadMatches(): void {
     this._copaAmericaService.match_list().subscribe(
       (response: any) => {
-        this.matches = response.data;
-        if (Array.isArray(this.matches)) {
+        this.matchesAux = response.data;
+        this.changeForm(this.faseActual);
+        if (Array.isArray(this.matchesAux)) {
+          // Filtrar solo los partidos que están abiertos para predicción
+          this.matches = this.matchesAux.filter(match => !this.isPredictionClosed(match.date));
           this.matches.sort((a, b) => a.nmatch - b.nmatch);
           this.initializeForm();
           this.loading = false;
         } else {
-          console.error('La respuesta de la API no es un array:', this.matches);
+          console.error('La respuesta de la API no es un array:', this.matchesAux);
           this.loading = false;
         }
       },
@@ -85,6 +91,17 @@ export class PredictionComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  changeForm(param: string) {
+      this.matches = this.matchesAux.filter(match => match.fase == param);
+      this.activeBtn = true;
+      this.initializeForm();
+    if (param == 'Grupos') {
+      this.matches = this.matchesAux.filter(match => match.fase == param);
+      this.activeBtn = false;
+      this.initializeForm();
+    }
   }
 
   initializeForm() {
@@ -105,7 +122,6 @@ export class PredictionComponent implements OnInit {
           teamB: [existingPrediction ? existingPrediction.predictedScore.teamB : ''],
         }),
       });
-
 
       predictionsArray.push(partidoFormGroup);
     });

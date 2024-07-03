@@ -41,9 +41,18 @@ export class CopaAmericaService {
     return this._http.post(this.url + "register_prediction",data,{headers})
   }
 
+  register_prediction_top(data:any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "register_prediction_top",data,{headers})
+  }
+
   view_prediction(user:any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.post(this.url + "view_prediction",user,{headers})
+  }
+  view_prediction_top(user:any,token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.post(this.url + "view_prediction_top",user,{headers})
   }
 
   table_prediction(user:any,token:any):Observable<any>{
@@ -114,6 +123,11 @@ export class CopaAmericaService {
   getMessageTournament(id:any,token:any):Observable<any>{
     let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
     return this._http.get(this.url + "getMessageTournament/" + id,{headers})
+  }
+
+  getTeamTournament():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url + 'getTeamTournament',{headers:headers});
   }
 
 }

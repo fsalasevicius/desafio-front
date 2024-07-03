@@ -11,7 +11,14 @@
       </ng-container>
       <ng-template #loadedContent>
         <div class="card text-center my-3" style="font-weight: 500; font-size: 20px; color: black;">
-          Predicciones Fase de Grupos
+          Predicciones Copa América 2024
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Grupos')">Fase de Grupos</button>
+          <button type="button" class="btn btn-success"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Cuartos')">Cuartos de Final</button>
+          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Semifinal')" disabled>Semifinal</button>
+          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Tercero')" disabled>Tercero/Cuarto</button>
+          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Final')" disabled>Final</button>
         </div>
         <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
           <div formArrayName="predictions">
@@ -32,11 +39,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <ng-container *ngIf="closedPredictionsCount > 0">
-                            <div class="alert alert-warning">
-                              Tienes {{ closedPredictionsCount }} predicciones cerradas.
-                            </div>
-                          </ng-container>
                           <tr *ngFor="let partido of matches; let pIndex = index" [formGroupName]="pIndex">
                             <td>
                               <div class="d-flex">
@@ -101,7 +103,7 @@
             </div>
           </div>
           <p-toast position="bottom-center"></p-toast>
-          <div class="text-right mt-2 mb-3 d-flex justify-content-between">
+          <div class="text-right mt-2 mb-3 d-flex justify-content-between" *ngIf="activeBtn">
             <button class="btn btn-danger" type="button" style="background-color: #cc2e2e; border: none; padding: 10px 20px;" (click)="clearPredictions()">Borrar Predicción</button>
             <button class="btn btn-primary" type="submit" style="background-color: #2ecc71; border: none; padding: 10px 20px;margin-right: 1rem;">Guardar Predicción</button>
           </div>
