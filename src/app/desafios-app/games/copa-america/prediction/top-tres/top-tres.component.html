@@ -82,7 +82,7 @@
                       <option *ngFor="let team of teams" [value]="team.name">{{ team.name }}</option>
                     </datalist>
                   </div>
-                  <button type="submit" class="btn btn-primary mt-3" [disabled]="positionsForm.invalid">Guardar Predicciones</button>
+                  <button type="submit" class="btn btn-primary mt-4" [disabled]="positionsForm.invalid">Guardar Predicciones</button>
                 </form>
               </div>
             </div>
@@ -90,7 +90,7 @@
           <div class="col-md-4">
             <div class="card podio-card">
               <div class="card-body text-center">
-                <h5 class="card-title" style="margin-bottom: 2.4rem;">Mis Predicciones</h5>
+                <h5 class="card-title" style="margin-bottom: 0.7rem;font-size: 1.1rem;">Mis Predicciones</h5>
                 <div class="podio">
                   <div class="puesto second">
                     <div class="flag-container" *ngIf="positionsForm.get('secondPlace')?.value">
