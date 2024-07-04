@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Team } from 'src/app/interface/copa-america.interface';
 import { CopaAmericaService } from 'src/app/services/copa-america.service';
 
@@ -15,9 +16,15 @@ export class TopTresComponent implements OnInit {
   public token = localStorage.getItem('authToken');
   positionsForm: FormGroup;
   existingPredictions: any = null; // Variable para almacenar predicciones existentes del usuario
+  days: number | undefined;
+  hours!: number;
+  minutes!: number;
+  seconds!: number;
+  showCountdown: boolean = true;
 
   constructor(
     private _fb: FormBuilder,
+    private _messageService: MessageService,
     private _copaService: CopaAmericaService,
   ) {
     if (this.token) {
@@ -33,6 +40,7 @@ export class TopTresComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    this.startCountdown();
   
     // Verificar que this.user._id esté definido
   
@@ -76,6 +84,13 @@ export class TopTresComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  getFlagUrl(teamName: string): string {
+    if (!teamName) {
+      return 'default-flag.png'; // Ruta de una imagen por defecto si no hay selección
+    }
+    return `assets/img/american-cup/countries/${teamName.toLowerCase().replace(/\s/g, '-')}.webp`;
   }
   
   populateFormWithPredictions(): void {
@@ -139,7 +154,11 @@ export class TopTresComponent implements OnInit {
         // Si ya existen predicciones, actualizarlas
         this._copaService.register_prediction_top(predictions, this.token).subscribe(
           response => {
-            // Aquí puedes manejar la respuesta del backend si es necesario
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Proceso Exitoso!',
+              detail: `Predicción de podio guardada correctamente.`
+            });
           },
           error => {
             console.error('Error al actualizar las predicciones del podio', error);
@@ -167,5 +186,31 @@ export class TopTresComponent implements OnInit {
     } else {
       console.error(`El formulario o el campo ${place} no están inicializados correctamente.`);
     }
+  }
+  
+  startCountdown(): void {
+    const countDownDate = new Date('Jul 04, 2024 21:55:00 GMT-0300').getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      if (distance < 0) {
+        this.days = 0;
+        this.hours = 0;
+        this.minutes = 0;
+        this.seconds = 0;
+        this.showCountdown = false;
+        return;
+      }
+
+      this.days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      this.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      this.seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   }
 }

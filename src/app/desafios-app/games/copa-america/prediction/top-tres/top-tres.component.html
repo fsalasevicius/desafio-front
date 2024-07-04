@@ -1,6 +1,6 @@
 <main>
   <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
-  
+
   <section class="teacher__area pt-50 pb-110">
     <div class="page__title-shape">
       <!-- Aquí puedes colocar tus imágenes relacionadas con la Copa América 2024 si es necesario -->
@@ -10,54 +10,114 @@
         <app-spinner></app-spinner>
       </ng-container>
       <ng-template #loadedContent>
-        <div class="card text-center my-3" style="font-weight: 500; font-size: 20px; color: black;">
-          Predicciones Copa América 2024 - Podio
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card text-center my-3 title-card" style="font-weight: 500; font-size: 20px; color: black;">
+              Predicciones Copa América 2024 - Podio
+            </div>
+            <div class="card text-center my-3 title-card" style="font-weight: 500; font-size: 20px; color: black;">
+            <div class="counter-container" *ngIf="showCountdown">
+              <h3 class="counter-title">Cierre de Predicciones</h3>
+              <div id="countdown" class="d-flex justify-content-center align-items-center">
+                <div class="time-box">
+                  <span id="days" class="time">{{ days }}</span>
+                  <span class="label">Días</span>
+                </div>
+                <div class="time-box">
+                  <span id="hours" class="time">{{ hours }}</span>
+                  <span class="label">Horas</span>
+                </div>
+                <div class="time-box">
+                  <span id="minutes" class="time">{{ minutes }}</span>
+                  <span class="label">Min</span>
+                </div>
+                <div class="time-box">
+                  <span id="seconds" class="time">{{ seconds }}</span>
+                  <span class="label">Seg</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          
         </div>
-        <div class="card">
-          <div class="card-body">
-            <form [formGroup]="positionsForm" (ngSubmit)="savePredictions()">
-              <div class="form-group">
-                <label for="firstPlace">1er Puesto</label>
-                <div class="input-group">
-                  <input type="text" id="firstPlaceInput" formControlName="firstPlace" class="form-control" list="teamsList" (input)="validateSelection('firstPlace', $event)">
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-outline-secondary" (click)="clearField('firstPlace')"><i class="fa fa-trash"></i></button>
+        <div class="row align-items-start">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-body">
+                <form [formGroup]="positionsForm" (ngSubmit)="savePredictions()">
+                  <div class="form-group">
+                    <label for="firstPlace">1er Puesto</label>
+                    <div class="input-group">
+                      <input type="text" id="firstPlaceInput" formControlName="firstPlace" class="form-control" list="teamsList" (input)="validateSelection('firstPlace', $event)">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-danger" (click)="clearField('firstPlace')"><i class="fa fa-trash"></i></button>
+                      </div>
+                    </div>
+                    <datalist id="teamsList">
+                      <option *ngFor="let team of teams" [value]="team.name">{{ team.name }}</option>
+                    </datalist>
+                  </div>
+                  <div class="form-group">
+                    <label for="secondPlace">2do Puesto</label>
+                    <div class="input-group">
+                      <input type="text" id="secondPlaceInput" formControlName="secondPlace" class="form-control" list="teamsList" (input)="validateSelection('secondPlace', $event)">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-danger" (click)="clearField('secondPlace')"><i class="fa fa-trash"></i></button>
+                      </div>
+                    </div>
+                    <datalist id="teamsList">
+                      <option *ngFor="let team of teams" [value]="team.name">{{ team.name }}</option>
+                    </datalist>
+                  </div>
+                  <div class="form-group">
+                    <label for="thirdPlace">3er Puesto</label>
+                    <div class="input-group">
+                      <input type="text" id="thirdPlaceInput" formControlName="thirdPlace" class="form-control" list="teamsList" (input)="validateSelection('thirdPlace', $event)">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-danger" (click)="clearField('thirdPlace')"><i class="fa fa-trash"></i></button>
+                      </div>
+                    </div>
+                    <datalist id="teamsList">
+                      <option *ngFor="let team of teams" [value]="team.name">{{ team.name }}</option>
+                    </datalist>
+                  </div>
+                  <button type="submit" class="btn btn-primary mt-3" [disabled]="positionsForm.invalid">Guardar Predicciones</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card podio-card">
+              <div class="card-body text-center">
+                <h5 class="card-title" style="margin-bottom: 2.4rem;">Mis Predicciones</h5>
+                <div class="podio">
+                  <div class="puesto second">
+                    <div class="flag-container" *ngIf="positionsForm.get('secondPlace')?.value">
+                      <img [src]="getFlagUrl(positionsForm.get('secondPlace')?.value)" alt="Bandera 2">
+                    </div>
+                    <div class="position">2do</div>
+                  </div>
+                  <div class="puesto first">
+                    <div class="flag-container" *ngIf="positionsForm.get('firstPlace')?.value">
+                      <img [src]="getFlagUrl(positionsForm.get('firstPlace')?.value)" alt="Bandera 1">
+                    </div>
+                    <div class="position">1er</div>
+                  </div>
+                  <div class="puesto third">
+                    <div class="flag-container" *ngIf="positionsForm.get('thirdPlace')?.value">
+                      <img [src]="getFlagUrl(positionsForm.get('thirdPlace')?.value)" alt="Bandera 3">
+                    </div>
+                    <div class="position">3er</div>
                   </div>
                 </div>
-                <datalist id="teamsList">
-                  <option *ngFor="let team of teams" [value]="team.name">{{ team.name }}</option>
-                </datalist>
               </div>
-              <div class="form-group">
-                <label for="secondPlace">2do Puesto</label>
-                <div class="input-group">
-                  <input type="text" id="secondPlaceInput" formControlName="secondPlace" class="form-control" list="teamsList" (input)="validateSelection('secondPlace', $event)">
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-outline-secondary" (click)="clearField('secondPlace')"><i class="fa fa-trash"></i></button>
-                  </div>
-                </div>
-                <datalist id="teamsList">
-                  <option *ngFor="let team of teams" [value]="team.name">{{ team.name }}</option>
-                </datalist>
-              </div>
-              <div class="form-group">
-                <label for="thirdPlace">3er Puesto</label>
-                <div class="input-group">
-                  <input type="text" id="thirdPlaceInput" formControlName="thirdPlace" class="form-control" list="teamsList" (input)="validateSelection('thirdPlace', $event)">
-                  <div class="input-group-append">
-                    <button type="button" class="btn btn-outline-secondary" (click)="clearField('thirdPlace')"><i class="fa fa-trash"></i></button>
-                  </div>
-                </div>
-                <datalist id="teamsList">
-                  <option *ngFor="let team of teams" [value]="team.name">{{ team.name }}</option>
-                </datalist>
-              </div>
-              <button type="submit" class="btn btn-primary mt-3" [disabled]="positionsForm.invalid">Guardar Predicciones</button>
-            </form>
+            </div>
           </div>
         </div>
       </ng-template>
     </div>
+    <p-toast position="bottom-center"></p-toast>
   </section>
   <app-footer></app-footer>
 </main>
