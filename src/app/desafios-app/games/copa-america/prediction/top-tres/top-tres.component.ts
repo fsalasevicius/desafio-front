@@ -162,18 +162,30 @@ export class TopTresComponent implements OnInit {
           },
           error => {
             console.error('Error al actualizar las predicciones del podio', error);
-            // Aquí puedes manejar errores y mostrar mensajes al usuario
+            this._messageService.add({
+              severity: 'error',
+              summary: 'Error!',
+              detail: `Error al guardar la predicción.`
+            });
           }
         );
       } else {
         // Si no existen predicciones, guardar nuevas
         this._copaService.register_prediction_top(predictions, this.token).subscribe(
           response => {
-            // Aquí puedes manejar la respuesta del backend si es necesario
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Proceso Exitoso!',
+              detail: `Predicción de podio guardada correctamente.`
+            });
           },
           error => {
             console.error('Error al guardar las predicciones del podio', error);
-            // Aquí puedes manejar errores y mostrar mensajes al usuario
+            this._messageService.add({
+              severity: 'error',
+              summary: 'Error!',
+              detail: `Error al guardar la predicción.`
+            });
           }
         );
       }
