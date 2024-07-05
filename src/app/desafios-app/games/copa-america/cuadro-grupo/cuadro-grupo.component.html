@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-1 result">
                           <div>
-                            <span>{{ partido.result.teamA !== undefined ? partido.result.teamA : '-' }}</span>
+                            <span>{{ partido.result.teamA !== undefined ? partido.result.teamA : '-' }}</span>  <span *ngIf="partido.result.teamAp !== undefined"> ({{ partido.result.teamAp }})</span>
                           </div>
                         </div>
                         <div class="col-3 text-center match-date">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-1 result">
                           <div>
-                            <span>{{ partido.result.teamB !== undefined ? partido.result.teamB : '-' }}</span>
+                            <span>{{ partido.result.teamB !== undefined ? partido.result.teamB : '-' }}</span> <span *ngIf="partido.result.teamBp !== undefined"> ({{ partido.result.teamBp }})</span>
                           </div>
                         </div>
                         <div class="col-3 d-flex align-items-center justify-content-end team-info">
