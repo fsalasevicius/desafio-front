@@ -19,7 +19,7 @@ export class PredictionComponent implements OnInit {
   loading = true;
   prediccion = false;
   activeBtn: boolean = true;
-  faseActual: string = 'Cuartos';
+  faseActual: string = 'Tercero';
   userPredictions: any[] = [];
   isSmallScreen: boolean = false;
   closedPredictionsCount: number = 0;
@@ -74,12 +74,9 @@ export class PredictionComponent implements OnInit {
     this._copaAmericaService.match_list().subscribe(
       (response: any) => {
         this.matchesAux = response.data;
-        this.changeForm(this.faseActual);
         if (Array.isArray(this.matchesAux)) {
-          // Filtrar solo los partidos que están abiertos para predicción
-          this.matches = this.matchesAux.filter(match => !this.isPredictionClosed(match.date));
+          this.changeForm(this.faseActual); // Filtrar por fase actual después de cargar los partidos
           this.matches.sort((a, b) => a.nmatch - b.nmatch);
-          this.initializeForm();
           this.loading = false;
         } else {
           console.error('La respuesta de la API no es un array:', this.matchesAux);
@@ -92,16 +89,12 @@ export class PredictionComponent implements OnInit {
       }
     );
   }
-
   changeForm(param: string) {
-      this.matches = this.matchesAux.filter(match => match.fase == param);
-      this.activeBtn = true;
-      this.initializeForm();
-    if (param == 'Grupos') {
-      this.matches = this.matchesAux.filter(match => match.fase == param);
-      this.activeBtn = false;
-      this.initializeForm();
-    }
+    this.faseActual = param; // Actualizar la fase actual
+    this.matches = this.matchesAux.filter(match => match.fase === param);
+    this.matches.sort((a, b) => a.nmatch - b.nmatch); // Asegurar que los partidos estén ordenados
+    this.activeBtn = param !== 'Grupos'; // Cambiar el estado del botón activo basado en la fase
+    this.initializeForm();
   }
 
   initializeForm() {

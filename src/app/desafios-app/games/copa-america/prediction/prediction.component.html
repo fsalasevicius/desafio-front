@@ -16,9 +16,9 @@
         <div>
           <button type="button" class="btn btn-primary"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Grupos')">Fase de Grupos</button>
           <button type="button" class="btn btn-success"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Cuartos')">Cuartos de Final</button>
-          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Semifinal')" disabled>Semifinal</button>
-          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Tercero')" disabled>Tercero/Cuarto</button>
-          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Final')" disabled>Final</button>
+          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Semifinal')" >Semifinal</button>
+          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Tercero')" >Tercero/Cuarto</button>
+          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Final')" >Final</button>
         </div>
         <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
           <div formArrayName="predictions">
@@ -31,7 +31,7 @@
                         <thead class="thead-light">
                           <tr>
                             <th>#</th>
-                            <th>Grupo</th>
+                            <th>Grupo <br> Estadio</th>
                             <th>Fecha / Hora</th>
                             <th>Cierre Predicción</th>
                             <th>Encuentro</th>
@@ -49,7 +49,9 @@
                             <td>
                               <div class="d-flex">
                                 <div class="match-title-mobile">Grupo: </div>
-                                <div>{{partido.group}}</div>
+                                <div>{{partido.group}} <br>
+                                     {{partido.stadium.name}}
+                                </div>
                               </div>
                             </td>
                             <td>
@@ -67,8 +69,11 @@
                             <td class="match-column">
                               <div class="match-container">
                                 <div class="match-team">
-                                  <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag" alt="{{ partido.teamA.name }}" class="team-flag">
-                                  <span class="team-name">{{ partido.teamA.name }}</span>
+                                  <img [src]="'assets/img/american-cup/countries/' + partido.teamA.flag" alt="{{ partido.teamA.name }}" class="team-flag" *ngIf="partido.nmatch != 30">
+                                  <span class="team-name">{{ partido.teamA.name }} </span>
+                                  <img [src]="'assets/img/american-cup/countries/uruguay.webp'" alt="{{ partido.teamB.name }}" class="team-flag" *ngIf="partido.nmatch == 30"> 
+                                  <b *ngIf="partido.nmatch == 30"> VS </b>
+                                  <img [src]="'assets/img/american-cup/countries/brasil.webp'" alt="{{ partido.teamB.name }}" class="team-flag" *ngIf="partido.nmatch == 30">
                                 </div>
                                 <div class="match-prediction" formGroupName="predictedScore">
                                   <input class="form-control form-control-goles" type="number" formControlName="teamA" min="0">
@@ -76,8 +81,11 @@
                               </div>
                               <div class="match-container">
                                 <div class="match-team">
-                                  <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag" alt="{{ partido.teamB.name }}" class="team-flag">
+                                  <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag" alt="{{ partido.teamB.name }}" class="team-flag"  *ngIf="partido.nmatch != 30">
                                   <span class="team-name">{{ partido.teamB.name }}</span>
+                                  <img [src]="'assets/img/american-cup/countries/colombia.webp'" alt="{{ partido.teamB.name }}" class="team-flag" *ngIf="partido.nmatch == 30"> 
+                                  <b *ngIf="partido.nmatch == 30"> VS </b>
+                                  <img [src]="'assets/img/american-cup/countries/panama.webp'" alt="{{ partido.teamB.name }}" class="team-flag" *ngIf="partido.nmatch == 30">
                                 </div>
                                 <div class="match-prediction" formGroupName="predictedScore">
                                   <input class="form-control form-control-goles" type="number" formControlName="teamB" min="0">
