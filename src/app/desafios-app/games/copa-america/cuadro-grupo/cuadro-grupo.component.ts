@@ -94,5 +94,6 @@ export class CuadroGrupoComponent implements OnInit {
     } else if (type === 'all') {
       this.filteredPartidos = this.partidos;
     }
+    console.log(`Filtro aplicado: ${type}`);
   }
 }
