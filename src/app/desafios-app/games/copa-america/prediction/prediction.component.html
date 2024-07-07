@@ -81,11 +81,8 @@
                               </div>
                               <div class="match-container">
                                 <div class="match-team">
-                                  <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag" alt="{{ partido.teamB.name }}" class="team-flag"  *ngIf="partido.nmatch != 30">
+                                  <img [src]="'assets/img/american-cup/countries/' + partido.teamB.flag" alt="{{ partido.teamB.name }}" class="team-flag">
                                   <span class="team-name">{{ partido.teamB.name }}</span>
-                                  <img [src]="'assets/img/american-cup/countries/colombia.webp'" alt="{{ partido.teamB.name }}" class="team-flag" *ngIf="partido.nmatch == 30"> 
-                                  <b *ngIf="partido.nmatch == 30"> VS </b>
-                                  <img [src]="'assets/img/american-cup/countries/panama.webp'" alt="{{ partido.teamB.name }}" class="team-flag" *ngIf="partido.nmatch == 30">
                                 </div>
                                 <div class="match-prediction" formGroupName="predictedScore">
                                   <input class="form-control form-control-goles" type="number" formControlName="teamB" min="0">
