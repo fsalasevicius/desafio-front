@@ -16,8 +16,8 @@
         <div>
           <button type="button" class="btn btn-primary"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Grupos')">Fase de Grupos</button>
           <button type="button" class="btn btn-primary"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Cuartos')">Cuartos de Final</button>
-          <button type="button" class="btn btn-success" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Semifinal')" >Semifinal</button>
-          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Tercero')" >Tercero/Cuarto</button>
+          <button type="button" class="btn btn-primary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Semifinal')" >Semifinal</button>
+          <button type="button" class="btn btn-success" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Tercero')" >Tercero/Cuarto</button>
           <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Final')" >Final</button>
         </div>
         <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">

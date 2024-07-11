@@ -19,7 +19,7 @@ export class PredictionComponent implements OnInit {
   loading = true;
   prediccion = false;
   activeBtn: boolean = true;
-  faseActual: string = 'Semifinal';
+  faseActual: string = 'Tercero';
   userPredictions: any[] = [];
   isSmallScreen: boolean = false;
   closedPredictionsCount: number = 0;
