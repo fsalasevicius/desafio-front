@@ -93,7 +93,7 @@ export class PredictionComponent implements OnInit {
     this.faseActual = param; // Actualizar la fase actual
     this.matches = this.matchesAux.filter(match => match.fase === param);
     this.matches.sort((a, b) => a.nmatch - b.nmatch); // Asegurar que los partidos estén ordenados
-    this.activeBtn = param !== 'Grupos'; // Cambiar el estado del botón activo basado en la fase
+    this.activeBtn = (param == 'Terceros' || param == 'Final') ; // Cambiar el estado del botón activo basado en la fase
     this.initializeForm();
   }
 
