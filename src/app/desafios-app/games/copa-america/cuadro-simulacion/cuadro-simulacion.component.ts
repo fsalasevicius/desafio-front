@@ -34,11 +34,11 @@ export class CuadroSimulacionComponent implements OnInit {
   }
 
   groupByGroup() {
-    const validGroups = ['A', 'B', 'C', 'D']; // Definir los grupos válidos
+    const validGroups = ['A', 'B', 'C', 'D']; 
 
     return Object.keys(this.groupStats)
-      .filter((group) => validGroups.includes(group)) // Filtrar los grupos válidos
-      .sort() // Ordenar las claves de los grupos por orden alfabético
+      .filter((group) => validGroups.includes(group)) 
+      .sort() 
       .map((group) => ({
         group,
         teams: Object.entries(this.groupStats[group]).map(

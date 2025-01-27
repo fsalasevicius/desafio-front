@@ -8,7 +8,7 @@ import { interval, Subscription } from 'rxjs';
 })
 export class CountdownComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
-  timeLeft: number = 10;  // Inicializa con el valor deseado
+  timeLeft: number = 10;  
 
   ngOnInit(): void {
     this.startCountdown();
@@ -24,7 +24,7 @@ export class CountdownComponent implements OnInit, OnDestroy {
     if (this.timeLeft > 0) {
       this.timeLeft--;
     } else {
-      this.timeLeft = 0;  // Asegúrate de que se mantenga en 0
+      this.timeLeft = 0;  
       this.subscription.unsubscribe();
     }
   }

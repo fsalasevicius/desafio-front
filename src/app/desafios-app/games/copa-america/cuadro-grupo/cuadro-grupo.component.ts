@@ -44,7 +44,7 @@ export class CuadroGrupoComponent implements OnInit {
           if (dateA > dateB) return 1;
           return a.group.localeCompare(b.group);
         });
-        this.filter('next'); // Aplicar filtro 'next' por defecto
+        this.filter('next'); 
       },
       (error) => {
         console.error('Error al obtener los partidos:', error);
@@ -60,7 +60,6 @@ export class CuadroGrupoComponent implements OnInit {
     const [dayMonthYear, time] = dateString.split(' ');
     const [day, month, year] = dayMonthYear.split('/');
     const [hours, minutes] = time.split(':');
-    // Formato deseado: yyyyMMddhhmm
     return `${year}${month}${day}${hours}${minutes}`;
   }
 

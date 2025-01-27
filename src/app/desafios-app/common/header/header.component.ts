@@ -43,7 +43,7 @@ export class HeaderTwoComponent implements OnInit {
   }
 
   toggleDropdown(event: MouseEvent): void {
-    event.stopPropagation(); // Para evitar que el evento llegue al documento y cierre el dropdown
+    event.stopPropagation(); 
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
@@ -66,9 +66,6 @@ export class HeaderTwoComponent implements OnInit {
     }
   }
 
-  
-  
-  // handleSidebar
   handleSidebar() {
     this.showSidebar = true;
   }
@@ -76,23 +73,19 @@ export class HeaderTwoComponent implements OnInit {
     this.showSidebar = false;
   }
 
-  // home dropdown
   homeDropdown() {
     this.showHomeDropdown = !this.showHomeDropdown
   }
-  // coursesDropdown
   coursesDropdown() {
     this.showCoursesDropdown = !this.showCoursesDropdown
   }
 
-  // blogDropdown
   blogDropdown() {
     this.showBlogDropdown = !this.showBlogDropdown
   }
   UsrDropdown() {
     this.showUsrDropdown = !this.showUsrDropdown
   }
-  // pagesDropDown
   pagesDropDown() {
     this.showPagesDropdown = !this.showPagesDropdown
   }

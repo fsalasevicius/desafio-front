@@ -36,7 +36,7 @@ export class FriendsTournamentComponent implements OnInit {
     this.tournamentForm = this.fb.group({
       tournamentName: ['', Validators.required],
       tournamentDetail: ['', Validators.required],
-      friendsEmails: this.fb.array([this.createFriendEmail()]), // Initialize with one email field
+      friendsEmails: this.fb.array([this.createFriendEmail()]), 
     });
     if (this.token) {
       let obj_lc: any = localStorage.getItem('userData');
@@ -106,7 +106,6 @@ export class FriendsTournamentComponent implements OnInit {
           this.sendInvitationEmails(emails, nameTournament, password);
           this.generateWhatsAppLinks(emails, nameTournament);
       
-          // Verificar si la respuesta contiene datos válidos
           if (response && response.password) {
             this._messageService.add({
               severity: 'success',

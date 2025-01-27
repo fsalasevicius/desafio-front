@@ -23,12 +23,12 @@ export class SearchTournamentComponent implements OnInit {
   displayModal: boolean = false;
 
   getDialogWidth(): string {
-    if (window.innerWidth <= 576) { // Dispositivos móviles extra pequeños
-      return '90vw'; // Ancho del modal en porcentaje
-    } else if (window.innerWidth <= 768) { // Dispositivos móviles y tablets
-      return '70vw'; // Ancho del modal en porcentaje
+    if (window.innerWidth <= 576) { 
+      return '90vw'; 
+    } else if (window.innerWidth <= 768) { 
+      return '70vw'; 
     } else {
-      return '30vw'; // Ancho del modal en porcentaje
+      return '30vw'; 
     }
   }
 
@@ -54,10 +54,10 @@ export class SearchTournamentComponent implements OnInit {
   ngOnInit(): void {
     this.searchTerms
       .pipe(
-        debounceTime(300), // Espera 300ms después de cada pulsación de tecla
-        distinctUntilChanged(), // Ignora si el término de búsqueda es el mismo que el anterior
+        debounceTime(300), 
+        distinctUntilChanged(), 
         switchMap((term: string) => {
-          this.loading = true; // Mostrar cargador cuando se inicia la búsqueda
+          this.loading = true; 
           return this._copaAmericaService.searchTournament(
             { tournamentName: term, userEmail: this.user.email },
             this.token
@@ -66,7 +66,7 @@ export class SearchTournamentComponent implements OnInit {
       )
       .subscribe((response) => {
         this.searchResult = response.tournaments;
-        this.loading = false; // Ocultar cargador cuando se completa la búsqueda
+        this.loading = false; 
       });
   }
 

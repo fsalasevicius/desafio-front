@@ -19,7 +19,7 @@ export class PredictionComponent implements OnInit {
   loading = true;
   prediccion = false;
   activeBtn: boolean = true;
-  faseActual: string = 'Tercero';
+  faseActual: string = 'Final';
   userPredictions: any[] = [];
   isSmallScreen: boolean = false;
   closedPredictionsCount: number = 0;
@@ -50,7 +50,7 @@ export class PredictionComponent implements OnInit {
         },
         (error) => {
           console.error('Error al obtener predicciones del usuario:', error);
-          this.loadMatches(); // Intentar cargar los partidos aunque haya error con predicciones
+          this.loadMatches(); 
         }
       );
       this._copaAmericaService.table_resultados().subscribe(
@@ -75,7 +75,7 @@ export class PredictionComponent implements OnInit {
       (response: any) => {
         this.matchesAux = response.data;
         if (Array.isArray(this.matchesAux)) {
-          this.changeForm(this.faseActual); // Filtrar por fase actual después de cargar los partidos
+          this.changeForm(this.faseActual); 
           this.matches.sort((a, b) => a.nmatch - b.nmatch);
           this.loading = false;
         } else {
@@ -90,17 +90,17 @@ export class PredictionComponent implements OnInit {
     );
   }
   changeForm(param: string) {
-    this.faseActual = param; // Actualizar la fase actual
+    this.faseActual = param; 
     this.matches = this.matchesAux.filter(match => match.fase === param);
-    this.matches.sort((a, b) => a.nmatch - b.nmatch); // Asegurar que los partidos estén ordenados
-    this.activeBtn = (param == 'Tercero' || param == 'Final') ; // Cambiar el estado del botón activo basado en la fase
+    this.matches.sort((a, b) => a.nmatch - b.nmatch); 
+    this.activeBtn = (param == 'Tercero' || param == 'Final') ; 
     this.initializeForm();
   }
 
   initializeForm() {
     const predictionsArray = this.predictionForm.get('predictions') as FormArray;
-    predictionsArray.clear(); // Clear the form array to avoid duplicates
-    this.closedPredictionsCount = 0; // Reset closed predictions count
+    predictionsArray.clear(); 
+    this.closedPredictionsCount = 0; 
 
     this.matches.forEach((partido) => {
       const existingPrediction = this.userPredictions.find(
@@ -132,7 +132,7 @@ export class PredictionComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let hasValidPrediction = false; // Variable bandera para indicar si al menos una predicción es válida
+    let hasValidPrediction = false; 
   
     const predictionsData = this.predictionForm.value.predictions.map(
       (prediction: any, index: number) => {
@@ -142,10 +142,9 @@ export class PredictionComponent implements OnInit {
           return null;
         }
   
-        // Validar que al menos un campo tenga un valor numérico antes de enviar la predicción
         if ((prediction.predictedScore.teamA !== null && !isNaN(prediction.predictedScore.teamA)) || 
             (prediction.predictedScore.teamB !== null && !isNaN(prediction.predictedScore.teamB))) {
-          hasValidPrediction = true; // Al menos una predicción es válida
+          hasValidPrediction = true; 
           return {
             ...prediction,
             matchId,
@@ -155,9 +154,8 @@ export class PredictionComponent implements OnInit {
           return null;
         }
       }
-    ).filter((prediction: any) => prediction !== null); // Filtrar las predicciones nulas
+    ).filter((prediction: any) => prediction !== null); 
   
-    // Verificar si no hay predicciones válidas antes de enviar la solicitud al backend
     if (!hasValidPrediction) {
       console.error('Debe completar al menos una predicción válida.');
       return;
@@ -232,7 +230,7 @@ export class PredictionComponent implements OnInit {
 
   calcularTiempoRestante(fechaPartidoStr: string): string {
     const fechaPartido = new Date(fechaPartidoStr);
-    fechaPartido.setMinutes(fechaPartido.getMinutes() - 5); // Restar 5 minutos en lugar de 1 hora
+    fechaPartido.setMinutes(fechaPartido.getMinutes() - 5); 
     const ahora = new Date();
     let diferencia = fechaPartido.getTime() - ahora.getTime();
 

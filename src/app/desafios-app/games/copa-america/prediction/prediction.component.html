@@ -2,9 +2,6 @@
   <app-header headerShadow="header__area header__padding-2 header__shadow"></app-header>
 
   <section class="teacher__area pt-50 pb-110">
-    <div class="page__title-shape">
-      <!-- Tus imágenes aquí -->
-    </div>
     <div class="container">
       <ng-container *ngIf="loading; else loadedContent">
         <app-spinner></app-spinner>
@@ -17,8 +14,8 @@
           <button type="button" class="btn btn-primary"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Grupos')">Fase de Grupos</button>
           <button type="button" class="btn btn-primary"   style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Cuartos')">Cuartos de Final</button>
           <button type="button" class="btn btn-primary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Semifinal')" >Semifinal</button>
-          <button type="button" class="btn btn-success" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Tercero')" >Tercero/Cuarto</button>
-          <button type="button" class="btn btn-secondary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Final')" >Final</button>
+          <button type="button" class="btn btn-primary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Tercero')" >Tercero/Cuarto</button>
+          <button type="button" class="btn btn-primary" style="margin-right:0.3rem;margin-bottom: 0.3rem;" (click)="changeForm('Final')" >Final</button>
         </div>
         <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
           <div formArrayName="predictions">

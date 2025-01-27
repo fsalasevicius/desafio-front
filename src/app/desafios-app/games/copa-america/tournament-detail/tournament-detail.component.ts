@@ -79,12 +79,12 @@ export class TournamentDetailComponent implements OnInit {
   }
 
   getDialogWidth(): string {
-    if (window.innerWidth <= 576) { // Dispositivos móviles extra pequeños
-      return '90vw'; // Ancho del modal en porcentaje
-    } else if (window.innerWidth <= 768) { // Dispositivos móviles y tablets
-      return '70vw'; // Ancho del modal en porcentaje
+    if (window.innerWidth <= 576) { 
+      return '90vw'; 
+    } else if (window.innerWidth <= 768) { 
+      return '70vw'; 
     } else {
-      return '30vw'; // Ancho del modal en porcentaje
+      return '30vw'; 
     }
   }
   
@@ -94,7 +94,7 @@ export class TournamentDetailComponent implements OnInit {
     this._copaAmericaService.calculatePoints({ id }, this.token).subscribe(
       (response) => {
         this.userPoints = response.userPoints;
-        this.userPredictions = response.userPredictionDetails; // Guardamos las predicciones
+        this.userPredictions = response.userPredictionDetails; 
         this.invitations.sort((a, b) => {
           return this.userPoints[b._id] - this.userPoints[a._id];
       });

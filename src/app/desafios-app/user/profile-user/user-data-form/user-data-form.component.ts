@@ -45,7 +45,7 @@ export class UserDataFormComponent implements OnInit {
         Validators.required,
         (control: AbstractControl) => {
           if (!control.value) {
-            return null; // Let Validators.required handle this
+            return null; 
           }
           const date = new Date(control.value);
           return isNaN(date.getTime()) ? { 'invalidDate': true } : null;
@@ -53,7 +53,7 @@ export class UserDataFormComponent implements OnInit {
         ageValidator
       ]],
       email: [{ value: this.user.email || '', disabled: true }, [Validators.required, Validators.email]],
-      description: [this.user.description || ''] // Assuming description is optional
+      description: [this.user.description || ''] 
     });
 
     this.registerForm.valueChanges.subscribe(() => {

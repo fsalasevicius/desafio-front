@@ -45,7 +45,6 @@ export class SignInAreaComponent implements OnInit {
         }
       });
     } else {
-      // Mostrar errores si el formulario no es válido
       Object.keys(this.loginForm.controls).forEach(field => {
         const control = this.loginForm.get(field);
         control?.markAsTouched({ onlySelf: true });

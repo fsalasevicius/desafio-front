@@ -40,14 +40,12 @@ export class TopTresComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.startCountdown();
-    // Verificar que this.user._id esté definido
 
-    // Obtener predicciones existentes del usuario
     this._copaService.view_prediction_top(this.user, this.token).subscribe(
       (response) => {
         if (response && response.data && response.data.length > 0) {
-          this.existingPredictions = response.data[0]; // Asignar la primera predicción (asumiendo que el usuario solo tiene una)
-          this.populateFormWithPredictions(); // Llenar el formulario con las predicciones existentes
+          this.existingPredictions = response.data[0]; 
+          this.populateFormWithPredictions(); 
         } else {
           console.log('No se encontraron predicciones para el usuario');
         }
@@ -59,12 +57,10 @@ export class TopTresComponent implements OnInit {
       }
     );
 
-    // Obtener equipos del torneo
     this._copaService.getTeamTournament().subscribe(
       (teams) => {
         this.teams = teams.data;
         if (this.existingPredictions) {
-          // Obtener los nombres de los equipos por ID
           const firstPlaceName = this.getTeamNameById(
             this.existingPredictions.firstPlace
           );
@@ -75,7 +71,6 @@ export class TopTresComponent implements OnInit {
             this.existingPredictions.thirdPlace
           );
 
-          // Asignar los valores al formulario
           this.positionsForm.patchValue({
             firstPlace: firstPlaceName,
             secondPlace: secondPlaceName,
@@ -92,7 +87,6 @@ export class TopTresComponent implements OnInit {
 
   populateFormWithPredictions(): void {
     if (this.existingPredictions) {
-      // Obtener los nombres de los equipos por ID
       const firstPlaceName = this.getTeamNameById(
         this.existingPredictions.firstPlace
       );
@@ -102,8 +96,6 @@ export class TopTresComponent implements OnInit {
       const thirdPlaceName = this.getTeamNameById(
         this.existingPredictions.thirdPlace
       );
-
-      // Asignar los valores al formulario
       this.positionsForm.patchValue({
         firstPlace: firstPlaceName,
         secondPlace: secondPlaceName,
@@ -122,17 +114,12 @@ export class TopTresComponent implements OnInit {
   ) {
     const inputElement = event.target as HTMLInputElement;
     const selectedValue = inputElement.value.trim();
-
-    // Verificar si el valor seleccionado está en la lista de equipos
     const isValid = this.teams.some((team) => team.name === selectedValue);
-
-    // Si es válido, actualizar el valor en el formulario
     if (isValid) {
       this.positionsForm.patchValue({
         [place]: selectedValue,
       });
     } else {
-      // Si no es válido, limpiar el campo en el formulario
       this.positionsForm.patchValue({
         [place]: '',
       });
@@ -143,7 +130,6 @@ export class TopTresComponent implements OnInit {
     if (this.positionsForm.valid) {
       const predictions = { ...this.positionsForm.value };
   
-      // Convertir nombres de equipos en IDs
       ['firstPlace', 'secondPlace', 'thirdPlace'].forEach((place) => {
         const teamName = predictions[place];
         const selectedTeam = this.teams.find((team) => team.name === teamName);
@@ -154,21 +140,18 @@ export class TopTresComponent implements OnInit {
   
       predictions.user = this.user._id;
   
-      // Verificar fecha límite
       const now = new Date();
-      const deadlineDate = new Date('2024-07-04T21:55:00-03:00'); // Fecha límite
+      const deadlineDate = new Date('2024-07-04T21:55:00-03:00'); 
   
       if (now > deadlineDate) {
-        // Mostrar mensaje de advertencia
         this._messageService.add({
           severity: 'warn',
           summary: 'Fecha límite excedida',
           detail: 'Ya no es posible actualizar las predicciones. La fecha límite ha sido superada.'
         });
-        return; // Salir de la función si se ha superado la fecha límite
+        return;
       }
   
-      // Guardar predicciones
       if (this.existingPredictions) {
         this._copaService.register_prediction_top(predictions, this.token).subscribe(
           (response) => {
@@ -188,7 +171,6 @@ export class TopTresComponent implements OnInit {
           }
         );
       } else {
-        // Guardar nuevas predicciones
         this._copaService.register_prediction_top(predictions, this.token).subscribe(
           (response) => {
             this._messageService.add({
@@ -213,7 +195,7 @@ export class TopTresComponent implements OnInit {
   clearField(place: 'firstPlace' | 'secondPlace' | 'thirdPlace'): void {
     const formControl = this.positionsForm?.get(place);
     if (formControl) {
-      formControl.reset(); // Resetear el campo específico del formulario
+      formControl.reset(); 
     } else {
       console.error(
         `El formulario o el campo ${place} no están inicializados correctamente.`

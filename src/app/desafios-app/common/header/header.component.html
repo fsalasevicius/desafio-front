@@ -60,9 +60,6 @@
                            <li>
                               <a [routerLink]="['/']">Inicio</a>
                            </li>
-                           <!-- <li>
-                              <a >Sobre Nosotros</a>
-                           </li> -->
                            <li class="has-dropdown">
                               <a [routerLink]="['/']"  style="cursor: pointer;">Juegos</a>
                               <ul class="submenu">
@@ -75,8 +72,6 @@
                                  <li><a [routerLink]="['/games-copa-america-como-jugar']">Copa America 2024</a></li>
                               </ul>
                            </li>
-
-                           <!-- <li><a [routerLink]="['/contact']">Contacto</a></li> -->
                         </ul>
                      </nav>
                   </div>
@@ -114,8 +109,6 @@
       </div>
    </div>
 </header>
-
-<!-- sidebar area start -->
 <div class="sidebar__area" [class.sidebar-opened]="showSidebar">
    <div class="sidebar__wrapper">
       <div (click)="handleSidebarClose()" class="sidebar__close">
@@ -135,9 +128,6 @@
                <li>
                   <a [routerLink]="['/']" class="border-0">Inicio</a>
                </li>
-               <!-- <li>
-                  <a [routerLink]="['/']" class="border-0">Sobre Nosotros</a>
-               </li> -->
                <li class="menu-item-has-children has-droupdown" [class.active]="showPagesDropdown">
                   <a (click)="pagesDropDown()">Juegos</a>
                   <ul class="sub-menu" [class.active]="showPagesDropdown">
@@ -150,16 +140,11 @@
                      <li><a [routerLink]="['/games-copa-america-como-jugar']">Copa America 2024</a></li>
                   </ul>
                </li>
-               <!-- <li>
-                  <a [routerLink]="['/contact']" class="border-0">Contacto</a>
-               </li> -->
                <ng-container *ngIf="buttonText === 'Registrarse' || buttonText === 'Ingresar'">
                   <li>
                     <a [routerLink]="buttonText === 'Ingresar' ? '/sign-in' : '/sign-up'" class="e-link">{{ buttonText.toUpperCase() }}</a>
                   </li>
                 </ng-container>
-                
-                <!-- Menú para usuarios autenticados -->
                 <ng-container *ngIf="buttonText !== 'Registrarse' && buttonText !== 'Ingresar'">
                   <li class="menu-item-has-children has-droupdown" [class.active]="showUsrDropdown">
                     <div class="dropdown" (click)="toggleDropdown($event)">
@@ -176,15 +161,8 @@
                 </ng-container>
             </ul>
          </div>
-         <!-- <div class="sidebar__search p-relative mt-40 ">
-            <form action="#">
-               <input type="text" placeholder="Buscar...">
-               <button type="submit"><i class="fad fa-search"></i></button>
-            </form>
-         </div> -->
       </div>
    </div>
 </div>
 
 <div (click)="handleSidebarClose()" class="body-overlay" [class.opened]="showSidebar"></div>
-<!-- sidebar area end -->

@@ -32,8 +32,8 @@ export class UserSegurityFormComponent implements OnInit {
     this.passwordForm = this._fb.group({
       currentPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required], // Agregar solo Validators.required aquí
-    }, { validators: this.matchPasswords('newPassword') }); // Agregar el validador matchPasswords aquí
+      confirmPassword: ['', Validators.required], 
+    }, { validators: this.matchPasswords('newPassword') }); 
   }
 
   ngOnInit(): void {
@@ -147,7 +147,7 @@ export class UserSegurityFormComponent implements OnInit {
     }
 
     if (control.hasError('minlength')) {
-      const minLengthError = control.errors?.['minlength']; // Acceder a 'minlength' con corchetes
+      const minLengthError = control.errors?.['minlength']; 
       return `La contraseña debe tener al menos ${minLengthError?.requiredLength} caracteres.`;
     }
 

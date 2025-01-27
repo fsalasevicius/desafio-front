@@ -25,7 +25,7 @@ export interface Prediction {
   userId: User[];
   matchId: Match[];
   predictedWinner: string;
-  predictedScore: [number, number]; // Array de dos números representando los goles de cada equipo
+  predictedScore: [number, number];  
 }
 
 export interface User {
