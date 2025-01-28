@@ -21,6 +21,11 @@ Crear una plataforma que permita al usuario registrarse y generar predicciones d
 - **ℹ️ Información de Partidos**: Cronograma de encuentros con fecha/horario/lugar de juego, resultados de los partidos.
 - **📊 Creación de Torneos de Amigos para competir con tu grupo cerrado/invitacion a torneos.
 
+## Proximas Mejoras
+- Adaptar a varias competencias en simultaneo.
+- Actualización de información de forma automatica.
+- Generar configuraciones donde el dueño del torneo decida que tipo de parametros suman puntos en el torneo (MVP, Asistencia, Goleador, Tarjetas R/A, Valla Invicta, etc).
+
 ## ⚙️ Tecnologías Utilizadas
 
 ### Frontend:
