@@ -9,7 +9,7 @@ Inicialmente la aplicación se abrio para amigos y en el torneo se registraron 2
 
 ## 📺 Demo
 
-https://www.desafios.com.ar/
+https://desafio-front-orcin.vercel.app
 
 ## 💡 Solución
 
